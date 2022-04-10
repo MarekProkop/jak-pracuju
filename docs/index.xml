@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss xmlns:atom="http://www.w3.org/2005/Atom" xmlns:media="http://search.yahoo.com/mrss/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:distill="https://distill.pub/journal/" version="2.0">
+  <channel>
+    <title>Jak pracuju</title>
+    <link>https://marekprokop.github.io/jak-pracuju/</link>
+    <atom:link href="https://marekprokop.github.io/jak-pracuju/index.xml" rel="self" type="application/rss+xml"/>
+    <description>My Blog
+</description>
+    <generator>Distill</generator>
+    <lastBuildDate>Sun, 10 Apr 2022 00:00:00 +0000</lastBuildDate>
+    <item>
+      <title>Čístím Search Consoli od zbytečných webů</title>
+      <dc:creator>Marek Prokop</dc:creator>
+      <link>https://marekprokop.github.io/jak-pracuju/posts/2022-04-09-cistim-search-consoli</link>
+      <description>Jako každý SEO konzultantant mám v Google Search Consoli plno webů, ke kterým už nemám přístup, nebo které už dlouho nefungují. Napsal jsem si skript v R, který je odstraní.</description>
+      <guid>https://marekprokop.github.io/jak-pracuju/posts/2022-04-09-cistim-search-consoli</guid>
+      <pubDate>Sun, 10 Apr 2022 00:00:00 +0000</pubDate>
+    </item>
+    <item>
+      <title>Kontrola stavových kódů většího počtu URL v R</title>
+      <dc:creator>Marek Prokop</dc:creator>
+      <link>https://marekprokop.github.io/jak-pracuju/posts/2022-04-09-kontrola-http-kodu</link>
+      <description>Potřeboval jsem rychle zkontrolovat stavové kódy HTTP dlouhého seznamu URL. Přitom jsem si vyzkoušel balíček furrr na paralelní zpracování a moc se mi zalíbil.</description>
+      <guid>https://marekprokop.github.io/jak-pracuju/posts/2022-04-09-kontrola-http-kodu</guid>
+      <pubDate>Sat, 09 Apr 2022 00:00:00 +0000</pubDate>
+    </item>
+  </channel>
+</rss>
