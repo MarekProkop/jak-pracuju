@@ -1,0 +1,11 @@
+d-article div.sourceCode pre {
+  overflow-x: scroll;
+  font-size: 85%;
+  line-height: 1.45;
+  background-color: #f6f8fa;
+  border-left: 0;
+  padding: 0.5em;
+}
+div.l-body {
+  margin-bottom: 1em;
+}

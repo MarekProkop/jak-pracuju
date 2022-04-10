@@ -1,0 +1,14 @@
+name: "distill-blog"
+title: "Jak pracuju"
+description: |
+  My Blog
+output_dir: "_site"
+navbar:
+  right:
+    - text: "Úvod"
+      href: index.html
+    - text: "O webu"
+      href: about.html
+output:
+  distill::distill_article:
+    css: styles.css
