@@ -2,7 +2,7 @@ name: "distill-blog"
 title: "Jak pracuju"
 description: |
   My Blog
-output_dir: "_site"
+output_dir: "doc"
 navbar:
   right:
     - text: "Úvod"
