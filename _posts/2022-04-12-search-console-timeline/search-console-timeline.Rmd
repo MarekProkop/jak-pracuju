@@ -1,0 +1,754 @@
+---
+title: "Časové řady z dat Search Console"
+description: |
+  Jako první na vás v Search Consoli vyskočí graf výkonu webu v čase. Časové řady ze Seaerch Console jdou ale vizualizovat o dost lépe a jdou z nich pak vypozorovat zajímavé věci.
+author:
+  - name: Marek Prokop
+    affiliation: PROKOP software s.r.o.
+    affiliation_url: https://www.prokopsw.cz/cs
+date: 2022-04-17
+output:
+  distill::distill_article:
+    self_contained: false
+    toc: true
+draft: true
+---
+
+```{r setup, include=FALSE}
+paged_print <- function(x, ...) {
+  if (inherits(x, "data.frame")) {
+    knitr::knit_print(rmarkdown::paged_table(x), ...)
+  } else {
+    knitr::knit_print(x, ...)
+  }
+}
+
+kable_print <- function(x, ...) {
+  knitr::knit_print(knitr::kable(x), ...)
+}
+
+knitr::opts_chunk$set(
+  echo = TRUE,
+  render = paged_print
+)
+```
+
+
+Článek je hodně dlouhý, protože sestavit a vizualizovat časové řady (time series) z dat Search Console jde mnoha způsoby a není úplně triviální si vybrat ty, které dávají pro daný účel smysl. Ukážu zde všechny, které bežně používám, i ty, které používám jen výjimečně nebo skoro vůbec.
+
+Kód v jazyce R jsem se snažil napsat tak, aby byl funkční, čistý, srozumitelný a hlavně snadno a univerzálně znovupoužitelný. Časem asi na analýzu dat Search Console udělám samostatný balíček, ale do té by musí stačit tohle.
+
+Na druhou stranu má článek i čistě metodickou, na programovacím jazyce nezávislou rovinu. Některé uvedené časové řady a jejich vizualizace jdou vytvořit i jinak, např. v Data Studiu (na příklad odkazuju dál) nebo v Google Sheets. I bez znalosti R jde tedy článek využít jako vzorník výstupů, které jdou z dat Search Console jakkoli udělat a které dávají určitý smysl.
+
+Všechny ukázky čerpají z dat webu [Glamour Cabaret](https://www.glamourcabaret.cz/) Alžběty Faltysové. Jako hobby projekt bez větších investic sice neohromí gigantickými čísly, ale zároveň hezky ukazuje některé vzorce typické pro přirozeně a dobře budovaný obsah se zajímavým potenciálem na další zlepšování. Alžbětě moc děkuju, že mi data pro článek poskytla.
+
+Pro jistotu upozorňuju, že tenhle článek se primárně zabývá konkstrukcí a vizualizací časových řad z dat Search Console, nikoli jejich detailní analýzou. Té se budu věnnovat někdy jindy.
+
+
+## Příprava
+
+### Potřebné balíčky
+
+Jako vždy *tidyverse*, *searchConsoleR* pro práci se Search Consolí, *lubridate* pro práci s daty a časem a pro stejný účel alternativně i *tsibble*. Balíček *feasts* je zde jen pro dekompozici časové řady na trend, sezónnost a šum, a balíček *slider* umožňuje výpočet klouzavých průměrů.
+
+Dlužno dodat, že specializované balíčky zde používám jen v nejnutnější míře a zatím mi to tak vyhovuje. Na druhou stranu přiznávám, že některé věci by šly řešit elegantněji plným nasazením specializovaných balíčků typu [timetk](https://business-science.github.io/timetk/index.html), [tsbox](https://www.tsbox.help/reference/index.html), [tsibble](https://tsibble.tidyverts.org/index.html) apod.
+
+Poslední řádek nastavuje začátek týdne na pondělí pro balíček *lubridate*.
+
+```{r warning=FALSE, message=FALSE}
+library(tidyverse)
+library(searchConsoleR)
+library(lubridate)
+library(tsibble)
+library(feasts)
+library(slider)
+
+options(lubridate.week.start = 1)
+```
+
+### Základní parametry
+
+Kdykoli pracuju s daty Search Console, nejprve definuju parametry, které určují, jaká vstupní data chci získat. Konkrétně:
+
+- `sc_site` -- z kterého webu,
+- `sc_country` -- ze které země má hledání pocházet (používám vždy, pokud web primárně cílí na jednu zemi),
+- `date_from`, `date_to` -- za jaké období data chci.
+
+```{r}
+sc_site <- "https://www.glamourcabaret.cz/"
+sc_country <- "cze"
+date_from <- as.Date("2020-11-01")
+date_to <- as.Date("2022-04-10")
+```
+
+#### Nastavení časových parametrů balíčkem *lubridate*
+
+Někdy jsem líný hledat v kalendáři vhodná data, nebo chci, aby se mi parametry `date_from` a `date_to` automaticky aktualizovaly. Na to se hodí balíček *lubridate*.
+
+Pro Search Consoli typicky chci datum před třemi dny, protože poslední tři dny ještě data v Search Consoli nejsou finální.
+
+```{r}
+today() - 3
+```
+
+Když chci třeba poslední 4 celé kalendářní týdny, udělám to takhle:
+
+```{r}
+period_end <- floor_date(today() - 3, unit = "week")
+period_start <- period_end - weeks(4) + 1
+
+cat("Od", format(period_start, "%x (%A)"), "do", format(period_end, "%x (%A)"))
+```
+
+Obdobně můžu určit třeba posledních 6 celých kalendářních měsíců:
+
+```{r}
+period_end <- floor_date(today() - 2, unit = "month") - 1
+period_start <- add_with_rollback(period_end, months(-6), roll_to_first = TRUE)
+
+cat("Od", format(period_start, "%x"), "do", format(period_end, "%x"))
+```
+
+Nebo poslední celý rok (ten ale nebude po dubnu běžného roku fungovat, protože Search Console archivuje jen posledních 16 měsíců):
+
+```{r}
+period_end <- floor_date(today() - 2, unit = "year") - 1
+period_start <- floor_date(period_end, "year")
+
+cat("Od", format(period_start, "%x"), "do", format(period_end, "%x"))
+```
+
+### Načtení vstupních dat
+
+Pak si podle potřeby definuju funkci, která při prvním zavolání s konkrétními parametry načte data funkcí `search_analytics` z balíčku *searchConsoleR* a uloží je do souboru. Při druhém a dalším zavolání se stejnými parametry již načítá data z uloženého souboru. To má dvě výhody:
+
+- Opakované načtení dat je mnohem rychlejší.
+- Skript pokaždé pracuje se stejnými daty, i když už ze Search Console zmizela (jsou tam data jen za posledních 16 měsíců).
+
+A dvě nevýhody:
+
+- Uložená data zabírají místo na disku.
+- Pokud potřebuju čerstvá data nebo s jinými parametry, musím soubory z disku odstranit.
+
+Pro účely tohoto zápisku si funkci definuju velmi jednoduše. Jako jediný parametr má dimenze, vše ostatní se bere přímo z globálních objektů definovaných výše. Data ukládá do podsložky `raw-data`, která již v aktuální složce musí existovat. Pro jiné účely může být funkce složitější.
+
+```{r}
+read_sc <- function(dimensions) {
+  rds_path <- file.path(
+    ".", "data-raw", paste0("sc-", paste(dimensions, collapse = "-"), ".rds")
+  )
+  row_limit <- as.integer(date_to - date_from) * 500 * (length(dimensions))
+
+  if (!file.exists(rds_path)) {
+    search_analytics(
+      siteURL = sc_site,
+      startDate = date_from,
+      endDate = date_to,
+      dimensions = dimensions,
+      dimensionFilterExp = paste0("country==", country),
+      rowLimit = row_limit
+    ) |>
+      write_rds(rds_path, compress = "gz")
+  }
+  read_rds(rds_path)
+}
+```
+
+Nakonec si opravdu stáhnu resp. ze souborů načtu všechna data, která budu ze Search Console potřebovat. V praxi se s tím musí opatrně, protože tahání více dimenzí za delší období z API může trvat docela dlouho. Když nevím, jak budou data konkrétního webu veliká, zkusím nejprve stáhnout jeden typický den nebo týden a podle toho se rozhodnu.
+
+```{r}
+scr_auth(email = Sys.getenv("MY_GOOGLE_ACCOUNT"))
+
+sc_by_date <- read_sc("date")
+sc_by_date_page <- read_sc(c("date", "page"))
+sc_by_date_query <- read_sc(c("date", "query"))
+sc_by_date_page_query <- read_sc(c("date", "page", "query"))
+```
+
+Výsledkem je několik dataframů, jejichž strukturu a obsah si mohu rychle zkontrolovat.
+
+```{r}
+glimpse(sc_by_date)
+```
+
+```{r}
+glimpse(sc_by_date_page)
+```
+
+A tak dále. Výsledný dataframe vždy obsahuje dimenzi *date*, případné další dimenze a čtyři základní metriky, které Search Console eviduje.
+
+### Nekonzistence dat Search Console
+
+Teoreticky by stačilo stáhnout jenom poslední dataset `sc_by_date_page_query`, protože z něho by mělo jít všechno ostatní agregovat, jenže Search Console vrací různě upravené výsledky podle toho, zda si vyžádáte dimenze *page* nebo *query*, takže datasety bez těchto dimenzí mají přesnější čísla než data sety s nimi. Podrobněji to dokumentuju v [tomhle testu](https://github.com/MarekProkop/search-analytics-test/blob/master/search-analytics-test.md).
+
+Z tohoto důvodu beru základní metriky (imprese, kliky, CTR a pozice) pokud možno jen z datasetu, který nebosahuje dimenze *page* nebo *query*. Datasety s těmito dimenzemi používám jen v případě, že potřebuju znát konkrétní stránky nebo jejich počty, resp. konkrétní dotazy nebo jejich počty.
+
+
+## Vizualizace časových řad
+
+### Základní metriky
+
+Základní vizualizace, kterou skoro stejně ukazuje i webové rozhraní Search Console, vypadá takto:
+
+```{r fig.asp=1/4, layout="l-body-outset"}
+scale_factor <- max(sc_by_date$clicks) / max(sc_by_date$impressions)
+sc_by_date |>
+  ggplot(aes(x = date)) +
+  geom_line(aes(y = clicks), color = "#4285f4") +
+  geom_line(aes(y = impressions * scale_factor), color = "#5e35b1") +
+  scale_y_continuous(
+    name = "clicks",
+    sec.axis = sec_axis(~ . / scale_factor, name = "impressions")
+  ) +
+  theme(
+    axis.title.y.left = element_text(color = "#4285f4"),
+    axis.text.y.left = element_text(color = "#4285f4"),
+    axis.title.y.right = element_text(color = "#5e35b1"),
+    axis.text.y.right = element_text(color = "#5e35b1")
+  ) +
+  theme_minimal()
+```
+
+Tenhle graf má duální osu Y (čili dvě různé osy Y), což patří spíš do rejstříku „manažerských“ grafů, které se ve vážnější analytice z dobrých důvodů moc nepoužívájí. V R se místo toho většinou používají fasety (grafy vedle sebe a/nebo pod sebou), které nezkreslují měřítko, nepletou čtenáře co je co a navíc se do nich vejdou víc než dvě metriky, když je to potřeba.
+
+Protože budu v dalším kódu potřebovat podobné fasetové grafy často, připravím si na ně dvě funkce, abych nepsal opakovaně stejný kód.
+
+První funkce `sc_reshape` provede tři věci:
+
+1. Přesune imprese před kliky, protože tohle pořadí mi připadá logičtější.
+1. Převede širokou tabulku na dlouhou, tj. hodnoty metrik v druhém až posledním sloupci sloučí do jediného sloupce `value` (to je ve funkci `pivot_longer default`) a jejich názvy do sloupce `metric`.
+1. Převede názvy metrik na typ *factor*, aby se fasety v grafu správně seřadily.
+
+K druhému bodu vysvětlení: Fasety v principu zobrazují jen jednu proměnnou ve více kategoriích, takže se tabulka musí předem převést na dlouhý formát, ve kterém se do jednoho sloupce dostanou názvy metrik jako kategorie a do druhého sloupce hodnoty všech metrik. K tomu slouží funkce `pivot_longer`.
+
+```{r}
+sc_reshape <- function(df) {
+  if ("impressions" %in% names(df)) {
+    df <- df |> 
+      relocate(impressions, .before = clicks)
+  }
+  df |>
+    pivot_longer(cols = 2:last_col(), names_to = "metric") |>
+    mutate(metric = as_factor(metric))
+}
+```
+
+Druhá funkce vykreslí samotný graf časových řad. Protože budu používat různé časové rozpětí a různé časové jednotky, je malinko složitější, aby se tomu přizpůsobila.
+
+```{r}
+sc_plot <- function(
+  df, x_breaks = "3 months", x_labels = "%b %y", x_minor_breaks = "month",
+  strip_pos = "right"
+) {
+  scale_x_fun <- scale_x_date
+  if (inherits(df[[1]], "yearweek")) {
+    scale_x_fun <- scale_x_yearweek
+  }
+  if (inherits(df[[1]], "yearmonth")) {
+    scale_x_fun <- scale_x_yearmonth
+  }
+
+  df |> 
+    ggplot(aes_string(x = names(df[1]), y = "value")) +
+    geom_line() +
+    scale_x_fun(
+      date_breaks = x_breaks, date_labels = x_labels,
+      date_minor_breaks = x_minor_breaks, expand = expansion(0.01)
+    ) +
+    facet_wrap(
+      ~ metric, ncol = 1, scales = "free_y", strip.position = strip_pos
+    ) +
+    theme_gray()
+}
+```
+
+
+Ve fasetách vypadají časové řady všech čtyř základních metrik takhle:
+
+```{r fig.asp=10/16, layout="l-body-outset"}
+sc_by_date |>
+  sc_reshape() |>
+  sc_plot()
+```
+
+#### Výklad dat
+
+Už tenhle graf jde nějak interpretovat:
+
+- Na začátku období neměl web z Googlu skoro žádnou návštěvnost, ale po cca třech měsících se začal postupně zlepšovat a zřejmě se zlepšuje pořád.
+- CTR v prvním měsíci skákalo až k 50 %, což s nepatrným počtem impresí naznačuje, že web se v té době zobrazoval jen na extrémně nekonkurenční dotazy, které neměly ve výsledcích hledání jinou dobrou odpověď. To se postupně změnilo, CTR kleslo, a to naznačuje, že přibyly nějaké normálnější dotazy.
+- Tuto hypotézu podporuje i křivka průměrných pozic. Na začátku šíleně skáče, což je typické pro velmi malý počet dotazů, později se uklidní, takže se počet dotazů asi zvýšil.
+- Z toho všecho bych usoudil, že web začínal s malým objemem obsahu a postupně se zvětšuje. Je to ale jen hypotéza, kterou je třeba podpořit dalšími daty.
+
+### Počet stránek a dotazů
+
+Aby šla data lépe interpretovat, skoro vždy přidávám ještě dvě další časové řady -- počet vstupních stránek a počet unikátních dotazů. K tomu jsem si stáhl ze Search Sonsole dva další datasety, vstupní stránky podle dnů (`sc_by_date_page`) dotazy podle dnů (`sc_by_date_query`). Nyní z nich funkcemi `group_by` a `summarise` spočítám počty unikátních stránek resp. dotazů za den a funkcí `left_join` je připojím k původní tabulce metrik. Výsledek uložím do objektu `sc_all_metrics_by_date`.
+
+```{r}
+sc_all_metrics_by_date <- sc_by_date |>
+  left_join(
+    sc_by_date_page |>
+      group_by(date) |>
+      summarise(pages = n()),
+    by = "date"
+  ) |>
+  left_join(
+    sc_by_date_query |>
+      group_by(date) |>
+      summarise(queries = n()),
+    by = "date"
+  ) |>
+  mutate(
+    pages = replace_na(pages, 0),
+    queries = replace_na(queries, 0)
+  )
+```
+
+Výslední tabulka vypadá takhle:
+
+```{r}
+glimpse(sc_all_metrics_by_date)
+```
+
+Graf zobrazím stejně, jako ten se čtyřmi základními metrikami, jen funkcí `scale_x_date` trochu vyladím rozdělení osy X, aby bylo časové členění přehlednější.
+
+```{r fig.asp=1, layout="l-body-outset"}
+sc_all_metrics_by_date |>
+  sc_reshape() |>
+  sc_plot()
+```
+
+Mimochodem, obdobný graf jde odělat i v Data Studiu. Tady je [příklad reportu](https://datastudio.google.com/u/0/reporting/9007c9b8-db68-4138-abcc-b800f0dc42bb/page/MlTqC), který si můžete zkopírovat a upravit pro své potřeby.
+
+### Zoomování grafu
+
+V druhé polovině grafu za celé období nejsou moc dobře vidět změny CTR a pozic, protože na začátku období mají tyto metriky příliš veliké rozpětí hodnot. Zazoomuju proto na období od začátku srpna 2021 prostým vyfiltrováním řádků, které do grafu vstupují.
+
+```{r fig.asp=1, layout="l-body-outset"}
+sc_all_metrics_by_date |>
+  filter(date >= as.Date("2021-08-01")) |>
+  sc_reshape() |>
+  sc_plot("month")
+```
+
+
+## Granularita období
+
+Až dosud jsem časové řady vykresloval po dnech. Pro data související s návštěvností webů je ale typická silná týdenní periodicita a v jejím důsledku grafy bývají hodně zubaté. Existuje několik způsobů, jak je vyhladit. Nejpřirozenější je snížit časovou granularitu a gregovat data za týden, měsíc, nebo ještě delší období. I to lze však udělat více způsoby, např mohu:
+
+1. Sečíst to, co jde sečíst (imprese a kliky) a zprůměrovat to, co sčítat nejde (CTR a pozice) a počty unikátních položek (stránek a dotazů) spočítat znovu. To vše za celé nové časové jednotky, tedy např. za týdny.
+2. Totéž, ale klouzavě. Ke každému dni tedy totéž sečtu, zprůměruju, nebo znovu vypočtu za posledních sedm dní. Bude to sice výpočetně náročnější, protože místo jednou za týden to budu počítat za každý den, ale i když nebude celé období začínat a končit přesně na hranici týdnů (resp. měsíců či jiné časové jednotky), nebude graf na okrajích zkreslený.
+3. Spočítat prosté průměry či mediány všech hodnot za týden či jinou časovou jednotku.
+4. Kromě průměru či mediánu spočítat a hezky vykreslit i pásmo, ve kterém se hodnoty pohybují.
+
+Zkusím všechny varianty, ať je vidět, zda a případně jak se liší.
+
+### Agregace za kalendářní období
+
+Agregace dat Search Console do delších časových jednotek, tedy typicky týdnů či měsíců případně kvartálů, není úplně triviální.
+
+- Imprese a kliky se normálně sečtou, tam problém není.
+- CTR a pozice se musí zprůměrovat váženým průměrem, přičemž vahou jsou imprese. Není to úplně nezbytné, ale je to bezpečnější, protože prostý aritmetický průměr se od váženého někdy liší jen nepatrně a jindy (při velkém rozdílu impresí) hodně.
+- Počty unikátních stránek a dotazů se musí spočítat funkcí `n_distinct` za každé dílčí období znovu. Rozdíl ve tvaru křivky sice nebývá moc veliký, ale zato je značný rozdíl ve velikosti hodnot -- za den je unikátních dotazů či stránek podstatně méně než za týden nebo měsíc.
+
+Pro usnadnění a zpřehlednění výpočtu si připravím několik funkcí.
+
+První funkce tranformuje datum (vektor) na delší období (týden, měsíc, čtvrtletí). Použije k tomu funkce a třídy z balíčku *tsibble*.
+
+```{r}
+trans_date <- function(x, per = "month") {
+  if (per == "week") {
+    tsibble::yearweek(x)
+  } else if (per == "month") {
+    tsibble::yearmonth(x)
+  } else if (per == "quarter") {
+    tsibble::yearquarter(x)
+  } else {
+    stop("Argument per has to be either 'week', 'month', or 'quarter'.")
+  }
+}
+```
+
+Druhá funkce agreguje tabulku základních metrik.
+
+```{r}
+sc_aggregate <- function(df, per = "week") {
+  df |>
+    group_by("{per}" := trans_date(date, per)) |> 
+    summarise(
+      across(ctr:position, ~ weighted.mean(.x, impressions)),
+      across(clicks:impressions, sum),
+    ) |> 
+    relocate(ctr:position, .after = impressions)
+}
+
+sc_aggregate(sc_by_date, "quarter")
+```
+
+Třetí funkce znovu spočítá počty unikátních stránek či dotazů. Předpokládá, že vstupní tabulka obsahuje sloupce `date` a sloupec řetězců, keré se mají spočítat. Na dalších sloupcích nezáleží.
+
+```{r}
+sc_recount <- function(df, per = "month", column, new_col) {
+  df |> 
+    group_by("{per}" := trans_date(date, per)) |> 
+    summarise("{new_col}" := n_distinct({{ column }}))
+}
+
+sc_recount(sc_by_date_page, "quarter", page, "pages")
+```
+
+A konečně mohu napsat poslední funkci, která sestaví všechny metriky do jedné tabulky.
+
+```{r message=FALSE}
+sc_aggregate_all_metrics <- function(per = "week") {
+  sc_aggregate(sc_by_date, per) |> 
+    left_join(sc_recount(sc_by_date_page, per, page, "pages")) |> 
+    left_join(sc_recount(sc_by_date_query, per, query, "queries")) |> 
+    mutate(
+      pages = replace_na(pages, 0),
+      queries = replace_na(queries, 0)
+    )
+}
+
+sc_aggregate_all_metrics("quarter")
+```
+
+
+#### Agregace po kalendářních týdnech
+
+S připravenými funkcemi již mohu snadno agregovat.
+
+```{r fig.asp=1, message=FALSE, layout="l-body-outset"}
+sc_aggregate_all_metrics("week") |> 
+  filter(week >= yearweek(as.Date("2021-08-01"))) |>
+  sc_reshape() |>
+  sc_plot("4 weeks", "%x", "week")
+```
+
+#### Agregace po kalendářních měsících
+
+```{r fig.asp=1, message=FALSE, layout="l-body-outset"}
+sc_aggregate_all_metrics("month") |> 
+  filter(
+    month >= yearmonth(as.Date("2021-08-01")),
+    month <= yearmonth(as.Date("2022-03-01"))
+  ) |>
+  sc_reshape() |>
+  sc_plot("month")
+```
+
+### Průměr za kalendářní týdny
+
+Průměr za kalendářní týdny je výpočetně mnohem jednodušší. Stačí spočítat průměry všech číselných hodnot. Jak ale píšu výše, pro CTR a pozice je metodicky nesprávný, a proto někdy méně a jindy více nepřesný, a u počtů stránek a dotazů sice metodicky dává smysl, nicméně říká něco jiného. 
+
+Když si porovnáte tvar křivek metrik *pages* a *queies*, jsou sice podobné, ale čísla jsou úplně jiná -- v prvním výpočtu (počet za týden) jsem se dostal na 110 stránek a 800 dotazů, kdežto v druhém (průměr týdenního počtu) jen na 80 resp. 300.
+
+```{r fig.asp=1, layout="l-body-outset"}
+sc_all_metrics_by_date |>
+  mutate(week = yearweek(date)) |> 
+  filter(week >= yearweek(as.Date("2021-08-01"))) |>
+  group_by(week) |> 
+  summarise(across(clicks:queries, mean)) |> 
+  sc_reshape() |> 
+  sc_plot("4 weeks", "%x", "week")
+```
+
+### Rozsah hodnot za týden
+
+Na tomto grafu vykreslím medián jako čáru, mezikvartilové rozpětí ([interquartile range](https://en.wikipedia.org/wiki/Interquartile_range), tj. rozsah mezi 1. a 3. kvartilem)  jako tmavší pás a variační rozpětí (rozdíl mezi maximem a minimem) jako světlejší pás.
+
+```{r fig.asp=1, layout="l-body-outset"}
+sc_all_metrics_by_date |>
+  mutate(week = yearweek(date), .before = date) |> 
+  filter(week >= yearweek(as.Date("2021-08-01"))) |> 
+  select(!date) |> 
+  sc_reshape() |> 
+  group_by(week, metric) |> 
+  summarise(
+    median = median(value),
+    lower = quantile(value, probs = 0.25),
+    upper = quantile(value, probs = 0.75),
+    min = min(value),
+    max = max(value),
+    .groups = "drop"
+  ) |> 
+  ggplot(aes(x = week)) +
+  geom_ribbon(aes(ymin = min, ymax = max), fill = "gray80") +
+  geom_ribbon(aes(ymin = lower, ymax = upper), fill = "gray60") +
+  geom_line(aes(y = median), color = "gray25") +
+  scale_x_yearweek(
+    date_breaks = "4 weeks", date_labels = "%x", date_minor_breaks = "week",
+    expand = expansion(0.025)
+  ) +
+  facet_wrap(~metric, ncol = 1, scales = "free_y", strip.position = "right")
+```
+
+### Klouzavý průměr (moving average)
+
+Klouzavý průměr za posledních sedm dní zpopularizovaly různé covidové statistiky, ale pro data Search Console obvykle nemá smysl. Hodí se jen v případě, že potřebujete znát co nejnovější hodnotu (typicky včerejší) očištěnou od týdenní sezónnosti, přestože týden ještě neskončil.
+
+Pro jistotu ukážu, jak jde klouzavý průměr za posledních 7 dní spočítat (zde jen imprese), přestože ho sám nepoužívám. Pod něj zároveň šedou barvou vykreslím skutečné imprese po dnech.
+
+```{r message=FALSE, fig.asp=9/16, layout="l-body-outset"}
+sc_by_date |>
+  mutate(
+    impressions_avg7 = slider::slide_dbl(impressions, ~ mean(.x), .before = 6)
+  ) |>
+  ggplot(aes(x = date)) +
+  geom_line(aes(y = impressions), color = "gray") +
+  geom_line(aes(y = impressions_avg7)) +
+  scale_x_date(
+    date_breaks = "3 months", date_labels = "%b %y", 
+    date_minor_breaks = "month", expand = expansion(0.01)
+  )
+```
+
+### Regrese
+
+V praxi je úplně nejjednodušší vyhledit denní křivku nějakou regresí. V balíčku *ggplot2* je na to hotový `geom_smooth`.
+
+```{r fig.asp=10/16, layout="l-body-outset"}
+sc_by_date |>
+  sc_reshape() |>
+  sc_plot() +
+  geom_smooth()
+```
+
+Pokud chci křivku klikatější, jde to nastavit parametrem `span`.
+
+```{r fig.asp=10/16, layout="l-body-outset"}
+sc_by_date |>
+  sc_reshape() |>
+  sc_plot() +
+  geom_smooth(span = 0.1)
+```
+
+A ještě ukážu, jak jde `geom_smooth` vykreslit na jediné metrice za kratší období, protože to je typ grafu, který asi používám v různých reportech pro klienty nejčastěji. Šedý pás okolo modré křivky je [konfidenční interval](https://cs.wikipedia.org/wiki/Interval_spolehlivosti).
+
+```{r fig.asp=10/16, layout="l-body-outset"}
+sc_by_date |>
+  filter(date >= as.Date("2022-01-01")) |> 
+  ggplot(aes(x = date, y = impressions)) +
+  geom_line(color = "gray50") +
+  geom_smooth() +
+  scale_x_date(date_labels = "%b %y")
+```
+
+
+## Poměrové metriky
+
+Z předešlých grafů už vím, že imprese i kliky dlouhodobě rostou a že to je mj. dáno tím, že roste počet vstupních stránek a dotazů. Tahle informace mi ale nestačí. Existují totiž tři možné varianty:
+
+1. Imprese a kliky rostou víc, než by odpovídalo nárůstu počtu stránek a dotazů. To by se mi líbilo nejvíc, protože by to znamenalo, že novější stránky resp. dotazy jsou úspěšnější než starší, případně se na růstu impresí a kliků podílí ještě něco jiného, např. celková síla webu.
+2. Rúst impresí a kliků zhruba odpovídá růstu počtu stránek a dotazů. To je neutrální výsledek -- odměna za vynaloženou práci na obsahu (a tedy efektivita této práce) zůstává pořád zhruba stejná, ani neklesá, ani se nezvyšuje.
+3. Poslední varianta je nejhorší: imprese a kliky rostou méně, než by odpovídalo nárůstu počtu stránek a dotazů. Efektivita vložené práce se tedy zhoršuje. Někdy to jinak nejde, protože nízko visíci ovoce je už otrhané, ale je dobré o tom vědět.
+
+Na tyhle otázky pomáhají najít odpověď poměrové metriky. V principu jde o poměry počtu impresí a kliků na jedné straně a počtu stránek a dotazů na straně druhé. Navíc je zajímavý i poměr počtu dotazů na stránku.
+
+```{r fig.asp=2/3, message=FALSE, layout="l-body-outset"}
+sc_aggregate_all_metrics() |> 
+  filter(week >= yearweek(as.Date("2021-08-01"))) |> 
+  transmute(
+    week = week,
+    impressions_per_page = impressions / pages,
+    clicks_per_page = clicks / pages,
+    impressions_per_query = impressions / queries,
+    clicks_per_query = clicks / queries,
+    queries_per_page = queries / pages
+  ) |>
+  sc_reshape() |> 
+  sc_plot("4 weeks", "%x", "week", strip_pos = "top")
+```
+
+Z grafu je vidět, že počty impresí a kliků na stránku stále rostou, což je dobře -- odpovídá to variantě 1. S impresemi a kliky na dotaz je to už slabší, ty posledních cca 5 měsíců stagnují. Co to znamená? Na to odpovídá poslední poměrová metrika, počet dotazů na stránku. Ta roste, což znamená, že novější stránky jsou efektivnější především proto, že pokrávají víc dotazů, avšak jednotlivé novéjší dotazy jsou efektivní zhruba stejně.
+
+K tomu jen poznámka: Grafy samy o sobě nejsou důkazem tvrzení, která zde píšu. Jsou jen dobrým podkladem k odbornému odhadu, který je tím spolehlivější, čím lépe znám daný web a jeho historii.
+
+
+## Metriky podle pozic
+
+Oblíbené vizualizace jsou různé metriky podle pozic nebo intervalů pozic. Např. Collabim a Marketing Miner nabízí graf počtu dotazů podle skupin pozic. I takové grafy jsou ze Search Console udělat.
+
+### Počet dotazů podle intervalů pozic
+
+V Collabimu a Marketing Mineru je 100% plošný graf počtu dotazů podle intervalů pozic. Ten v principu vypadá takhle, byť má intervaly pozic nastavené jinak:
+
+```{r fig.asp=9/16, message=FALSE, layout="l-body-outset"}
+sc_by_date_query |>
+  filter(date >= as.Date("2021-08-01")) |> 
+  mutate(
+    pos_int = cut(
+      position,
+      breaks = c(10 * 0:3, Inf),
+      labels = c("1-10", "11-20", "21-30", "31+")
+    )
+  ) |>
+  group_by(date, pos_int) |>
+  summarise(queries = n_distinct(query)) |>
+  mutate(queries = queries / sum(queries)) |> 
+  ungroup() |> 
+  ggplot(aes(x = date, y = queries, fill = pos_int)) +
+  geom_area() +
+  scale_x_date(
+    date_breaks = "3 months", date_labels = "%b %y", 
+    date_minor_breaks = "month", expand = expansion(0.01)
+  )
+```
+
+Tenhle graf má ale význam jen pro pevně danou sadu dotazů, která se v čase nemění. V kontextu Search Console, kde se dotazy a jejich počet každý den mění, nedává příliš smysl. O trochu užitečnější je graf skutečných počtů dotazů nepřepočítaných na procenta. Z toho je alespoň vidět, že počet dotazů roste a růst táhnou dotazy v první desítce.
+
+```{r fig.asp=9/16, message=FALSE, layout="l-body-outset"}
+sc_by_date_query |>
+  filter(date >= as.Date("2021-08-01")) |> 
+  mutate(
+    pos_int = cut(
+      position,
+      breaks = c(10 * 0:3, Inf),
+      labels = c("1-10", "11-20", "21-30", "31+")
+    )
+  ) |>
+  group_by(date, pos_int) |>
+  summarise(queries = n_distinct(query), .groups = "drop") |>
+  ggplot(aes(x = date, y = queries, fill = pos_int)) +
+  geom_area() +
+  scale_x_date(
+    date_breaks = "3 months", date_labels = "%b %y", 
+    date_minor_breaks = "month", expand = expansion(0.01)
+  )
+```
+
+
+### Počet vstupních stránek podle intervalů pozic
+
+Obdobný graf lze vykreslit i pro počty vstupních stránek
+
+```{r fig.asp=9/16, layout="l-body-outset"}
+sc_by_date_page |>
+  filter(date >= as.Date("2021-08-01")) |> 
+  mutate(
+    pos_int = cut(
+      position,
+      breaks = c(10 * 0:3, Inf),
+      labels = c("1-10", "11-20", "21-30", "31+")
+    )
+  ) |>
+  group_by(date, pos_int) |>
+  summarise(pages = n_distinct(page), .groups = "drop") |>
+  ggplot(aes(x = date, y = pages, fill = pos_int)) +
+  geom_area() +
+  scale_x_date(
+    date_breaks = "3 months", date_labels = "%b %y", 
+    date_minor_breaks = "month", expand = expansion(0.01)
+  )
+```
+
+### Imprese podle intervalů pozic
+
+Graf jde vykreslit i pro imprese nebo kliky (zde imprese). Zároveň jsem mu nastavil i jiné intervaly pozic, aby bylo vidět pordobnější rozdělení pozic na první stránce výsledků hledání.
+
+Ale upřímně, všechny tyhle grafy mají z dat Search Console málokdy smysl, protože bývají pro většinu webů hodně podobné a nějaký důležitý vhled z nich získám jen výjimečně.
+
+```{r fig.asp=9/16, layout="l-body-outset"}
+sc_by_date_query |>
+  filter(date >= as.Date("2021-08-01")) |> 
+  mutate(
+    pos_int = cut(
+      position,
+      breaks = c(1, 1.5, 3.5, 5.5, 10.01, Inf),
+      labels = c("1", "2-3", "4-5", "6-10", "10+"),
+      right = FALSE
+    )
+  ) |>
+  group_by(date, pos_int) |>
+  summarise(impressions = sum(impressions), .groups = "drop") |>
+  ggplot(aes(x = date, y = impressions, fill = pos_int)) +
+  geom_area() +
+  scale_x_date(
+    date_breaks = "3 months", date_labels = "%b %y", 
+    date_minor_breaks = "month", expand = expansion(0.01)
+  )
+```
+
+
+## Porovnání metrik s předešlým obdobím nebo rokem
+
+Dalším populárním grafem je porovnání běžného období s obdobím před rokem (YoY, year over year) nebo s obdobím bezprostředně předcházejícím.
+
+### Meziroční porovnání (YoY)
+
+Princip přípravy je jednoduchý. Vím, že mám v dlouhé tabulce 6 metrik, takže ke každému řádku přidám funkcí `lag` hodnotu z řádku o 6 * 365 řádků zpátky. Tuhle hodnotu pak vykreslím tečkovanou čárou.
+
+```{r fig.asp=1, layout="l-body-outset"}
+sc_all_metrics_by_date |> 
+  sc_reshape() |> 
+  mutate(value_prev = lag(value, 6 * 365)) |> 
+  filter(date >= as.Date("2022-01-01")) |>
+  sc_plot("month") +
+  geom_line(aes(y = value_prev), linetype = "dotted")
+```
+
+### Posledních 12 týdnů a 12 týdnů před tím
+
+Obdobně jde vykreslit jakékoli období s jakoukoli granularitou a k němu stejně dlouhé období bezprostředně předcházející.
+
+```{r fig.asp=1, message=FALSE, layout="l-body-outset"}
+sc_aggregate_all_metrics("week") |> 
+  sc_reshape() |> 
+  mutate(value_prev = lag(value, 6 * 12)) |> 
+  filter(week >= yearweek(as.Date("2022-01-03"))) |> 
+  sc_plot("2 weeks", "%x", "week") +
+  geom_line(aes(y = value_prev), linetype = "dotted")
+```
+
+### Autokorelace
+
+Zajímavá varianta je, když se vykreslí jen rozdíly (případně podíly resp. procenta) mezi aktuální a předešlou hodnotou. V principu se jedná o svislou úsečku mezi plnou a tečkovanou z grafů výše, která má základ v nule.
+
+Zde je příklad posledních 12 týdnů v porovnání s předešlými 12 týdny vykreslený po dnech. Ukazuje, o kolik byla daná metrika v daný den vyšší než před 12 tdny.
+
+```{r fig.asp=0.8, layout="l-body-outset"}
+sc_all_metrics_by_date |>
+  sc_reshape() |> 
+  mutate(value = value - lag(value, 6 * 7 * 12)) |> 
+  filter(date >= as.Date("2022-01-01")) |>
+  ggplot(aes(x = date, y = value)) +
+  geom_segment(aes(xend = date, yend = 0)) +
+  scale_x_date(date_breaks = "month", date_labels = "%b %y") +
+  facet_wrap(~metric, ncol = 1, scales = "free_y", strip.position = "right")
+```
+
+## Dny v týdnu
+
+Pro většinu webů je typická týdenní periodicita. Někde je slabší, někde silnější a liší se i její průběh. Asi nejlepším porovnáním je [boxplot](https://cs.wikipedia.org/wiki/Boxplot), který ukazuje jednak medián (tlustší vodorovná čára uvnitř boxu) a jednak i celou distribuci hodnt (box reprezentuje 50 % hodnot uprostřed, box i s fousy rozpětí bez odlehlých hodnot, které reprezentují puntíky).
+
+Graf má smysl spíš jen pro imprese a kliky, protože u ostatních metrik se periodicita moc neprojevuje.
+
+```{r fig.asp=9/16, layout="l-body-outset"}
+sc_by_date |>
+  filter(date >= as.Date("2021-08-01")) |>
+  select(!c(ctr, position)) |> 
+  sc_reshape() |> 
+  mutate(day = wday(date, label = TRUE, week_start = 1)) |> 
+  ggplot(aes(x = day, y = value)) +
+  geom_boxplot() +
+  facet_wrap(~metric, ncol = 1, scales = "free_y", strip.position = "right")
+```
+
+Z grafu je vidět, že zrovna tenhle web silnou týdenní periodicitu nemá. Sice od pondělí trochu vystoupá do úterý, pak až do soboty mírně klesá a znovu stoupne v neděli, ale rozdíly hodnot nejsou moc přesvědčivé.
+
+### Dekompozice časové řady
+
+Pro dekompozici časových řad na trend, sezónnost a šum existuje mnoho teoretických modelů a balíčků, které je počítají. Pro příklad ukážu postup s balíčkem *feasts* z rodiny balíčku *tsibble*. Ten sice nějakou sezónnost našel, ale zároveň ukazuje, že se pohybuje jen v rozpětí cca 100 impresí (-50 až 50), což v objemu nějakých 2000 impresí za den není zrovna moc. Navíc je vidět, že rozpětí šumu (označený jako _random_) je čtyřikrát větší.
+
+```{r fig.asp=10/16, layout="l-body-outset"}
+sc_by_date |>
+  filter(date >= as.Date("2022-01-01")) |> 
+  as_tsibble(index = date) |>
+  fabletools::model(feasts::classical_decomposition(impressions)) |>
+  fabletools::components() |>
+  autoplot()
+```
+
+Nutno poznamenat, že sezónnost v v rámci roku nejde z dat Search Console odvodit, protože je k dispozici jen 16 měsíců dat. Museli byste si data sami archivovat za delší období.
+
+A to je všechno :-)
