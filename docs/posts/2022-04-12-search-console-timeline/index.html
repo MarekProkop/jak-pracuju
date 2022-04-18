@@ -2187,10 +2187,10 @@ div.l-body {
 </nav>
 </div>
 <p>Článek je hodně dlouhý, protože sestavit a vizualizovat časové řady (time series) z dat Search Console jde mnoha způsoby a není úplně triviální si vybrat ty, které dávají pro daný účel smysl. Ukážu zde všechny, které bežně používám, i ty, které používám jen výjimečně nebo skoro vůbec.</p>
-<p>Kód v jazyce R jsem se snažil napsat tak, aby byl funkční, čistý, srozumitelný a hlavně snadno a univerzálně znovupoužitelný. Časem asi na analýzu dat Search Console udělám samostatný balíček, ale do té by musí stačit tohle.</p>
-<p>Na druhou stranu má článek i čistě metodickou, na programovacím jazyce nezávislou rovinu. Některé uvedené časové řady a jejich vizualizace jdou vytvořit i jinak, např. v Data Studiu (na příklad odkazuju dál) nebo v Google Sheets. I bez znalosti R jde tedy článek využít jako vzorník výstupů, které jdou z dat Search Console různými prostředky udělat a které dávají určitý smysl.</p>
+<p>Kód v jazyce R jsem se snažil napsat tak, aby byl funkční, čistý, srozumitelný a hlavně snadno a univerzálně znovupoužitelný. Časem asi na analýzu dat Search Console udělám samostatný balíček, ale do té doby musí stačit tohle.</p>
+<p>Na druhou stranu má článek i čistě metodickou, na programovacím jazyce nezávislou rovinu. Některé uvedené časové řady a jejich vizualizace jdou vytvořit i jinak, např. v Data Studiu (na příklad odkazuju dál) nebo v Google Sheets. I bez znalosti R jde tedy článek využít jako vzorník výstupů, které jdou z dat Search Console různými prostředky udělat, a které dávají určitý smysl.</p>
 <p>Všechny ukázky čerpají z dat webu <a href="https://www.glamourcabaret.cz/">Glamour Cabaret</a> Alžběty Faltysové. Jako hobby projekt bez větších investic sice neohromí gigantickými čísly, ale zároveň hezky ukazuje některé vzorce typické pro přirozeně a dobře budovaný obsah se zajímavým potenciálem dalšího růstu. Alžbětě moc děkuju, že mi data pro článek poskytla.</p>
-<p>Pro jistotu upozorňuju, že tenhle článek se primárně zabývá konkstrukcí a vizualizací časových řad z dat Search Console, nikoli jejich detailní analýzou. Té se budu věnnovat někdy jindy.</p>
+<p>Pro jistotu upozorňuju, že tenhle článek se primárně zabývá konstrukcí a vizualizací časových řad z dat Search Console, nikoli jejich detailní analýzou. Té se budu věnnovat někdy jindy.</p>
 <h2 id="příprava">Příprava</h2>
 <h3 id="potřebné-balíčky">Potřebné balíčky</h3>
 <p>Jako vždy <em>tidyverse</em>, <em>searchConsoleR</em> pro práci se Search Consolí, <em>lubridate</em> pro práci s daty a časem. Balíček <em>feasts</em> je zde jen pro dekompozici časové řady na trend, sezónnost a šum, a balíček <em>slider</em> umožňuje výpočet klouzavých průměrů. Balíček <em>urltools</em> slouží k rozložení URL na složky a používám ho k segentaci dat podle stránek.</p>
@@ -2925,7 +2925,7 @@ $ queries     &lt;int&gt; 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 2, 1, 2, 2, 1, ~</cod
 </div>
 <p>Nutno poznamenat, že sezónnost v v rámci roku nejde z dat Search Console odvodit, protože je k dispozici jen 16 měsíců dat. Museli byste si data sami archivovat za delší období.</p>
 <h2 id="segmentace-podle-url">Segmentace podle URL</h2>
-<p>Date Search Console se nejčastěji segmentují podle skupin vstupních stránek (URL) nebo podle skupin dotazů. Většinou segmentuju aktuální stav (tj. např. posledních 28 dní) sloupcovým grafem, ale vývoj v čase se občas hodí taky.</p>
+<p>Data Search Console se nejčastěji segmentují podle skupin vstupních stránek (URL) nebo podle skupin dotazů. Většinou segmentuju aktuální stav (tj. např. posledních 28 dní) sloupcovým grafem, ale vývoj v čase se občas hodí taky.</p>
 <p>V tomto konkrétním případě se v URL hned za doménou nachází složka representující kategorii (rubriku či sekci webu), takže se nabízí segmentace stránek podle těchto kategorií. Dále jde segmentovat i podle typu stránky – na webu jsou jednak stránky rubrik se seznamem článků (ty mají za doménou jen jedno lomítko) a jednak články, které mají za doménou dvě lomítka.</p>
 <h3 id="typ-stránky-rubriky-vs.-články">Typ stránky: rubriky vs. články</h3>
 <p>Vyjdu z datasetu <code>sc_by_date_page</code> a doplním ho o sloupec reprezentující typ stránky. Imprese a kliky sečtu za měsíc a rubriku a přidám i počet unikátních stránek. Výsledek vykreslím jako vrstvený plošný graf (stacked area chart). Rubriku poznám tak, že má v URL celkem 3 lomítka, kdežto článek má 4. Tím se mi do rubrik dostane i homepage, ale to mi nevadí.</p>
@@ -2990,7 +2990,7 @@ $ queries     &lt;int&gt; 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 2, 1, 2, 2, 1, ~</cod
 <li>Stránek v rubrice <em>značky</em> je hodně, ale impresí a kliků mají málo. Lze je tedy považovat za nepříliš úspěšné. Obdobně je na tom <em>katalog</em>.</li>
 <li>Opakem jsou <em>trendy</em>, které mají velmi málo stránek, ale získávají hodně impresí i kliků.</li>
 <li>Rubriky <em>nákupy</em> a <em>materiály</em> mají hodně impresí, ale z hlediska viditelnosti <em>nákupy</em> fungují efektivněji, protože impresí dosahují s menším počtem stránek. Zase ale mají horší CTR.</li>
-<li>Zajímavá je rubirka <em>m</em> (magazín), která má hodně kliků při menším počtu impresí (takže vysoké CTR) a navíc jí kliky v posledních měsících rychle rostou i při stagnujícím počtu stránek.</li>
+<li>Zajímavá je rubrika <em>m</em> (magazín), která má hodně kliků při menším počtu impresí (takže vysoké CTR) a navíc jí kliky v posledních měsících rychle rostou i při stagnujícím počtu stránek.</li>
 </ul>
 <p>Aby byla efektivita výkonových metrik (kliky a imprese) vzhledem k počtu unikátních stránek vidět ještě lépe, lze použít poměrové metriky: počet impresí na stránku a počet kliků na stránku.</p>
 <div class="layout-chunk" data-layout="l-body-outset">
@@ -3021,7 +3021,7 @@ $ queries     &lt;int&gt; 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 2, 1, 2, 2, 1, ~</cod
 </div>
 <p>Zde je ještě lépe vidět malá efektivita značek a katalogu a vysoká efektivita trendů.</p>
 <p>Z těchto poznatků jde odvodit docela dost doporučení pro další práci s obsahem, ale to již záleží na konkrétním kontextu projektu.</p>
-<p>Podobně jde segemntovat podle dotazů. Nejčastěji se tak rozlišuje brandové hledání od obecného, ale jde zapojit i klasifikace dotazů z analýzy klíčových slov a segementovat podle ní. To už ale přesahuje téma tohoto článku.</p>
+<p>Podobně jde segmentovat podle dotazů. Nejčastěji se tak rozlišuje brandové hledání od obecného, ale jde zapojit i klasifikace dotazů z analýzy klíčových slov a segementovat podle ní. To už ale přesahuje téma tohoto článku.</p>
 <p>A to je všechno :-)</p>
 <div class="sourceCode" id="cb8"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
 <!--radix_placeholder_article_footer-->

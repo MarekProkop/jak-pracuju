@@ -35,13 +35,13 @@ knitr::opts_chunk$set(
 
 Článek je hodně dlouhý, protože sestavit a vizualizovat časové řady (time series) z dat Search Console jde mnoha způsoby a není úplně triviální si vybrat ty, které dávají pro daný účel smysl. Ukážu zde všechny, které bežně používám, i ty, které používám jen výjimečně nebo skoro vůbec.
 
-Kód v jazyce R jsem se snažil napsat tak, aby byl funkční, čistý, srozumitelný a hlavně snadno a univerzálně znovupoužitelný. Časem asi na analýzu dat Search Console udělám samostatný balíček, ale do té by musí stačit tohle.
+Kód v jazyce R jsem se snažil napsat tak, aby byl funkční, čistý, srozumitelný a hlavně snadno a univerzálně znovupoužitelný. Časem asi na analýzu dat Search Console udělám samostatný balíček, ale do té doby musí stačit tohle.
 
-Na druhou stranu má článek i čistě metodickou, na programovacím jazyce nezávislou rovinu. Některé uvedené časové řady a jejich vizualizace jdou vytvořit i jinak, např. v Data Studiu (na příklad odkazuju dál) nebo v Google Sheets. I bez znalosti R jde tedy článek využít jako vzorník výstupů, které jdou z dat Search Console různými prostředky udělat a které dávají určitý smysl.
+Na druhou stranu má článek i čistě metodickou, na programovacím jazyce nezávislou rovinu. Některé uvedené časové řady a jejich vizualizace jdou vytvořit i jinak, např. v Data Studiu (na příklad odkazuju dál) nebo v Google Sheets. I bez znalosti R jde tedy článek využít jako vzorník výstupů, které jdou z dat Search Console různými prostředky udělat, a které dávají určitý smysl.
 
 Všechny ukázky čerpají z dat webu [Glamour Cabaret](https://www.glamourcabaret.cz/) Alžběty Faltysové. Jako hobby projekt bez větších investic sice neohromí gigantickými čísly, ale zároveň hezky ukazuje některé vzorce typické pro přirozeně a dobře budovaný obsah se zajímavým potenciálem dalšího růstu. Alžbětě moc děkuju, že mi data pro článek poskytla.
 
-Pro jistotu upozorňuju, že tenhle článek se primárně zabývá konkstrukcí a vizualizací časových řad z dat Search Console, nikoli jejich detailní analýzou. Té se budu věnnovat někdy jindy.
+Pro jistotu upozorňuju, že tenhle článek se primárně zabývá konstrukcí a vizualizací časových řad z dat Search Console, nikoli jejich detailní analýzou. Té se budu věnnovat někdy jindy.
 
 
 ## Příprava
@@ -732,7 +732,7 @@ Nutno poznamenat, že sezónnost v v rámci roku nejde z dat Search Console odvo
 
 ## Segmentace podle URL
 
-Date Search Console se nejčastěji segmentují podle skupin vstupních stránek (URL) nebo podle skupin dotazů. Většinou segmentuju aktuální stav (tj. např. posledních 28 dní) sloupcovým grafem, ale vývoj v čase se občas hodí taky.
+Data Search Console se nejčastěji segmentují podle skupin vstupních stránek (URL) nebo podle skupin dotazů. Většinou segmentuju aktuální stav (tj. např. posledních 28 dní) sloupcovým grafem, ale vývoj v čase se občas hodí taky.
 
 V tomto konkrétním případě se v URL hned za doménou nachází složka representující kategorii (rubriku či sekci webu), takže se nabízí segmentace stránek podle těchto kategorií. Dále jde segmentovat i podle typu stránky -- na webu jsou jednak stránky rubrik se seznamem článků (ty mají za doménou jen jedno lomítko) a jednak články, které mají za doménou dvě lomítka.
 
@@ -798,7 +798,7 @@ Tady už je interpretace zajímavější.
 - Stránek v rubrice *značky* je hodně, ale impresí a kliků mají málo. Lze je tedy považovat za nepříliš úspěšné. Obdobně je na tom *katalog*.
 - Opakem jsou *trendy*, které mají velmi málo stránek, ale získávají hodně impresí i kliků.
 - Rubriky *nákupy* a *materiály* mají hodně impresí, ale z hlediska viditelnosti *nákupy* fungují efektivněji, protože impresí dosahují s menším počtem stránek. Zase ale mají horší CTR.
-- Zajímavá je rubirka *m* (magazín), která má hodně kliků při menším počtu impresí (takže vysoké CTR) a navíc jí kliky v posledních měsících rychle rostou i při stagnujícím počtu stránek.
+- Zajímavá je rubrika *m* (magazín), která má hodně kliků při menším počtu impresí (takže vysoké CTR) a navíc jí kliky v posledních měsících rychle rostou i při stagnujícím počtu stránek.
 
 Aby byla efektivita výkonových metrik (kliky a imprese) vzhledem k počtu unikátních stránek vidět ještě lépe, lze použít poměrové metriky: počet impresí na stránku a počet kliků na stránku.
 
@@ -829,6 +829,6 @@ Zde je ještě lépe vidět malá efektivita značek a katalogu a vysoká efekti
 
 Z těchto poznatků jde odvodit docela dost doporučení pro další práci s obsahem, ale to již záleží na konkrétním kontextu projektu.
 
-Podobně jde segemntovat podle dotazů. Nejčastěji se tak rozlišuje brandové hledání od obecného, ale jde zapojit i klasifikace dotazů z analýzy klíčových slov a segementovat podle ní. To už ale přesahuje téma tohoto článku.
+Podobně jde segmentovat podle dotazů. Nejčastěji se tak rozlišuje brandové hledání od obecného, ale jde zapojit i klasifikace dotazů z analýzy klíčových slov a segementovat podle ní. To už ale přesahuje téma tohoto článku.
 
 A to je všechno :-)
