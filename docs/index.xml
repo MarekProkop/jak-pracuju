@@ -7,7 +7,16 @@
     <description>My Blog
 </description>
     <generator>Distill</generator>
-    <lastBuildDate>Sun, 10 Apr 2022 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 18 Apr 2022 00:00:00 +0000</lastBuildDate>
+    <item>
+      <title>Časové řady z dat Search Console</title>
+      <dc:creator>Marek Prokop</dc:creator>
+      <link>https://marekprokop.github.io/jak-pracuju/posts/2022-04-12-search-console-timeline</link>
+      <description>Jako první na vás v Search Consoli vyskočí graf výkonu webu v čase. Časové řady ze Seaerch Console jdou ale vizualizovat o dost lépe a jdou z nich pak vypozorovat zajímavé věci.</description>
+      <guid>https://marekprokop.github.io/jak-pracuju/posts/2022-04-12-search-console-timeline</guid>
+      <pubDate>Mon, 18 Apr 2022 00:00:00 +0000</pubDate>
+      <media:content url="https://marekprokop.github.io/jak-pracuju/posts/2022-04-12-search-console-timeline/search-console-timeline_files/figure-html5/unnamed-chunk-29-1.png" medium="image" type="image/png" width="1248" height="780"/>
+    </item>
     <item>
       <title>Čístím Search Consoli od zbytečných webů</title>
       <dc:creator>Marek Prokop</dc:creator>
