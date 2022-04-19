@@ -144,7 +144,7 @@ read_sc <- function(dimensions) {
       startDate = date_from,
       endDate = date_to,
       dimensions = dimensions,
-      dimensionFilterExp = paste0("country==", country),
+      dimensionFilterExp = paste0("country==", sc_country),
       rowLimit = row_limit
     ) |>
       write_rds(rds_path, compress = "gz")
@@ -154,6 +154,8 @@ read_sc <- function(dimensions) {
 ```
 
 Nakonec si opravdu stáhnu resp. ze souborů načtu všechna data, která budu ze Search Console potřebovat. V praxi se s tím musí opatrně, protože tahání více dimenzí za delší období z API může trvat docela dlouho. Když nevím, jak budou data konkrétního webu veliká, zkusím nejprve stáhnout jeden typický den nebo týden a podle toho se rozhodnu.
+
+Pokud budete kód sami pouštět, funkci `src_auth` můžete nechat bez parametrů a ona se vás na e-mail zeptá. Já to mám takhle proto, aby to běželo automaticky.
 
 ```{r}
 scr_auth(email = Sys.getenv("MY_GOOGLE_ACCOUNT"))

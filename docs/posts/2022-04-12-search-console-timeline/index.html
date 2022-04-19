@@ -2233,7 +2233,7 @@ div.l-body {
 <pre class="sourceCode r"><code class="sourceCode r"><span class='fu'><a href='https://lubridate.tidyverse.org/reference/now.html'>today</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>-</span> <span class='fl'>3</span>
 </code></pre>
 </div>
-<pre><code>[1] &quot;2022-04-15&quot;</code></pre>
+<pre><code>[1] &quot;2022-04-16&quot;</code></pre>
 </div>
 <p>Když chci třeba poslední 4 celé kalendářní týdny, udělám to takhle:</p>
 <div class="layout-chunk" data-layout="l-body">
@@ -2294,7 +2294,7 @@ div.l-body {
       startDate <span class='op'>=</span> <span class='va'>date_from</span>,
       endDate <span class='op'>=</span> <span class='va'>date_to</span>,
       dimensions <span class='op'>=</span> <span class='va'>dimensions</span>,
-      dimensionFilterExp <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste0</a></span><span class='op'>(</span><span class='st'>"country=="</span>, <span class='va'>country</span><span class='op'>)</span>,
+      dimensionFilterExp <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste0</a></span><span class='op'>(</span><span class='st'>"country=="</span>, <span class='va'>sc_country</span><span class='op'>)</span>,
       rowLimit <span class='op'>=</span> <span class='va'>row_limit</span>
     <span class='op'>)</span> |&gt;
       <span class='fu'><a href='https://readr.tidyverse.org/reference/read_rds.html'>write_rds</a></span><span class='op'>(</span><span class='va'>rds_path</span>, compress <span class='op'>=</span> <span class='st'>"gz"</span><span class='op'>)</span>
@@ -2305,6 +2305,7 @@ div.l-body {
 </div>
 </div>
 <p>Nakonec si opravdu stáhnu resp. ze souborů načtu všechna data, která budu ze Search Console potřebovat. V praxi se s tím musí opatrně, protože tahání více dimenzí za delší období z API může trvat docela dlouho. Když nevím, jak budou data konkrétního webu veliká, zkusím nejprve stáhnout jeden typický den nebo týden a podle toho se rozhodnu.</p>
+<p>Pokud budete kód sami pouštět, funkci <code>src_auth</code> můžete nechat bez parametrů a ona se vás na e-mail zeptá. Já to mám takhle proto, aby to běželo automaticky.</p>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
 <pre class="sourceCode r"><code class="sourceCode r"><span class='fu'><a href='https://rdrr.io/pkg/searchConsoleR/man/scr_auth.html'>scr_auth</a></span><span class='op'>(</span>email <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/Sys.getenv.html'>Sys.getenv</a></span><span class='op'>(</span><span class='st'>"MY_GOOGLE_ACCOUNT"</span><span class='op'>)</span><span class='op'>)</span>

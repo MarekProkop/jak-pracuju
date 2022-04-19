@@ -5,14 +5,14 @@
       "title": "O mně a o tomto blogu",
       "author": [],
       "contents": "\r\nJmenuju se Marek Prokop a pracuju jako konzultant a analytik digitálního marketingu ve své firmě PROKOP software s.r.o. Kdysi dávno jsem programoval, a přestože mě už přes 20 let živí něco jiného, slovo software jsem v názvu firmy nechal. I v marketingu totiž rád vymýšlím řešení, která jdou „naprogramovat“ – ať už se jedná o různé analýzy, marketingovou automatizaci, nebo tvorbu webů.\r\nA právě taková řešení si zapisuju do tohoto blogu. Zapisuju si je sem především pro sebe, abych je tu snadno našel, když je zase zapomenu, ale budu rád, když přinesou nějaký užitek i vám.\r\nVětšina řešení je v jazyce R, a jestli je chcete využít pro sebe, měli byste R alespoň malinko umět. Když neumíte, projděte si mou příručku Od Excelu k R a budete připravení. Kromě R občas použiju i Google Sheets, Google Apps Script, Python apod. Pokusím se zápisky štítkovat, aby bylo jasné, o čem konkrétně jsou.\r\n\r\n\r\n\r\n",
-      "last_modified": "2022-04-18T22:02:36+02:00"
+      "last_modified": "2022-04-19T08:53:04+02:00"
     },
     {
       "path": "index.html",
       "title": "Nejnovější zápisky",
       "author": [],
       "contents": "\r\n\r\n\r\n\r\n",
-      "last_modified": "2022-04-18T22:02:37+02:00"
+      "last_modified": "2022-04-19T08:53:05+02:00"
     }
   ],
   "collections": ["posts/posts.json"]
