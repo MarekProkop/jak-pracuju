@@ -1,7 +1,7 @@
 ---
 title: "Časové řady z dat Search Console"
 description: |
-  Jako první na vás v Search Consoli vyskočí graf výkonu webu v čase. Časové řady ze Seaerch Console jdou ale vizualizovat o dost lépe a jdou z nich pak vypozorovat zajímavé věci.
+  Jako první na vás v Search Consoli vyskočí graf výkonu webu v čase. Časové řady ze Search Console jdou ale vizualizovat o dost lépe a jdou z nich pak vypozorovat zajímavé věci.
 author:
   - name: Marek Prokop
     affiliation: PROKOP software s.r.o.
