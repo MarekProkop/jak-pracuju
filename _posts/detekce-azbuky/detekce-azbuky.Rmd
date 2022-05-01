@@ -1,0 +1,124 @@
+---
+title: "Jak se zbavit azbuky"
+description: |
+  Do vyhledávacích dotazů nebo jiných dat se občas dostane ruština či jiný jazyk psaný azbukou a dělá tam nepořádek. Tohle je rýchlý návod, jak se textů v azbuce zbavit, nebo je naopak najít.
+author:
+  - name: Marek Prokop
+    affiliation: PROKOP software s.r.o.
+    affiliation_url: https://www.prokopsw.cz/cs
+date: 2022-04-23
+output:
+  distill::distill_article:
+    self_contained: false
+    toc: true
+draft: true
+---
+
+MacOS je v tomhle snad lepší, ale na Windows se v R resp. RStudiu blbě zobrazuje azbuka (cyrilice) a navíc v typických situacích, třeba ve vyhledávacích dotazech, ani texty v azbuce nechci.
+
+```{r setup, include=FALSE}
+paged_print <- function(x, ...) {
+  if (inherits(x, "data.frame")) {
+    knitr::knit_print(rmarkdown::paged_table(x), ...)
+  } else {
+    knitr::knit_print(x, ...)
+  }
+}
+
+kable_print <- function(x, ...) {
+  knitr::knit_print(knitr::kable(x), ...)
+}
+
+knitr::opts_chunk$set(
+  echo = TRUE,
+  render = paged_print
+)
+```
+
+```{r libs, include=FALSE}
+library(tidyverse)
+library(stringi)
+library(reactable)
+library(flextable)
+library(gt)
+```
+
+## Rychlý příklad
+
+Mám tahle data:
+
+```{r data}
+strings <- c(
+  "Praha",
+  "Prague",
+  "布拉格",
+  "Прага",
+  "Πράγα"
+)
+
+df <- tibble(text = strings, jazyk = c("česky", "anglicky", "čínsky", "rusky", "řecky"))
+```
+
+Vektor se v RStudiu zobrazuje správně v R Markdownu i na konsoli, ale v HTML, které vygeneruje [knitr](https://yihui.org/knitr/), je azbuka zmršená.
+
+```{r}
+print(strings)
+```
+
+Encodings
+
+```{r}
+stringi::stri_enc_mark(strings)
+```
+
+Dataframe je zmršený i v RStudiu.
+
+```{r}
+df
+```
+
+## Jak texty v azbuce odstranit
+
+Stačí třída v regulárních výrazech. Konkrétně v případě vektoru:
+
+```{r}
+strings[!str_detect(strings, "[\\p{IsCyrillic}]")]
+```
+
+A v případě dataframu:
+
+```{r}
+df |> 
+  filter(!str_detect(strings, "[\\p{IsCyrillic}]"))
+```
+
+## Ještě ke zobrazování
+
+Jen pro zajímavost a kontext, `knitr::kable()` zobrazuje azbuku blbě v R Markdownu i na konzoli.
+
+```{r}
+df |> knitr::kable()
+```
+
+Reactable zobrazuje azbuku v R Markdownu dobře, ale blbě se zknituje.
+
+```{r}
+df |> reactable()
+```
+
+Totéž xtable -- dobře v R Mardownu, knitr špatně.
+
+```{r}
+df |> qflextable()
+```
+
+```{r}
+df |> gt()
+```
+
+## Session info
+
+```{r}
+print(sessionInfo())
+```
+
