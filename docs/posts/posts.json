@@ -1,5 +1,22 @@
 [
   {
+    "path": "posts/detekce-azbuky/",
+    "title": "Jak se zbavit azbuky, čínštiny apod.",
+    "description": "Do dat se občas dostane nechtěná ruština, čínština, řečtina, nebo jiný jazyk psaný nelatinkovým písmem. Tohle je rychlý návod, jak se takových textů pomocí regulárních výrazů zbavit, nebo je naopak najít.",
+    "author": [
+      {
+        "name": "Marek Prokop",
+        "url": {}
+      }
+    ],
+    "date": "2022-05-01",
+    "categories": [],
+    "contents": "\r\nRychlý příklad\r\nMám tahle data:\r\n\r\n\r\ndf <- tibble(\r\n  text = c(\r\n    \"Praha - Střešovice\",\r\n    \"Prague - Stresovice\",\r\n    \"布拉格 - Střešovice\",\r\n    \"Прага - Střešovice\",\r\n    \"Πράγα - Střešovice\"\r\n  ), \r\n  jazyk = c(\"česky\", \"anglicky\", \"čínsky\", \"rusky\", \"řecky\")\r\n)\r\n\r\ndf\r\n\r\n\r\ntext\r\njazyk\r\nPraha - Střešovice\r\nčesky\r\nPrague - Stresovice\r\nanglicky\r\n布拉格 - Střešovice\r\nčínsky\r\nПрага - Střešovice\r\nrusky\r\nΠράγα - Střešovice\r\nřecky\r\n\r\nChci odstranit texty v azbuce\r\n\r\n\r\ndf |> \r\n  filter(!str_detect(text, \"[\\\\p{Cyrillic}]\"))\r\n\r\n\r\ntext\r\njazyk\r\nPraha - Střešovice\r\nčesky\r\nPrague - Stresovice\r\nanglicky\r\n布拉格 - Střešovice\r\nčínsky\r\nΠράγα - Střešovice\r\nřecky\r\n\r\nChci odstranit texty v čínštině\r\n\r\n\r\ndf |> \r\n  filter(!str_detect(text, \"[\\\\p{Han}]\"))\r\n\r\n\r\ntext\r\njazyk\r\nPraha - Střešovice\r\nčesky\r\nPrague - Stresovice\r\nanglicky\r\nПрага - Střešovice\r\nrusky\r\nΠράγα - Střešovice\r\nřecky\r\n\r\nChci odstranit texty v řečtině\r\n\r\n\r\ndf |> \r\n  filter(!str_detect(text, \"[\\\\p{Greek}]\"))\r\n\r\n\r\ntext\r\njazyk\r\nPraha - Střešovice\r\nčesky\r\nPrague - Stresovice\r\nanglicky\r\n布拉格 - Střešovice\r\nčínsky\r\nПрага - Střešovice\r\nrusky\r\n\r\nChci odstranit texty v čekmoli kromě latinky\r\nTo už je těžší. V předešlých případech jsem odstranil texty, které obsahovaly alespoň jeden znak z daného Unicode rozsahu, ale zde musím odstranit texty, které obsahují jenom znaky z daného rozsahu. Musím tedy zkombinovat tři část:\r\n{Latin} – latinkové znaky\r\n{Punct} – interpunkce\r\n\\x20 – mezera (může být napsaná i normálně, ale byla by blbě vidět)\r\n\r\n\r\ndf |> \r\n  filter(str_detect(text, \"^[\\x20\\\\p{Punct}\\\\p{Latin}]+$\"))\r\n\r\n\r\ntext\r\njazyk\r\nPraha - Střešovice\r\nčesky\r\nPrague - Stresovice\r\nanglicky\r\n\r\nChci najít…\r\nSamozřejmě to jde použít i pro hledání textů s určitými znaky.\r\nVšechny v azbuce:\r\n\r\n\r\ndf |> \r\n  filter(str_detect(text, \"[\\\\p{Cyrillic}]\"))\r\n\r\n\r\ntext\r\njazyk\r\nПрага - Střešovice\r\nrusky\r\n\r\nVšechny nelatinkové:\r\n\r\n\r\ndf |> \r\n  filter(!str_detect(text, \"^[\\x20\\\\p{Punct}\\\\p{Latin}]+$\"))\r\n\r\n\r\ntext\r\njazyk\r\n布拉格 - Střešovice\r\nčínsky\r\nПрага - Střešovice\r\nrusky\r\nΠράγα - Střešovice\r\nřecky\r\n\r\nV případě potřeby něčeho speciálního poslouží podrobný přehled Unicode v regulárních výrazech.\r\n\r\n\r\n\r\n",
+    "preview": {},
+    "last_modified": "2022-05-01T11:19:40+02:00",
+    "input_file": {}
+  },
+  {
     "path": "posts/2022-04-12-search-console-timeline/",
     "title": "Časové řady z dat Search Console",
     "description": "Jako první na vás v Search Consoli vyskočí graf výkonu webu v čase. Časové řady ze Search Console jdou ale vizualizovat o dost lépe a jdou z nich pak vypozorovat zajímavé věci.",

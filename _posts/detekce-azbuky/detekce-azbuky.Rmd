@@ -1,20 +1,18 @@
 ---
-title: "Jak se zbavit azbuky"
+title: "Jak se zbavit azbuky, čínštiny apod."
 description: |
-  Do vyhledávacích dotazů nebo jiných dat se občas dostane ruština či jiný jazyk psaný azbukou a dělá tam nepořádek. Tohle je rýchlý návod, jak se textů v azbuce zbavit, nebo je naopak najít.
+  Do dat se občas dostane nechtěná ruština, čínština, řečtina, nebo jiný jazyk psaný nelatinkovým písmem. Tohle je rychlý návod, jak se takových textů pomocí regulárních výrazů zbavit, nebo je naopak najít.
 author:
   - name: Marek Prokop
     affiliation: PROKOP software s.r.o.
     affiliation_url: https://www.prokopsw.cz/cs
-date: 2022-04-23
+date: 2022-05-01
 output:
   distill::distill_article:
     self_contained: false
-    toc: true
-draft: true
+    toc: false
+draft: false
 ---
-
-MacOS je v tomhle snad lepší, ale na Windows se v R resp. RStudiu blbě zobrazuje azbuka (cyrilice) a navíc v typických situacích, třeba ve vyhledávacích dotazech, ani texty v azbuce nechci.
 
 ```{r setup, include=FALSE}
 paged_print <- function(x, ...) {
@@ -31,16 +29,14 @@ kable_print <- function(x, ...) {
 
 knitr::opts_chunk$set(
   echo = TRUE,
-  render = paged_print
+  render = kable_print
 )
 ```
 
 ```{r libs, include=FALSE}
 library(tidyverse)
+library(knitr)
 library(stringi)
-library(reactable)
-library(flextable)
-library(gt)
 ```
 
 ## Rychlý příklad
@@ -48,77 +44,69 @@ library(gt)
 Mám tahle data:
 
 ```{r data}
-strings <- c(
-  "Praha",
-  "Prague",
-  "布拉格",
-  "Прага",
-  "Πράγα"
+df <- tibble(
+  text = c(
+    "Praha - Střešovice",
+    "Prague - Stresovice",
+    "布拉格 - Střešovice",
+    "Прага - Střešovice",
+    "Πράγα - Střešovice"
+  ), 
+  jazyk = c("česky", "anglicky", "čínsky", "rusky", "řecky")
 )
 
-df <- tibble(text = strings, jazyk = c("česky", "anglicky", "čínsky", "rusky", "řecky"))
-```
-
-Vektor se v RStudiu zobrazuje správně v R Markdownu i na konsoli, ale v HTML, které vygeneruje [knitr](https://yihui.org/knitr/), je azbuka zmršená.
-
-```{r}
-print(strings)
-```
-
-Encodings
-
-```{r}
-stringi::stri_enc_mark(strings)
-```
-
-Dataframe je zmršený i v RStudiu.
-
-```{r}
 df
 ```
 
-## Jak texty v azbuce odstranit
-
-Stačí třída v regulárních výrazech. Konkrétně v případě vektoru:
-
-```{r}
-strings[!str_detect(strings, "[\\p{IsCyrillic}]")]
-```
-
-A v případě dataframu:
+### Chci odstranit texty v azbuce
 
 ```{r}
 df |> 
-  filter(!str_detect(strings, "[\\p{IsCyrillic}]"))
+  filter(!str_detect(text, "[\\p{Cyrillic}]"))
 ```
 
-## Ještě ke zobrazování
-
-Jen pro zajímavost a kontext, `knitr::kable()` zobrazuje azbuku blbě v R Markdownu i na konzoli.
+### Chci odstranit texty v čínštině
 
 ```{r}
-df |> knitr::kable()
+df |> 
+  filter(!str_detect(text, "[\\p{Han}]"))
 ```
 
-Reactable zobrazuje azbuku v R Markdownu dobře, ale blbě se zknituje.
+### Chci odstranit texty v řečtině
 
 ```{r}
-df |> reactable()
+df |> 
+  filter(!str_detect(text, "[\\p{Greek}]"))
 ```
 
-Totéž xtable -- dobře v R Mardownu, knitr špatně.
+### Chci odstranit texty v čekmoli kromě latinky
+
+To už je těžší. V předešlých případech jsem odstranil texty, které obsahovaly alespoň jeden znak z daného Unicode rozsahu, ale zde musím odstranit texty, které obsahují **jenom** znaky z daného rozsahu. Musím tedy zkombinovat tři část: 
+
+- `{Latin}` -- latinkové znaky
+- `{Punct}` -- interpunkce
+- `\x20` -- mezera (může být napsaná i normálně, ale byla by blbě vidět)
 
 ```{r}
-df |> qflextable()
+df |> 
+  filter(str_detect(text, "^[\x20\\p{Punct}\\p{Latin}]+$"))
 ```
+
+### Chci najít...
+
+Samozřejmě to jde použít i pro hledání textů s určitými znaky.
+
+Všechny v azbuce:
 
 ```{r}
-df |> gt()
+df |> 
+  filter(str_detect(text, "[\\p{Cyrillic}]"))
 ```
 
-## Session info
+Všechny nelatinkové:
 
 ```{r}
-print(sessionInfo())
+df |> 
+  filter(!str_detect(text, "^[\x20\\p{Punct}\\p{Latin}]+$"))
 ```
-
+V případě potřeby něčeho speciálního poslouží [podrobný přehled Unicode v regulárních výrazech](https://www.regular-expressions.info/unicode.html).

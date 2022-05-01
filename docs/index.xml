@@ -7,7 +7,15 @@
     <description>My Blog
 </description>
     <generator>Distill</generator>
-    <lastBuildDate>Mon, 18 Apr 2022 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 01 May 2022 00:00:00 +0000</lastBuildDate>
+    <item>
+      <title>Jak se zbavit azbuky, čínštiny apod.</title>
+      <dc:creator>Marek Prokop</dc:creator>
+      <link>https://marekprokop.github.io/jak-pracuju/posts/detekce-azbuky</link>
+      <description>Do dat se občas dostane nechtěná ruština, čínština, řečtina, nebo jiný jazyk psaný nelatinkovým písmem. Tohle je rychlý návod, jak se takových textů pomocí regulárních výrazů zbavit, nebo je naopak najít.</description>
+      <guid>https://marekprokop.github.io/jak-pracuju/posts/detekce-azbuky</guid>
+      <pubDate>Sun, 01 May 2022 00:00:00 +0000</pubDate>
+    </item>
     <item>
       <title>Časové řady z dat Search Console</title>
       <dc:creator>Marek Prokop</dc:creator>
