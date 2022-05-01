@@ -33,17 +33,14 @@ knitr::opts_chunk$set(
 )
 ```
 
-```{r libs, include=FALSE}
-library(tidyverse)
-library(knitr)
-library(stringi)
-```
 
 ## Rychlý příklad
 
 Mám tahle data:
 
 ```{r data}
+library(tidyverse)
+
 df <- tibble(
   text = c(
     "Praha - Střešovice",
