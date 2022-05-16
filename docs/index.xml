@@ -7,7 +7,16 @@
     <description>My Blog
 </description>
     <generator>Distill</generator>
-    <lastBuildDate>Sun, 01 May 2022 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 16 May 2022 00:00:00 +0000</lastBuildDate>
+    <item>
+      <title>Detekce změny průměru v časové řadě</title>
+      <dc:creator>Marek Prokop</dc:creator>
+      <link>https://marekprokop.github.io/jak-pracuju/posts/changepoint-detection</link>
+      <description>Ukážu, jak jde v R detekovat a hezky vykreslit významné změny průměru v časové řadě. Za příklad mi poslouží imprese ze Search Console.</description>
+      <guid>https://marekprokop.github.io/jak-pracuju/posts/changepoint-detection</guid>
+      <pubDate>Mon, 16 May 2022 00:00:00 +0000</pubDate>
+      <media:content url="https://marekprokop.github.io/jak-pracuju/posts/changepoint-detection/changepoint-detection_files/figure-html5/unnamed-chunk-14-1.png" medium="image" type="image/png" width="1248" height="768"/>
+    </item>
     <item>
       <title>Jak se zbavit azbuky, čínštiny apod.</title>
       <dc:creator>Marek Prokop</dc:creator>
