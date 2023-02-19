@@ -1,0 +1,107 @@
+---
+title: "Děláte digitální marketing a chcete začít používat R? Tohle je váš studijní plán"
+description: |
+  Naučit se používat R v digitálním marketingu je docela lehké, ale těžké je vybrat, co se vlastně máte učit. Bez dobrého plánu vás čeká hodně slepých uliček. Tohle je ten dobrý plán :-)
+author:
+  - name: Marek Prokop
+    affiliation: "[PROKOP software s.r.o.](https://www.prokopsw.cz/cs)"
+date: 2023-02-17
+date-format: "D. M. YYYY"
+toc: true
+---
+
+Základem tohoto článku je sylabus, ktarý jsem si vyrobil pro svůj workshop *Jak dělat SEO lépe a rychleji v jazyce R*. Jenže jsem měl jsem velké oči. Za jediný den, který jsem měl k dispozici, ho nešlo probrat ani náhodou. Takže jsem ho trochu rozpracoval, doplnil odkazy na zdroje a předkládám vám ho jako orientační mapu pro samostudium.
+
+Snažil jsem se témata řadit podle priority a zároveň obtížnosti. Myslím, že vám pomůže, když pořadí dodržíte, ale postupujte samozřejmě podle svých výchozích znalostí a svého uvážení.
+
+Do studia vám držím palce!
+
+## Základy R
+
+Naučte se **základní datové typy**: čísla, znakové řetězce, logické hodnoty. Zvykněte si na to, že to jsou **vektory** a naučte se s nimi pracovat. Nechoďte zbytečně do hloubky. Pro začátek vám stačí, když pochopíte a v případě potřeby i napíšete třeba tyto příklady kódu:
+
+``` r
+vysledek_vypoctu <- (5 * 4) / 2
+spojene_retezce <- paste("první řetězec", "druhý řetězec", sep = ",")
+vynasobeny_vektor <- c(1, 2, 3, 6, 5, 4) * 10
+druhy_prvek_vektoru <- vynasobeny_vektor[2]
+vynasobene_vektor <- c(1, 2, 3) * c(1, 2, 3)
+zaokrouhlena_nahodna_cisla <- runif(n = 40, min = 1, max = 10) |> 
+  round(digits = 1)
+```
+
+K základním datovým typům přidejte ještě **data.frame** a případně **list**. Zase stačí jen málo:
+
+``` r
+df <- data.frame(
+  cislo = 1:3,
+  text = c("první", "druhý", "třetí")
+)
+prvni_text <- df[1, 2]
+vsechny_texty <- df$text
+```
+
+Nezpomeňte, že kdykoli můžete R požádat o nápovědu -- např. `?sum` nebo klávesou [F1]{.kbd} s kurzorem na funkci.
+
+## Základy RStudia a Quarta
+
+Prakticky všechno budete dělat v RStudiu. Nainstalujte si ho, udržujte ho aktuální, naučte se s ním dobře zacházet.
+
+Erkový kód pište prakticky výhradně do Quarto dokumentů. Skripty zatím nebudete potřebovat, starší R Markdown nebo R Notebook ignorujte. Studujte postupně z:
+
+1.  [Tutorial: Hello, Quarto](https://quarto.org/docs/get-started/hello/rstudio.html)
+2.  [Tutorial: Computations](https://quarto.org/docs/get-started/computations/rstudio.html)
+3.  [Tutorial: Authoring](https://quarto.org/docs/get-started/authoring/rstudio.html)
+
+Pro začátek to nepřehánějte, jde jen o to, abyste měli kde interaktivně pracovat a viděli současně kód i jeho výsledek. Reporty a další výstupy z Quarta se naučíte později.
+
+## Tidyverse
+
+Pro práci s daty používejte zásadně balíčky z ekosystému [Tidyverse](https://www.tidyverse.org/). Konkrétně se naučte a na praktických příkladech si vyzkoušejte následující funkce.
+
+### Vytváření data framů
+
+-   [`tibble`](https://tibble.tidyverse.org/reference/tibble.html) a [`trible`](https://tibble.tidyverse.org/reference/tribble.html) na vytvoření data framu
+-   [`glimpse`](https://pillar.r-lib.org/reference/glimpse.html) na prohlédnutí struktury data framu
+
+### Import a export dat
+
+-   [`read_csv` etc.](https://readr.tidyverse.org/reference/read_delim.html) na import textových souborů
+-   [`write_csv` etc.](https://readr.tidyverse.org/reference/write_delim.html) na export do textových soubor
+-   [`read_excel` etc.](https://readxl.tidyverse.org/reference/read_excel.html) na import z Excelu
+-   [`write_rds` a `read_rds`](https://readr.tidyverse.org/reference/read_rds.html), pokud si chcete sami něco uložit v erkovém interním formátu
+-   pokud potřebujete, balíček [googlesheets4](https://googlesheets4.tidyverse.org/) na čtení z a zápis do Tabulek Google
+
+### Manipulace s daty
+
+-   Naučte se a hlavně si vyzkoušejte všechno, co najdete v [taháku k balíčku dplyr](https://github.com/rstudio/cheatsheets/blob/main/data-transformation.pdf).
+-   Nakoukněte i do [taháku k balíčku tidyr](https://github.com/rstudio/cheatsheets/blob/main/tidyr.pdf). Ten se neučte, jen si přibližně zapamatujte, co umí. Až to budete potřebovat, vygooglíte si to.
+
+### Grafy balíčkem ggplot2
+
+Neztrácejte čas funkcí `plot` ze základního R. Na vizualizace používejte jen balíček [gglot2](https://ggplot2.tidyverse.org/). Naučte se a hlavně si vyzkoušejte všechno, co najdete v [jeho taháku](https://github.com/rstudio/cheatsheets/blob/main/data-visualization.pdf).
+
+## Příručka od Excelu k R
+
+Výše uvedená témata tak akorát pokrývá moje příručka [Od Excelu k R](https://www.prokopsw.cz/bookdown/excel-r/). Projděte si ji a rovnou z ní všechno zkoušejte, ušetříte tím dost času. Jen pozor: teď už použijte *Quarto Document* namísto *R Notebook*.
+
+## Digitální marketing
+
+Ze specialit digitálního marketingu doporučuju začít těmito tématy:
+
+-   Analýza dat **Search Console** -- použijete balíček [searchConsoleR](https://github.com/MarkEdmondson1234/searchConsoleR) v kombinaci s balíčky [tidyr](https://tidyr.tidyverse.org/), [dplyr](https://dplyr.tidyverse.org/) a [ggplot2](https://ggplot2.tidyverse.org/).
+-   Na Google Analytics použijete balíček [googleAnalyticsR](https://github.com/MarkEdmondson1234/googleAnalyticsR).
+-   Dále doporučuju (polo)automatizovat reportování ze [Screaming Frogu](https://www.screamingfrog.co.uk/seo-spider/). Stačí načíst jeho CSV exporty (balíček [readr](https://readr.tidyverse.org/)), zpracovat (balíček [dplyr](https://dplyr.tidyverse.org/){style="font-size: 12pt;"}), vizualizovat (balíček [ggplot2](https://ggplot2.tidyverse.org/){style="font-size: 12pt;"}) a reportovat v Quarto.
+-   Pokud děláte SEO a analýzy klíčových slov, naučte se můj balíček [keywordr](https://marekprokop.github.io/keywordr/).
+
+## Reporting
+
+Jestli máte klienty a/nebo šéfy, naučte se hodně dobře [Quarto](https://quarto.org/docs/reference/) a generování reportů, případně i prezentací. Ušetří vám to mraky času.
+
+## Stahování informací z webu
+
+-   Občas se hodí stáhnout něco z webu. Na to je perfektní balíček [rvest](https://rvest.tidyverse.org/).
+-   Jestli chcete cucat data z různých API, zkuste balíček [httr](https://httr.r-lib.org/). Tím jde taky [ověřovat stavové kódy HTTP](https://marekprokop.github.io/jak-pracuju/posts/2022-04-09-kontrola-http-kodu/).
+-   Na import XML sitemap se kromě balíčku *httr* hodí i balíček [xml2](https://xml2.r-lib.org/).
+
+A to je vlastně všechno. Leda byste byli stejně velcí blázni jako já a pustili se i do [Shiny](https://shiny.rstudio.com/) :-)

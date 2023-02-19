@@ -10,7 +10,115 @@
 <atom:link href="https://marekprokop.github.io/jak-pracuju/index.xml" rel="self" type="application/rss+xml"/>
 <description></description>
 <generator>quarto-1.2.335</generator>
-<lastBuildDate>Sun, 15 May 2022 22:00:00 GMT</lastBuildDate>
+<lastBuildDate>Thu, 16 Feb 2023 23:00:00 GMT</lastBuildDate>
+<item>
+  <title>Děláte digitální marketing a chcete začít používat R? Tohle je váš studijní plán</title>
+  <dc:creator>Marek Prokop</dc:creator>
+  <link>https://marekprokop.github.io/jak-pracuju/posts/r-pro-digitalni-marketing/index.html</link>
+  <description><![CDATA[ 
+
+
+
+
+<p>Základem tohoto článku je sylabus, ktarý jsem si vyrobil pro svůj workshop <em>Jak dělat SEO lépe a&nbsp;rychleji v&nbsp;jazyce R</em>. Jenže jsem měl jsem velké oči. Za jediný den, který jsem měl k dispozici, ho nešlo probrat ani náhodou. Takže jsem ho trochu rozpracoval, doplnil odkazy na zdroje a předkládám vám ho jako orientační mapu pro samostudium.</p>
+<p>Snažil jsem se témata řadit podle priority a zároveň obtížnosti. Myslím, že vám pomůže, když pořadí dodržíte, ale postupujte samozřejmě podle svých výchozích znalostí a svého uvážení.</p>
+<p>Do studia vám držím palce!</p>
+<section id="základy-r" class="level2">
+<h2 class="anchored" data-anchor-id="základy-r">Základy R</h2>
+<p>Naučte se <strong>základní datové typy</strong>: čísla, znakové řetězce, logické hodnoty. Zvykněte si na to, že to jsou <strong>vektory</strong> a naučte se s nimi pracovat. Nechoďte zbytečně do hloubky. Pro začátek vám stačí, když pochopíte a v případě potřeby i napíšete třeba tyto příklady kódu:</p>
+<div class="sourceCode" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1">vysledek_vypoctu <span class="ot" style="color: #003B4F;">&lt;-</span> (<span class="dv" style="color: #AD0000;">5</span> <span class="sc" style="color: #5E5E5E;">*</span> <span class="dv" style="color: #AD0000;">4</span>) <span class="sc" style="color: #5E5E5E;">/</span> <span class="dv" style="color: #AD0000;">2</span></span>
+<span id="cb1-2">spojene_retezce <span class="ot" style="color: #003B4F;">&lt;-</span> <span class="fu" style="color: #4758AB;">paste</span>(<span class="st" style="color: #20794D;">"první řetězec"</span>, <span class="st" style="color: #20794D;">"druhý řetězec"</span>, <span class="at" style="color: #657422;">sep =</span> <span class="st" style="color: #20794D;">","</span>)</span>
+<span id="cb1-3">vynasobeny_vektor <span class="ot" style="color: #003B4F;">&lt;-</span> <span class="fu" style="color: #4758AB;">c</span>(<span class="dv" style="color: #AD0000;">1</span>, <span class="dv" style="color: #AD0000;">2</span>, <span class="dv" style="color: #AD0000;">3</span>, <span class="dv" style="color: #AD0000;">6</span>, <span class="dv" style="color: #AD0000;">5</span>, <span class="dv" style="color: #AD0000;">4</span>) <span class="sc" style="color: #5E5E5E;">*</span> <span class="dv" style="color: #AD0000;">10</span></span>
+<span id="cb1-4">druhy_prvek_vektoru <span class="ot" style="color: #003B4F;">&lt;-</span> vynasobeny_vektor[<span class="dv" style="color: #AD0000;">2</span>]</span>
+<span id="cb1-5">vynasobene_vektor <span class="ot" style="color: #003B4F;">&lt;-</span> <span class="fu" style="color: #4758AB;">c</span>(<span class="dv" style="color: #AD0000;">1</span>, <span class="dv" style="color: #AD0000;">2</span>, <span class="dv" style="color: #AD0000;">3</span>) <span class="sc" style="color: #5E5E5E;">*</span> <span class="fu" style="color: #4758AB;">c</span>(<span class="dv" style="color: #AD0000;">1</span>, <span class="dv" style="color: #AD0000;">2</span>, <span class="dv" style="color: #AD0000;">3</span>)</span>
+<span id="cb1-6">zaokrouhlena_nahodna_cisla <span class="ot" style="color: #003B4F;">&lt;-</span> <span class="fu" style="color: #4758AB;">runif</span>(<span class="at" style="color: #657422;">n =</span> <span class="dv" style="color: #AD0000;">40</span>, <span class="at" style="color: #657422;">min =</span> <span class="dv" style="color: #AD0000;">1</span>, <span class="at" style="color: #657422;">max =</span> <span class="dv" style="color: #AD0000;">10</span>) <span class="sc" style="color: #5E5E5E;">|&gt;</span> </span>
+<span id="cb1-7">  <span class="fu" style="color: #4758AB;">round</span>(<span class="at" style="color: #657422;">digits =</span> <span class="dv" style="color: #AD0000;">1</span>)</span></code></pre></div>
+<p>K základním datovým typům přidejte ještě <strong>data.frame</strong> a případně <strong>list</strong>. Zase stačí jen málo:</p>
+<div class="sourceCode" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1">df <span class="ot" style="color: #003B4F;">&lt;-</span> <span class="fu" style="color: #4758AB;">data.frame</span>(</span>
+<span id="cb2-2">  <span class="at" style="color: #657422;">cislo =</span> <span class="dv" style="color: #AD0000;">1</span><span class="sc" style="color: #5E5E5E;">:</span><span class="dv" style="color: #AD0000;">3</span>,</span>
+<span id="cb2-3">  <span class="at" style="color: #657422;">text =</span> <span class="fu" style="color: #4758AB;">c</span>(<span class="st" style="color: #20794D;">"první"</span>, <span class="st" style="color: #20794D;">"druhý"</span>, <span class="st" style="color: #20794D;">"třetí"</span>)</span>
+<span id="cb2-4">)</span>
+<span id="cb2-5">prvni_text <span class="ot" style="color: #003B4F;">&lt;-</span> df[<span class="dv" style="color: #AD0000;">1</span>, <span class="dv" style="color: #AD0000;">2</span>]</span>
+<span id="cb2-6">vsechny_texty <span class="ot" style="color: #003B4F;">&lt;-</span> df<span class="sc" style="color: #5E5E5E;">$</span>text</span></code></pre></div>
+<p>Nezpomeňte, že kdykoli můžete R požádat o nápovědu – např. <code>?sum</code> nebo klávesou <kbd>F1</kbd> s&nbsp;kurzorem na funkci.</p>
+</section>
+<section id="základy-rstudia-a-quarta" class="level2">
+<h2 class="anchored" data-anchor-id="základy-rstudia-a-quarta">Základy RStudia a Quarta</h2>
+<p>Prakticky všechno budete dělat v RStudiu. Nainstalujte si ho, udržujte ho aktuální, naučte se s&nbsp;ním dobře zacházet.</p>
+<p>Erkový kód pište prakticky výhradně do Quarto dokumentů. Skripty zatím nebudete potřebovat, starší R&nbsp;Markdown nebo R Notebook ignorujte. Studujte postupně z:</p>
+<ol type="1">
+<li><a href="https://quarto.org/docs/get-started/hello/rstudio.html">Tutorial: Hello, Quarto</a></li>
+<li><a href="https://quarto.org/docs/get-started/computations/rstudio.html">Tutorial: Computations</a></li>
+<li><a href="https://quarto.org/docs/get-started/authoring/rstudio.html">Tutorial: Authoring</a></li>
+</ol>
+<p>Pro začátek to nepřehánějte, jde jen o to, abyste měli kde interaktivně pracovat a viděli současně kód i jeho výsledek. Reporty a další výstupy z Quarta se naučíte později.</p>
+</section>
+<section id="tidyverse" class="level2">
+<h2 class="anchored" data-anchor-id="tidyverse">Tidyverse</h2>
+<p>Pro práci s daty používejte zásadně balíčky z ekosystému <a href="https://www.tidyverse.org/">Tidyverse</a>. Konkrétně se naučte a na praktických příkladech si vyzkoušejte následující funkce.</p>
+<section id="vytváření-data-framů" class="level3">
+<h3 class="anchored" data-anchor-id="vytváření-data-framů">Vytváření data framů</h3>
+<ul>
+<li><a href="https://tibble.tidyverse.org/reference/tibble.html"><code>tibble</code></a> a <a href="https://tibble.tidyverse.org/reference/tribble.html"><code>trible</code></a> na vytvoření data framu</li>
+<li><a href="https://pillar.r-lib.org/reference/glimpse.html"><code>glimpse</code></a> na prohlédnutí struktury data framu</li>
+</ul>
+</section>
+<section id="import-a-export-dat" class="level3">
+<h3 class="anchored" data-anchor-id="import-a-export-dat">Import a export dat</h3>
+<ul>
+<li><a href="https://readr.tidyverse.org/reference/read_delim.html"><code>read_csv</code> etc.</a> na import textových souborů</li>
+<li><a href="https://readr.tidyverse.org/reference/write_delim.html"><code>write_csv</code> etc.</a> na export do textových soubor</li>
+<li><a href="https://readxl.tidyverse.org/reference/read_excel.html"><code>read_excel</code> etc.</a> na import z Excelu</li>
+<li><a href="https://readr.tidyverse.org/reference/read_rds.html"><code>write_rds</code> a <code>read_rds</code></a>, pokud si chcete sami něco uložit v erkovém interním formátu</li>
+<li>pokud potřebujete, balíček <a href="https://googlesheets4.tidyverse.org/">googlesheets4</a> na čtení z a zápis do Tabulek Google</li>
+</ul>
+</section>
+<section id="manipulace-s-daty" class="level3">
+<h3 class="anchored" data-anchor-id="manipulace-s-daty">Manipulace s daty</h3>
+<ul>
+<li>Naučte se a hlavně si vyzkoušejte všechno, co najdete v <a href="https://github.com/rstudio/cheatsheets/blob/main/data-transformation.pdf">taháku k balíčku dplyr</a>.</li>
+<li>Nakoukněte i do <a href="https://github.com/rstudio/cheatsheets/blob/main/tidyr.pdf">taháku k balíčku tidyr</a>. Ten se neučte, jen si přibližně zapamatujte, co umí. Až to budete potřebovat, vygooglíte si to.</li>
+</ul>
+</section>
+<section id="grafy-balíčkem-ggplot2" class="level3">
+<h3 class="anchored" data-anchor-id="grafy-balíčkem-ggplot2">Grafy balíčkem ggplot2</h3>
+<p>Neztrácejte čas funkcí <code>plot</code> ze základního R. Na vizualizace používejte jen balíček <a href="https://ggplot2.tidyverse.org/">gglot2</a>. Naučte se a hlavně si vyzkoušejte všechno, co najdete v <a href="https://github.com/rstudio/cheatsheets/blob/main/data-visualization.pdf">jeho taháku</a>.</p>
+</section>
+</section>
+<section id="příručka-od-excelu-k-r" class="level2">
+<h2 class="anchored" data-anchor-id="příručka-od-excelu-k-r">Příručka od Excelu k R</h2>
+<p>Výše uvedená témata tak akorát pokrývá moje příručka <a href="https://www.prokopsw.cz/bookdown/excel-r/">Od Excelu k R</a>. Projděte si ji a rovnou z ní všechno zkoušejte, ušetříte tím dost času. Jen pozor: teď už použijte <em>Quarto Document</em> namísto <em>R Notebook</em>.</p>
+</section>
+<section id="digitální-marketing" class="level2">
+<h2 class="anchored" data-anchor-id="digitální-marketing">Digitální marketing</h2>
+<p>Ze specialit digitálního marketingu doporučuju začít těmito tématy:</p>
+<ul>
+<li>Analýza dat <strong>Search Console</strong> – použijete balíček <a href="https://github.com/MarkEdmondson1234/searchConsoleR">searchConsoleR</a> v kombinaci s balíčky <a href="https://tidyr.tidyverse.org/">tidyr</a>, <a href="https://dplyr.tidyverse.org/">dplyr</a> a <a href="https://ggplot2.tidyverse.org/">ggplot2</a>.</li>
+<li>Na Google Analytics použijete balíček <a href="https://github.com/MarkEdmondson1234/googleAnalyticsR">googleAnalyticsR</a>.</li>
+<li>Dále doporučuju (polo)automatizovat reportování ze <a href="https://www.screamingfrog.co.uk/seo-spider/">Screaming Frogu</a>. Stačí načíst jeho CSV exporty (balíček <a href="https://readr.tidyverse.org/">readr</a>), zpracovat (balíček <a href="https://dplyr.tidyverse.org/" style="font-size: 12pt;">dplyr</a>), vizualizovat (balíček <a href="https://ggplot2.tidyverse.org/" style="font-size: 12pt;">ggplot2</a>) a reportovat v&nbsp;Quarto.</li>
+<li>Pokud děláte SEO a analýzy klíčových slov, naučte se můj balíček <a href="https://marekprokop.github.io/keywordr/">keywordr</a>.</li>
+</ul>
+</section>
+<section id="reporting" class="level2">
+<h2 class="anchored" data-anchor-id="reporting">Reporting</h2>
+<p>Jestli máte klienty a/nebo šéfy, naučte se hodně dobře <a href="https://quarto.org/docs/reference/">Quarto</a> a generování reportů, případně i prezentací. Ušetří vám to mraky času.</p>
+</section>
+<section id="stahování-informací-z-webu" class="level2">
+<h2 class="anchored" data-anchor-id="stahování-informací-z-webu">Stahování informací z webu</h2>
+<ul>
+<li>Občas se hodí stáhnout něco z webu. Na to je perfektní balíček <a href="https://rvest.tidyverse.org/">rvest</a>.</li>
+<li>Jestli chcete cucat data z různých API, zkuste balíček <a href="https://httr.r-lib.org/">httr</a>. Tím jde taky <a href="https://marekprokop.github.io/jak-pracuju/posts/2022-04-09-kontrola-http-kodu/">ověřovat stavové kódy HTTP</a>.</li>
+<li>Na import XML sitemap se kromě balíčku <em>httr</em> hodí i balíček <a href="https://xml2.r-lib.org/">xml2</a>.</li>
+</ul>
+<p>A to je vlastně všechno. Leda byste byli stejně velcí blázni jako já a pustili se i do <a href="https://shiny.rstudio.com/">Shiny</a> :-)</p>
+
+
+</section>
+
+ ]]></description>
+  <guid>https://marekprokop.github.io/jak-pracuju/posts/r-pro-digitalni-marketing/index.html</guid>
+  <pubDate>Thu, 16 Feb 2023 23:00:00 GMT</pubDate>
+</item>
 <item>
   <title>Detekce změny průměru v časové řadě</title>
   <dc:creator>Marek Prokop</dc:creator>
