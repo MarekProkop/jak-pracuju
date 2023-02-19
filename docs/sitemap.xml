@@ -1,35 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" version="1.0">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://marekprokop.github.io/jak-pracuju/about.html</loc>
-    <lastmod>2022-04-10T12:22:02+02:00</lastmod>
+    <lastmod>2023-02-19T09:02:27.195Z</lastmod>
   </url>
   <url>
-    <loc>https://marekprokop.github.io/jak-pracuju/detekce-azbuky.html</loc>
-    <lastmod>2022-05-16T09:54:10+02:00</lastmod>
+    <loc>https://marekprokop.github.io/jak-pracuju/index.html</loc>
+    <lastmod>2023-02-19T09:02:27.670Z</lastmod>
   </url>
   <url>
-    <loc>https://marekprokop.github.io/jak-pracuju/</loc>
-    <lastmod>2022-04-10T10:57:31+02:00</lastmod>
+    <loc>https://marekprokop.github.io/jak-pracuju/posts/2022-04-09-cistim-search-consoli/index.html</loc>
+    <lastmod>2023-02-19T09:02:28.126Z</lastmod>
   </url>
   <url>
-    <loc>https://marekprokop.github.io/jak-pracuju/posts/changepoint-detection/</loc>
-    <lastmod>2022-05-16T09:54:00+02:00</lastmod>
+    <loc>https://marekprokop.github.io/jak-pracuju/posts/2022-04-09-kontrola-http-kodu/index.html</loc>
+    <lastmod>2023-02-19T09:02:28.596Z</lastmod>
   </url>
   <url>
-    <loc>https://marekprokop.github.io/jak-pracuju/posts/detekce-azbuky/</loc>
-    <lastmod>2022-05-01T12:11:21+02:00</lastmod>
+    <loc>https://marekprokop.github.io/jak-pracuju/posts/2022-04-12-search-console-timeline/index.html</loc>
+    <lastmod>2023-02-19T09:02:29.681Z</lastmod>
   </url>
   <url>
-    <loc>https://marekprokop.github.io/jak-pracuju/posts/2022-04-12-search-console-timeline/</loc>
-    <lastmod>2022-04-19T09:40:16+02:00</lastmod>
+    <loc>https://marekprokop.github.io/jak-pracuju/posts/changepoint-detection/index.html</loc>
+    <lastmod>2023-02-19T09:02:30.163Z</lastmod>
   </url>
   <url>
-    <loc>https://marekprokop.github.io/jak-pracuju/posts/2022-04-09-cistim-search-consoli/</loc>
-    <lastmod>2022-04-10T11:12:51+02:00</lastmod>
-  </url>
-  <url>
-    <loc>https://marekprokop.github.io/jak-pracuju/posts/2022-04-09-kontrola-http-kodu/</loc>
-    <lastmod>2022-04-10T12:01:08+02:00</lastmod>
+    <loc>https://marekprokop.github.io/jak-pracuju/posts/detekce-azbuky/index.html</loc>
+    <lastmod>2023-02-19T09:02:30.598Z</lastmod>
   </url>
 </urlset>

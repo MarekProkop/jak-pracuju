@@ -1,0 +1,28 @@
+project:
+  type: website
+  output-dir: docs
+  preview:
+    browser: true
+    watch-inputs: true
+    port: 4200
+
+website:
+  title: "Jak pracuju"
+  site-url: https://marekprokop.github.io/jak-pracuju/
+  navbar:
+    right:
+      - text: "Úvod"
+        href: index.html
+      - text: "O webu"
+        href: about.html
+      - icon: rss
+        href: index.xml
+      - icon: github
+        href: https://github.com/MarekProkop
+      - icon: twitter
+        href: https://twitter.com/MarekP
+format:
+  html:
+    theme: cosmo
+    css: styles.css
+

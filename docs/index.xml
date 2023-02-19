@@ -1,54 +1,1750 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<rss xmlns:atom="http://www.w3.org/2005/Atom" xmlns:media="http://search.yahoo.com/mrss/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:distill="https://distill.pub/journal/" version="2.0">
-  <channel>
-    <title>Jak pracuju</title>
-    <link>https://marekprokop.github.io/jak-pracuju/</link>
-    <atom:link href="https://marekprokop.github.io/jak-pracuju/index.xml" rel="self" type="application/rss+xml"/>
-    <description>My Blog
-</description>
-    <generator>Distill</generator>
-    <lastBuildDate>Mon, 16 May 2022 00:00:00 +0000</lastBuildDate>
-    <item>
-      <title>Detekce změny průměru v časové řadě</title>
-      <dc:creator>Marek Prokop</dc:creator>
-      <link>https://marekprokop.github.io/jak-pracuju/posts/changepoint-detection</link>
-      <description>Ukážu, jak jde v R detekovat a hezky vykreslit významné změny průměru v časové řadě. Za příklad mi poslouží imprese ze Search Console.</description>
-      <guid>https://marekprokop.github.io/jak-pracuju/posts/changepoint-detection</guid>
-      <pubDate>Mon, 16 May 2022 00:00:00 +0000</pubDate>
-      <media:content url="https://marekprokop.github.io/jak-pracuju/posts/changepoint-detection/changepoint-detection_files/figure-html5/unnamed-chunk-14-1.png" medium="image" type="image/png" width="1248" height="768"/>
-    </item>
-    <item>
-      <title>Jak se zbavit azbuky, čínštiny apod.</title>
-      <dc:creator>Marek Prokop</dc:creator>
-      <link>https://marekprokop.github.io/jak-pracuju/posts/detekce-azbuky</link>
-      <description>Do dat se občas dostane nechtěná ruština, čínština, řečtina, nebo jiný jazyk psaný nelatinkovým písmem. Tohle je rychlý návod, jak se takových textů pomocí regulárních výrazů zbavit, nebo je naopak najít.</description>
-      <guid>https://marekprokop.github.io/jak-pracuju/posts/detekce-azbuky</guid>
-      <pubDate>Sun, 01 May 2022 00:00:00 +0000</pubDate>
-    </item>
-    <item>
-      <title>Časové řady z dat Search Console</title>
-      <dc:creator>Marek Prokop</dc:creator>
-      <link>https://marekprokop.github.io/jak-pracuju/posts/2022-04-12-search-console-timeline</link>
-      <description>Jako první na vás v Search Consoli vyskočí graf výkonu webu v čase. Časové řady ze Search Console jdou ale vizualizovat o dost lépe a jdou z nich pak vypozorovat zajímavé věci.</description>
-      <guid>https://marekprokop.github.io/jak-pracuju/posts/2022-04-12-search-console-timeline</guid>
-      <pubDate>Mon, 18 Apr 2022 00:00:00 +0000</pubDate>
-      <media:content url="https://marekprokop.github.io/jak-pracuju/posts/2022-04-12-search-console-timeline/search-console-timeline_files/figure-html5/unnamed-chunk-29-1.png" medium="image" type="image/png" width="1248" height="780"/>
-    </item>
-    <item>
-      <title>Čístím Search Consoli od zbytečných webů</title>
-      <dc:creator>Marek Prokop</dc:creator>
-      <link>https://marekprokop.github.io/jak-pracuju/posts/2022-04-09-cistim-search-consoli</link>
-      <description>Jako každý SEO konzultantant mám v Google Search Consoli plno webů, ke kterým už nemám přístup, nebo které už dlouho nefungují. Napsal jsem si skript v R, který je odstraní.</description>
-      <guid>https://marekprokop.github.io/jak-pracuju/posts/2022-04-09-cistim-search-consoli</guid>
-      <pubDate>Sun, 10 Apr 2022 00:00:00 +0000</pubDate>
-    </item>
-    <item>
-      <title>Kontrola stavových kódů většího počtu URL v R</title>
-      <dc:creator>Marek Prokop</dc:creator>
-      <link>https://marekprokop.github.io/jak-pracuju/posts/2022-04-09-kontrola-http-kodu</link>
-      <description>Potřeboval jsem rychle zkontrolovat stavové kódy HTTP dlouhého seznamu URL. Přitom jsem si vyzkoušel balíček furrr na paralelní zpracování a moc se mi zalíbil.</description>
-      <guid>https://marekprokop.github.io/jak-pracuju/posts/2022-04-09-kontrola-http-kodu</guid>
-      <pubDate>Sat, 09 Apr 2022 00:00:00 +0000</pubDate>
-    </item>
-  </channel>
+<rss  xmlns:atom="http://www.w3.org/2005/Atom" 
+      xmlns:media="http://search.yahoo.com/mrss/" 
+      xmlns:content="http://purl.org/rss/1.0/modules/content/" 
+      xmlns:dc="http://purl.org/dc/elements/1.1/" 
+      version="2.0">
+<channel>
+<title>Jak pracuju</title>
+<link>https://marekprokop.github.io/jak-pracuju/index.html</link>
+<atom:link href="https://marekprokop.github.io/jak-pracuju/index.xml" rel="self" type="application/rss+xml"/>
+<description></description>
+<generator>quarto-1.2.335</generator>
+<lastBuildDate>Sun, 15 May 2022 22:00:00 GMT</lastBuildDate>
+<item>
+  <title>Detekce změny průměru v časové řadě</title>
+  <dc:creator>Marek Prokop</dc:creator>
+  <link>https://marekprokop.github.io/jak-pracuju/posts/changepoint-detection/index.html</link>
+  <description><![CDATA[ 
+
+
+
+
+<p>Mám časovou řadu nějaké metriky. Chci zjistit, zda a případně kde se v ní nacházejí významné změny v průměru. Na to existuje mnoho metod a balíčků, viz např. <a href="https://lindeloev.github.io/mcp/articles/packages.html">srovnání v dokumentci balíčku mcp</a>. Další jde vygooglit třeba dotazem <a href="https://www.google.com/search?q=change+point+detection+in+R">change point detection in R</a>.</p>
+<p>V tomto zápisku použiju balíček <a href="https://cran.r-project.org/web/packages/changepoint/changepoint.pdf">changepoint</a>. Nevím, jestli je pro moje účely nejvhodnější, ale používám ho a osvědčil se mi. Zkoušel jsem i jiné, které dávaly buď skoro stejné, nebo horší výsledky. Nicméně je možné, že jsem je neuměl správně nastavit, protože v dokumentaci mívají hodně matematiky, kterou jsem byl líný studovat.</p>
+<p>Dále chci vykreslit graf, který změny v průměru hezky ukáže.</p>
+<section id="balíčky" class="level2">
+<h2 class="anchored" data-anchor-id="balíčky">Balíčky</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><span class="fu" style="color: #4758AB;">library</span>(tidyverse)</span>
+<span id="cb1-2"><span class="fu" style="color: #4758AB;">library</span>(changepoint)</span></code></pre></div>
+</div>
+</section>
+<section id="vstupní-data" class="level2">
+<h2 class="anchored" data-anchor-id="vstupní-data">Vstupní data</h2>
+<p>Jako vstupní data použiju metriky Search Console jednoho webu s dimenzí <code>date</code>. Web je anonymní, ale jedná se o reálný případ, který jsem nedávno řešil pro klienta. Data jsem si předem stáhl a uložil do souboru, který teď jen načtu.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1">sc_date <span class="ot" style="color: #003B4F;">&lt;-</span> <span class="fu" style="color: #4758AB;">read_rds</span>(<span class="st" style="color: #20794D;">"data-raw/sc_date.rds"</span>)</span></code></pre></div>
+</div>
+<p>Data mají tuto strukturu:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1">sc_date <span class="sc" style="color: #5E5E5E;">|&gt;</span> <span class="fu" style="color: #4758AB;">glimpse</span>()</span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Rows: 56
+Columns: 5
+$ date        &lt;date&gt; 2022-03-18, 2022-03-19, 2022-03-20, 2022-03-21, 2022-03-2…
+$ clicks      &lt;int&gt; 4428, 3285, 3693, 4420, 5505, 4060, 4035, 3374, 2944, 3017…
+$ impressions &lt;int&gt; 11825, 9857, 10523, 11969, 13918, 11034, 10891, 9586, 8807…
+$ ctr         &lt;dbl&gt; 0.3744609, 0.3332657, 0.3509455, 0.3692873, 0.3955310, 0.3…
+$ position    &lt;dbl&gt; 3.264355, 3.439992, 3.623776, 3.236193, 3.121354, 3.589179…</code></pre>
+</div>
+</div>
+<p>Zajímají mě imprese a ty se v čase vyvíjely takhle:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1">sc_date <span class="sc" style="color: #5E5E5E;">|&gt;</span> </span>
+<span id="cb5-2">  <span class="fu" style="color: #4758AB;">ggplot</span>(<span class="fu" style="color: #4758AB;">aes</span>(date, impressions)) <span class="sc" style="color: #5E5E5E;">+</span></span>
+<span id="cb5-3">  <span class="fu" style="color: #4758AB;">geom_line</span>() <span class="sc" style="color: #5E5E5E;">+</span></span>
+<span id="cb5-4">  <span class="fu" style="color: #4758AB;">scale_x_date</span>(<span class="at" style="color: #657422;">date_breaks =</span> <span class="st" style="color: #20794D;">"2 weeks"</span>)</span></code></pre></div>
+<div class="cell-output-display">
+<p><img src="https://marekprokop.github.io/jak-pracuju/posts/changepoint-detection/index_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</section>
+<section id="nalezení-změn-v-průměru" class="level2">
+<h2 class="anchored" data-anchor-id="nalezení-změn-v-průměru">Nalezení změn v průměru</h2>
+<section id="jedna-změna" class="level3">
+<h3 class="anchored" data-anchor-id="jedna-změna">Jedna změna</h3>
+<p>Samotné nalezení jedné změny v průměru je s balíčkem <em>changepoint</em> a jeho funkcí <code>cpt.mean</code> jednoduché. Stačí numerický vektor a spolehnout se na výchozí hodnoty parametrů.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1">cpt_object <span class="ot" style="color: #003B4F;">&lt;-</span> <span class="fu" style="color: #4758AB;">cpt.mean</span>(sc_date<span class="sc" style="color: #5E5E5E;">$</span>impressions)</span>
+<span id="cb6-2"><span class="fu" style="color: #4758AB;">summary</span>(cpt_object)</span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Created Using changepoint version 2.2.4 
+Changepoint type      : Change in mean 
+Method of analysis    : AMOC 
+Test Statistic  : Normal 
+Type of penalty       : MBIC with value, 12.07606 
+Minimum Segment Length : 1 
+Maximum no. of cpts   : 1 
+Changepoint Locations : 35 </code></pre>
+</div>
+</div>
+<p>Výsledek jde i vykreslit základní funkcí <code>plot</code>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><span class="fu" style="color: #4758AB;">plot</span>(cpt_object)</span></code></pre></div>
+<div class="cell-output-display">
+<p><img src="https://marekprokop.github.io/jak-pracuju/posts/changepoint-detection/index_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</section>
+<section id="víc-změn" class="level3">
+<h3 class="anchored" data-anchor-id="víc-změn">Víc změn</h3>
+<p>Předešlý postup detekuje jen jednu (největší) změnu, ale co když chci detekovat víc změn? Aby funkce <code>cpt.mean</code> našla víc změn, je třeba nastavit několik parametrů. Postupoval jsem podle článku <a href="https://www.marinedatascience.co/blog/2019/09/28/comparison-of-change-point-detection-methods/">Comparison of change point detection methods</a>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1">cpt_object <span class="ot" style="color: #003B4F;">&lt;-</span> <span class="fu" style="color: #4758AB;">cpt.mean</span>(</span>
+<span id="cb9-2">  <span class="at" style="color: #657422;">data =</span> sc_date<span class="sc" style="color: #5E5E5E;">$</span>impressions,</span>
+<span id="cb9-3">  <span class="at" style="color: #657422;">penalty =</span> <span class="st" style="color: #20794D;">"AIC"</span>,</span>
+<span id="cb9-4">  <span class="at" style="color: #657422;">method =</span> <span class="st" style="color: #20794D;">"PELT"</span>,</span>
+<span id="cb9-5">  <span class="at" style="color: #657422;">Q =</span> <span class="dv" style="color: #AD0000;">5</span>,</span>
+<span id="cb9-6">  <span class="at" style="color: #657422;">minseglen =</span> <span class="dv" style="color: #AD0000;">14</span></span>
+<span id="cb9-7">)</span>
+<span id="cb9-8"><span class="fu" style="color: #4758AB;">summary</span>(cpt_object)</span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Created Using changepoint version 2.2.4 
+Changepoint type      : Change in mean 
+Method of analysis    : PELT 
+Test Statistic  : Normal 
+Type of penalty       : AIC with value, 4 
+Minimum Segment Length : 14 
+Maximum no. of cpts   : Inf 
+Changepoint Locations : 17 35 </code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb11" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><span class="fu" style="color: #4758AB;">plot</span>(cpt_object)</span></code></pre></div>
+<div class="cell-output-display">
+<p><img src="https://marekprokop.github.io/jak-pracuju/posts/changepoint-detection/index_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</section>
+</section>
+<section id="hezčí-výstupu" class="level2">
+<h2 class="anchored" data-anchor-id="hezčí-výstupu">Hezčí výstupu</h2>
+<p>Nevýhoda je, že ve standardním výstupu jsou body změny identifikovány jen pořadovým číslem v časové řadě a graf je dost ošklivý. Chci určit přesná data a graf vykreslit balíčkem <em>ggplot2</em>.</p>
+<section id="dešifrování-třídy-cpt" class="level3">
+<h3 class="anchored" data-anchor-id="dešifrování-třídy-cpt">Dešifrování třídy <code>cpt</code></h3>
+<p>Funkce <code>cpt.mean</code> vrací objekt třídy <code>cpt</code>. Vypadá takhle:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb12" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1">cpt_object <span class="sc" style="color: #5E5E5E;">|&gt;</span> <span class="fu" style="color: #4758AB;">str</span>()</span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Formal class 'cpt' [package "changepoint"] with 12 slots
+  ..@ data.set : Time-Series [1:56] from 1 to 56: 11825 9857 10523 11969 13918 11034 10891 9586 8807 8864 ...
+  ..@ cpttype  : chr "mean"
+  ..@ method   : chr "PELT"
+  ..@ test.stat: chr "Normal"
+  ..@ pen.type : chr "AIC"
+  ..@ pen.value: num 4
+  ..@ minseglen: num 14
+  ..@ cpts     : int [1:3] 17 35 56
+  ..@ ncpts.max: num Inf
+  ..@ param.est:List of 1
+  .. ..$ mean: num [1:3] 10864 11794 10140
+  ..@ date     : chr "Thu Feb 16 04:18:49 2023"
+  ..@ version  : chr "2.2.4"</code></pre>
+</div>
+</div>
+<p>Z toho mě zajímá počet change pointů, jejich pozice a průměry odpovídající segmentům mezi change pointy.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb14" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><span class="fu" style="color: #4758AB;">length</span>(cpt_object<span class="sc" style="color: #5E5E5E;">@</span>cpts)</span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 3</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb16" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1">cpt_object<span class="sc" style="color: #5E5E5E;">@</span>cpts[<span class="dv" style="color: #AD0000;">1</span><span class="sc" style="color: #5E5E5E;">:</span><span class="fu" style="color: #4758AB;">length</span>(cpt_object<span class="sc" style="color: #5E5E5E;">@</span>cpts)]</span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 17 35 56</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb18" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1">cpt_object<span class="sc" style="color: #5E5E5E;">@</span>param.est<span class="sc" style="color: #5E5E5E;">$</span>mean</span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 10864.41 11794.50 10139.90</code></pre>
+</div>
+</div>
+<p>Data, které odpovídají pozicím, najdu snadno:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb20" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1">sc_date<span class="sc" style="color: #5E5E5E;">$</span>date[cpt_object<span class="sc" style="color: #5E5E5E;">@</span>cpts[<span class="dv" style="color: #AD0000;">1</span><span class="sc" style="color: #5E5E5E;">:</span><span class="fu" style="color: #4758AB;">length</span>(cpt_object<span class="sc" style="color: #5E5E5E;">@</span>cpts)]]</span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "2022-04-03" "2022-04-21" "2022-05-12"</code></pre>
+</div>
+</div>
+</section>
+<section id="cpt-tibble" class="level3">
+<h3 class="anchored" data-anchor-id="cpt-tibble">cpt –&gt; tibble</h3>
+<p>Z toho už dokážu sestavit funkci, která vrátí přehledný data frame segmentů.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb22" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1">cpt_as_tibble <span class="ot" style="color: #003B4F;">&lt;-</span> <span class="cf" style="color: #003B4F;">function</span>(cpt, dates) {</span>
+<span id="cb22-2">  cpt_dates <span class="ot" style="color: #003B4F;">&lt;-</span> dates[cpt<span class="sc" style="color: #5E5E5E;">@</span>cpts[<span class="dv" style="color: #AD0000;">1</span><span class="sc" style="color: #5E5E5E;">:</span><span class="fu" style="color: #4758AB;">length</span>(cpt<span class="sc" style="color: #5E5E5E;">@</span>cpts) <span class="sc" style="color: #5E5E5E;">-</span> <span class="dv" style="color: #AD0000;">1</span>]]</span>
+<span id="cb22-3">  <span class="fu" style="color: #4758AB;">tibble</span>(</span>
+<span id="cb22-4">    <span class="at" style="color: #657422;">start_date =</span> <span class="fu" style="color: #4758AB;">c</span>(<span class="fu" style="color: #4758AB;">min</span>(dates), cpt_dates <span class="sc" style="color: #5E5E5E;">+</span> <span class="dv" style="color: #AD0000;">1</span>),</span>
+<span id="cb22-5">    <span class="at" style="color: #657422;">end_date =</span> <span class="fu" style="color: #4758AB;">c</span>(cpt_dates, <span class="fu" style="color: #4758AB;">max</span>(dates)),</span>
+<span id="cb22-6">    <span class="at" style="color: #657422;">value =</span> cpt<span class="sc" style="color: #5E5E5E;">@</span>param.est<span class="sc" style="color: #5E5E5E;">$</span>mean</span>
+<span id="cb22-7">  )</span>
+<span id="cb22-8">}</span>
+<span id="cb22-9"></span>
+<span id="cb22-10"><span class="fu" style="color: #4758AB;">cpt_as_tibble</span>(cpt_object, sc_date<span class="sc" style="color: #5E5E5E;">$</span>date)</span></code></pre></div>
+<div class="cell-output-display">
+<div class="kable-table">
+<table class="table table-sm table-striped">
+<thead>
+<tr class="header">
+<th style="text-align: left;">start_date</th>
+<th style="text-align: left;">end_date</th>
+<th style="text-align: right;">value</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">2022-03-18</td>
+<td style="text-align: left;">2022-04-03</td>
+<td style="text-align: right;">10864.41</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">2022-04-04</td>
+<td style="text-align: left;">2022-04-21</td>
+<td style="text-align: right;">11794.50</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">2022-04-22</td>
+<td style="text-align: left;">2022-05-12</td>
+<td style="text-align: right;">10139.90</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</section>
+<section id="graf-pomocí-ggplot" class="level3">
+<h3 class="anchored" data-anchor-id="graf-pomocí-ggplot">Graf pomocí <code>ggplot</code></h3>
+<p>A teď již můžu vykreslit hezčí graf.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb23" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1">cpt_plot <span class="ot" style="color: #003B4F;">&lt;-</span> <span class="cf" style="color: #003B4F;">function</span>(cpt, dates) {</span>
+<span id="cb23-2">  segment <span class="ot" style="color: #003B4F;">&lt;-</span> <span class="fu" style="color: #4758AB;">cpt_as_tibble</span>(cpt, dates)</span>
+<span id="cb23-3">  </span>
+<span id="cb23-4">  <span class="fu" style="color: #4758AB;">tibble</span>(<span class="at" style="color: #657422;">date =</span> dates, <span class="at" style="color: #657422;">value =</span> <span class="fu" style="color: #4758AB;">as.numeric</span>(cpt_object<span class="sc" style="color: #5E5E5E;">@</span>data.set)) <span class="sc" style="color: #5E5E5E;">|&gt;</span> </span>
+<span id="cb23-5">    <span class="fu" style="color: #4758AB;">ggplot</span>(<span class="fu" style="color: #4758AB;">aes</span>(date, value)) <span class="sc" style="color: #5E5E5E;">+</span></span>
+<span id="cb23-6">    <span class="fu" style="color: #4758AB;">geom_line</span>() <span class="sc" style="color: #5E5E5E;">+</span></span>
+<span id="cb23-7">    <span class="fu" style="color: #4758AB;">geom_segment</span>(</span>
+<span id="cb23-8">      <span class="at" style="color: #657422;">data =</span> segment,</span>
+<span id="cb23-9">      <span class="fu" style="color: #4758AB;">aes</span>(<span class="at" style="color: #657422;">x =</span> start_date, <span class="at" style="color: #657422;">xend =</span> end_date, <span class="at" style="color: #657422;">y =</span> value, <span class="at" style="color: #657422;">yend =</span> value), </span>
+<span id="cb23-10">      <span class="at" style="color: #657422;">color =</span> <span class="st" style="color: #20794D;">"red"</span></span>
+<span id="cb23-11">    ) <span class="sc" style="color: #5E5E5E;">+</span></span>
+<span id="cb23-12">    <span class="fu" style="color: #4758AB;">scale_x_date</span>(<span class="at" style="color: #657422;">breaks =</span> <span class="fu" style="color: #4758AB;">c</span>(segment<span class="sc" style="color: #5E5E5E;">$</span>start_date, <span class="fu" style="color: #4758AB;">max</span>(dates)))</span>
+<span id="cb23-13">}</span>
+<span id="cb23-14"></span>
+<span id="cb23-15"><span class="fu" style="color: #4758AB;">cpt_plot</span>(cpt_object, sc_date<span class="sc" style="color: #5E5E5E;">$</span>date)</span></code></pre></div>
+<div class="cell-output-display">
+<p><img src="https://marekprokop.github.io/jak-pracuju/posts/changepoint-detection/index_files/figure-html/unnamed-chunk-13-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>Ještě ověřím, že funkce správně pracují i s jednou změnou.</p>
+<div class="cell" data-preview="true">
+<div class="sourceCode cell-code" id="cb24" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><span class="fu" style="color: #4758AB;">cpt_plot</span>(<span class="fu" style="color: #4758AB;">cpt.mean</span>(sc_date<span class="sc" style="color: #5E5E5E;">$</span>impressions), sc_date<span class="sc" style="color: #5E5E5E;">$</span>date)</span></code></pre></div>
+<div class="cell-output-display">
+<p><img src="https://marekprokop.github.io/jak-pracuju/posts/changepoint-detection/index_files/figure-html/unnamed-chunk-14-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>A to je všechno :-)</p>
+
+
+</section>
+</section>
+
+ ]]></description>
+  <guid>https://marekprokop.github.io/jak-pracuju/posts/changepoint-detection/index.html</guid>
+  <pubDate>Sun, 15 May 2022 22:00:00 GMT</pubDate>
+  <media:content url="https://marekprokop.github.io/jak-pracuju/posts/changepoint-detection/changepoint.png" medium="image" type="image/png" height="89" width="144"/>
+</item>
+<item>
+  <title>Jak se zbavit azbuky, čínštiny apod.</title>
+  <dc:creator>Marek Prokop</dc:creator>
+  <link>https://marekprokop.github.io/jak-pracuju/posts/detekce-azbuky/index.html</link>
+  <description><![CDATA[ 
+
+
+
+
+<section id="rychlý-příklad" class="level2">
+<h2 class="anchored" data-anchor-id="rychlý-příklad">Rychlý příklad</h2>
+<p>Mám tahle data:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><span class="fu" style="color: #4758AB;">library</span>(tidyverse)</span>
+<span id="cb1-2"></span>
+<span id="cb1-3">df <span class="ot" style="color: #003B4F;">&lt;-</span> <span class="fu" style="color: #4758AB;">tibble</span>(</span>
+<span id="cb1-4">  <span class="at" style="color: #657422;">text =</span> <span class="fu" style="color: #4758AB;">c</span>(</span>
+<span id="cb1-5">    <span class="st" style="color: #20794D;">"Praha - Střešovice"</span>,</span>
+<span id="cb1-6">    <span class="st" style="color: #20794D;">"Prague - Stresovice"</span>,</span>
+<span id="cb1-7">    <span class="st" style="color: #20794D;">"布拉格 - Střešovice"</span>,</span>
+<span id="cb1-8">    <span class="st" style="color: #20794D;">"Прага - Střešovice"</span>,</span>
+<span id="cb1-9">    <span class="st" style="color: #20794D;">"Πράγα - Střešovice"</span></span>
+<span id="cb1-10">  ), </span>
+<span id="cb1-11">  <span class="at" style="color: #657422;">jazyk =</span> <span class="fu" style="color: #4758AB;">c</span>(<span class="st" style="color: #20794D;">"česky"</span>, <span class="st" style="color: #20794D;">"anglicky"</span>, <span class="st" style="color: #20794D;">"čínsky"</span>, <span class="st" style="color: #20794D;">"rusky"</span>, <span class="st" style="color: #20794D;">"řecky"</span>)</span>
+<span id="cb1-12">)</span>
+<span id="cb1-13"></span>
+<span id="cb1-14">df</span></code></pre></div>
+<div class="cell-output-display">
+<div class="kable-table">
+<table class="table table-sm table-striped">
+<thead>
+<tr class="header">
+<th style="text-align: left;">text</th>
+<th style="text-align: left;">jazyk</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Praha - Střešovice</td>
+<td style="text-align: left;">česky</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Prague - Stresovice</td>
+<td style="text-align: left;">anglicky</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">布拉格 - Střešovice</td>
+<td style="text-align: left;">čínsky</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Прага - Střešovice</td>
+<td style="text-align: left;">rusky</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Πράγα - Střešovice</td>
+<td style="text-align: left;">řecky</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<section id="chci-odstranit-texty-v-azbuce" class="level3">
+<h3 class="anchored" data-anchor-id="chci-odstranit-texty-v-azbuce">Chci odstranit texty v azbuce</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1">df <span class="sc" style="color: #5E5E5E;">|&gt;</span> </span>
+<span id="cb2-2">  <span class="fu" style="color: #4758AB;">filter</span>(<span class="sc" style="color: #5E5E5E;">!</span><span class="fu" style="color: #4758AB;">str_detect</span>(text, <span class="st" style="color: #20794D;">"[</span><span class="sc" style="color: #5E5E5E;">\\</span><span class="st" style="color: #20794D;">p{Cyrillic}]"</span>))</span></code></pre></div>
+<div class="cell-output-display">
+<div class="kable-table">
+<table class="table table-sm table-striped">
+<thead>
+<tr class="header">
+<th style="text-align: left;">text</th>
+<th style="text-align: left;">jazyk</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Praha - Střešovice</td>
+<td style="text-align: left;">česky</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Prague - Stresovice</td>
+<td style="text-align: left;">anglicky</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">布拉格 - Střešovice</td>
+<td style="text-align: left;">čínsky</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Πράγα - Střešovice</td>
+<td style="text-align: left;">řecky</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</section>
+<section id="chci-odstranit-texty-v-čínštině" class="level3">
+<h3 class="anchored" data-anchor-id="chci-odstranit-texty-v-čínštině">Chci odstranit texty v čínštině</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1">df <span class="sc" style="color: #5E5E5E;">|&gt;</span> </span>
+<span id="cb3-2">  <span class="fu" style="color: #4758AB;">filter</span>(<span class="sc" style="color: #5E5E5E;">!</span><span class="fu" style="color: #4758AB;">str_detect</span>(text, <span class="st" style="color: #20794D;">"[</span><span class="sc" style="color: #5E5E5E;">\\</span><span class="st" style="color: #20794D;">p{Han}]"</span>))</span></code></pre></div>
+<div class="cell-output-display">
+<div class="kable-table">
+<table class="table table-sm table-striped">
+<thead>
+<tr class="header">
+<th style="text-align: left;">text</th>
+<th style="text-align: left;">jazyk</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Praha - Střešovice</td>
+<td style="text-align: left;">česky</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Prague - Stresovice</td>
+<td style="text-align: left;">anglicky</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Прага - Střešovice</td>
+<td style="text-align: left;">rusky</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Πράγα - Střešovice</td>
+<td style="text-align: left;">řecky</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</section>
+<section id="chci-odstranit-texty-v-řečtině" class="level3">
+<h3 class="anchored" data-anchor-id="chci-odstranit-texty-v-řečtině">Chci odstranit texty v řečtině</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1">df <span class="sc" style="color: #5E5E5E;">|&gt;</span> </span>
+<span id="cb4-2">  <span class="fu" style="color: #4758AB;">filter</span>(<span class="sc" style="color: #5E5E5E;">!</span><span class="fu" style="color: #4758AB;">str_detect</span>(text, <span class="st" style="color: #20794D;">"[</span><span class="sc" style="color: #5E5E5E;">\\</span><span class="st" style="color: #20794D;">p{Greek}]"</span>))</span></code></pre></div>
+<div class="cell-output-display">
+<div class="kable-table">
+<table class="table table-sm table-striped">
+<thead>
+<tr class="header">
+<th style="text-align: left;">text</th>
+<th style="text-align: left;">jazyk</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Praha - Střešovice</td>
+<td style="text-align: left;">česky</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Prague - Stresovice</td>
+<td style="text-align: left;">anglicky</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">布拉格 - Střešovice</td>
+<td style="text-align: left;">čínsky</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Прага - Střešovice</td>
+<td style="text-align: left;">rusky</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</section>
+<section id="chci-odstranit-texty-v-čekmoli-kromě-latinky" class="level3">
+<h3 class="anchored" data-anchor-id="chci-odstranit-texty-v-čekmoli-kromě-latinky">Chci odstranit texty v čekmoli kromě latinky</h3>
+<p>To už je těžší. V předešlých případech jsem odstranil texty, které obsahovaly alespoň jeden znak z daného Unicode rozsahu, ale zde musím odstranit texty, které obsahují <strong>jenom</strong> znaky z daného rozsahu. Musím tedy zkombinovat tři část:</p>
+<ul>
+<li><code>{Latin}</code> – latinkové znaky</li>
+<li><code>{Punct}</code> – interpunkce</li>
+<li><code>\x20</code> – mezera (může být napsaná i normálně, ale byla by blbě vidět)</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1">df <span class="sc" style="color: #5E5E5E;">|&gt;</span> </span>
+<span id="cb5-2">  <span class="fu" style="color: #4758AB;">filter</span>(<span class="fu" style="color: #4758AB;">str_detect</span>(text, <span class="st" style="color: #20794D;">"^[</span><span class="sc" style="color: #5E5E5E;">\x20\\</span><span class="st" style="color: #20794D;">p{Punct}</span><span class="sc" style="color: #5E5E5E;">\\</span><span class="st" style="color: #20794D;">p{Latin}]+$"</span>))</span></code></pre></div>
+<div class="cell-output-display">
+<div class="kable-table">
+<table class="table table-sm table-striped">
+<thead>
+<tr class="header">
+<th style="text-align: left;">text</th>
+<th style="text-align: left;">jazyk</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Praha - Střešovice</td>
+<td style="text-align: left;">česky</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Prague - Stresovice</td>
+<td style="text-align: left;">anglicky</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</section>
+<section id="chci-najít" class="level3">
+<h3 class="anchored" data-anchor-id="chci-najít">Chci najít…</h3>
+<p>Samozřejmě to jde použít i pro hledání textů s určitými znaky.</p>
+<p>Všechny v azbuce:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1">df <span class="sc" style="color: #5E5E5E;">|&gt;</span> </span>
+<span id="cb6-2">  <span class="fu" style="color: #4758AB;">filter</span>(<span class="fu" style="color: #4758AB;">str_detect</span>(text, <span class="st" style="color: #20794D;">"[</span><span class="sc" style="color: #5E5E5E;">\\</span><span class="st" style="color: #20794D;">p{Cyrillic}]"</span>))</span></code></pre></div>
+<div class="cell-output-display">
+<div class="kable-table">
+<table class="table table-sm table-striped">
+<thead>
+<tr class="header">
+<th style="text-align: left;">text</th>
+<th style="text-align: left;">jazyk</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Прага - Střešovice</td>
+<td style="text-align: left;">rusky</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<p>Všechny nelatinkové:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1">df <span class="sc" style="color: #5E5E5E;">|&gt;</span> </span>
+<span id="cb7-2">  <span class="fu" style="color: #4758AB;">filter</span>(<span class="sc" style="color: #5E5E5E;">!</span><span class="fu" style="color: #4758AB;">str_detect</span>(text, <span class="st" style="color: #20794D;">"^[</span><span class="sc" style="color: #5E5E5E;">\x20\\</span><span class="st" style="color: #20794D;">p{Punct}</span><span class="sc" style="color: #5E5E5E;">\\</span><span class="st" style="color: #20794D;">p{Latin}]+$"</span>))</span></code></pre></div>
+<div class="cell-output-display">
+<div class="kable-table">
+<table class="table table-sm table-striped">
+<thead>
+<tr class="header">
+<th style="text-align: left;">text</th>
+<th style="text-align: left;">jazyk</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">布拉格 - Střešovice</td>
+<td style="text-align: left;">čínsky</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Прага - Střešovice</td>
+<td style="text-align: left;">rusky</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Πράγα - Střešovice</td>
+<td style="text-align: left;">řecky</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<p>V případě potřeby něčeho speciálního poslouží <a href="https://www.regular-expressions.info/unicode.html">podrobný přehled Unicode v regulárních výrazech</a>.</p>
+
+
+</section>
+</section>
+
+ ]]></description>
+  <guid>https://marekprokop.github.io/jak-pracuju/posts/detekce-azbuky/index.html</guid>
+  <pubDate>Sat, 30 Apr 2022 22:00:00 GMT</pubDate>
+</item>
+<item>
+  <title>Časové řady z dat Search Console</title>
+  <dc:creator>Marek Prokop</dc:creator>
+  <link>https://marekprokop.github.io/jak-pracuju/posts/2022-04-12-search-console-timeline/index.html</link>
+  <description><![CDATA[ 
+
+
+
+
+<p>Článek je hodně dlouhý, protože sestavit a vizualizovat časové řady (time series) z dat Search Console jde mnoha způsoby a není úplně triviální si vybrat ty, které dávají pro daný účel smysl. Ukážu zde všechny, které bežně používám, i ty, které používám jen výjimečně nebo skoro vůbec.</p>
+<p>Kód v jazyce R jsem se snažil napsat tak, aby byl funkční, čistý, srozumitelný a hlavně snadno a univerzálně znovupoužitelný. Časem asi na analýzu dat Search Console udělám samostatný balíček, ale do té doby musí stačit tohle.</p>
+<p>Na druhou stranu má článek i čistě metodickou, na programovacím jazyce nezávislou rovinu. Některé uvedené časové řady a jejich vizualizace jdou vytvořit i jinak, např. v Data Studiu (na příklad odkazuju dál) nebo v Google Sheets. I bez znalosti R jde tedy článek využít jako vzorník výstupů, které jdou z dat Search Console různými prostředky udělat, a které dávají určitý smysl.</p>
+<p>Všechny ukázky čerpají z dat webu <a href="https://www.glamourcabaret.cz/">Glamour Cabaret</a> Alžběty Faltysové. Jako hobby projekt bez větších investic sice neohromí gigantickými čísly, ale zároveň hezky ukazuje některé vzorce typické pro přirozeně a dobře budovaný obsah se zajímavým potenciálem dalšího růstu. Alžbětě moc děkuju, že mi data pro článek poskytla.</p>
+<p>Pro jistotu upozorňuju, že tenhle článek se primárně zabývá konstrukcí a vizualizací časových řad z dat Search Console, nikoli jejich detailní analýzou. Té se budu věnnovat někdy jindy.</p>
+<section id="příprava" class="level2">
+<h2 class="anchored" data-anchor-id="příprava">Příprava</h2>
+<section id="potřebné-balíčky" class="level3">
+<h3 class="anchored" data-anchor-id="potřebné-balíčky">Potřebné balíčky</h3>
+<p>Jako vždy <em>tidyverse</em>, <em>searchConsoleR</em> pro práci se Search Consolí, <em>lubridate</em> pro práci s daty a časem. Balíček <em>feasts</em> je zde jen pro dekompozici časové řady na trend, sezónnost a šum, a balíček <em>slider</em> umožňuje výpočet klouzavých průměrů. Balíček <em>urltools</em> slouží k rozložení URL na složky a používám ho k segentaci dat podle stránek.</p>
+<p>Dlužno dodat, že balíčky specializované na časové řady zde používám jen v nejnutnější míře a zatím mi to tak vyhovuje. Na druhou stranu přiznávám, že některé věci by šly řešit elegantněji plným nasazením specializovaných balíčků typu <a href="https://business-science.github.io/timetk/index.html">timetk</a>, <a href="https://www.tsbox.help/reference/index.html">tsbox</a>, <a href="https://tsibble.tidyverts.org/index.html">tsibble</a> apod.</p>
+<p>Poslední řádek nastavuje začátek týdne na pondělí pro balíček <em>lubridate</em>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><span class="fu" style="color: #4758AB;">library</span>(tidyverse)</span>
+<span id="cb1-2"><span class="fu" style="color: #4758AB;">library</span>(searchConsoleR)</span>
+<span id="cb1-3"><span class="fu" style="color: #4758AB;">library</span>(lubridate)</span>
+<span id="cb1-4"><span class="fu" style="color: #4758AB;">library</span>(feasts)</span>
+<span id="cb1-5"><span class="fu" style="color: #4758AB;">library</span>(slider)</span>
+<span id="cb1-6"><span class="fu" style="color: #4758AB;">library</span>(urltools)</span>
+<span id="cb1-7"></span>
+<span id="cb1-8"><span class="fu" style="color: #4758AB;">options</span>(<span class="at" style="color: #657422;">lubridate.week.start =</span> <span class="dv" style="color: #AD0000;">1</span>)</span></code></pre></div>
+</div>
+</section>
+<section id="základní-parametry" class="level3">
+<h3 class="anchored" data-anchor-id="základní-parametry">Základní parametry</h3>
+<p>Kdykoli pracuju s daty Search Console, nejprve definuju parametry, které určují, jaká vstupní data chci získat. Konkrétně:</p>
+<ul>
+<li><code>sc_site</code> – z kterého webu,</li>
+<li><code>sc_country</code> – ze které země má hledání pocházet (používám vždy, pokud web primárně cílí na jednu zemi),</li>
+<li><code>date_from</code>, <code>date_to</code> – za jaké období data chci.</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1">sc_site <span class="ot" style="color: #003B4F;">&lt;-</span> <span class="st" style="color: #20794D;">"https://www.glamourcabaret.cz/"</span></span>
+<span id="cb2-2">sc_country <span class="ot" style="color: #003B4F;">&lt;-</span> <span class="st" style="color: #20794D;">"cze"</span></span>
+<span id="cb2-3">date_from <span class="ot" style="color: #003B4F;">&lt;-</span> <span class="fu" style="color: #4758AB;">as.Date</span>(<span class="st" style="color: #20794D;">"2020-11-01"</span>)</span>
+<span id="cb2-4">date_to <span class="ot" style="color: #003B4F;">&lt;-</span> <span class="fu" style="color: #4758AB;">as.Date</span>(<span class="st" style="color: #20794D;">"2022-04-10"</span>)</span></code></pre></div>
+</div>
+<section id="nastavení-časových-parametrů-balíčkem-lubridate" class="level4">
+<h4 class="anchored" data-anchor-id="nastavení-časových-parametrů-balíčkem-lubridate">Nastavení časových parametrů balíčkem <em>lubridate</em></h4>
+<p>Někdy jsem líný hledat v kalendáři vhodná data, nebo chci, aby se mi parametry <code>date_from</code> a <code>date_to</code> automaticky aktualizovaly. Na to se hodí balíček <em>lubridate</em>.</p>
+<p>Pro Search Consoli typicky chci datum před třemi dny, protože poslední tři dny ještě data v Search Consoli nejsou finální.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><span class="fu" style="color: #4758AB;">today</span>() <span class="sc" style="color: #5E5E5E;">-</span> <span class="dv" style="color: #AD0000;">3</span></span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "2023-02-15"</code></pre>
+</div>
+</div>
+<p>Když chci třeba poslední 4 celé kalendářní týdny, udělám to takhle:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1">period_end <span class="ot" style="color: #003B4F;">&lt;-</span> <span class="fu" style="color: #4758AB;">floor_date</span>(<span class="fu" style="color: #4758AB;">today</span>() <span class="sc" style="color: #5E5E5E;">-</span> <span class="dv" style="color: #AD0000;">2</span>, <span class="at" style="color: #657422;">unit =</span> <span class="st" style="color: #20794D;">"week"</span>) <span class="sc" style="color: #5E5E5E;">-</span> <span class="dv" style="color: #AD0000;">1</span></span>
+<span id="cb5-2">period_start <span class="ot" style="color: #003B4F;">&lt;-</span> period_end <span class="sc" style="color: #5E5E5E;">-</span> <span class="fu" style="color: #4758AB;">weeks</span>(<span class="dv" style="color: #AD0000;">4</span>) <span class="sc" style="color: #5E5E5E;">+</span> <span class="dv" style="color: #AD0000;">1</span></span>
+<span id="cb5-3"></span>
+<span id="cb5-4"><span class="fu" style="color: #4758AB;">cat</span>(<span class="st" style="color: #20794D;">"Od"</span>, <span class="fu" style="color: #4758AB;">format</span>(period_start, <span class="st" style="color: #20794D;">"%x (%A)"</span>), <span class="st" style="color: #20794D;">"do"</span>, <span class="fu" style="color: #4758AB;">format</span>(period_end, <span class="st" style="color: #20794D;">"%x (%A)"</span>))</span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Od 16.01.2023 (pondělí) do 12.02.2023 (neděle)</code></pre>
+</div>
+</div>
+<p>Obdobně můžu určit třeba posledních 6 celých kalendářních měsíců:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1">period_end <span class="ot" style="color: #003B4F;">&lt;-</span> <span class="fu" style="color: #4758AB;">floor_date</span>(<span class="fu" style="color: #4758AB;">today</span>() <span class="sc" style="color: #5E5E5E;">-</span> <span class="dv" style="color: #AD0000;">2</span>, <span class="at" style="color: #657422;">unit =</span> <span class="st" style="color: #20794D;">"month"</span>) <span class="sc" style="color: #5E5E5E;">-</span> <span class="dv" style="color: #AD0000;">1</span></span>
+<span id="cb7-2">period_start <span class="ot" style="color: #003B4F;">&lt;-</span> <span class="fu" style="color: #4758AB;">add_with_rollback</span>(period_end, <span class="fu" style="color: #4758AB;">months</span>(<span class="sc" style="color: #5E5E5E;">-</span><span class="dv" style="color: #AD0000;">6</span>), <span class="at" style="color: #657422;">roll_to_first =</span> <span class="cn" style="color: #8f5902;">TRUE</span>)</span>
+<span id="cb7-3"></span>
+<span id="cb7-4"><span class="fu" style="color: #4758AB;">cat</span>(<span class="st" style="color: #20794D;">"Od"</span>, <span class="fu" style="color: #4758AB;">format</span>(period_start, <span class="st" style="color: #20794D;">"%x"</span>), <span class="st" style="color: #20794D;">"do"</span>, <span class="fu" style="color: #4758AB;">format</span>(period_end, <span class="st" style="color: #20794D;">"%x"</span>))</span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Od 31.07.2022 do 31.01.2023</code></pre>
+</div>
+</div>
+<p>Nebo poslední celý rok (ten ale nebude po dubnu běžného roku fungovat, protože Search Console archivuje jen posledních 16 měsíců):</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1">period_end <span class="ot" style="color: #003B4F;">&lt;-</span> <span class="fu" style="color: #4758AB;">floor_date</span>(<span class="fu" style="color: #4758AB;">today</span>() <span class="sc" style="color: #5E5E5E;">-</span> <span class="dv" style="color: #AD0000;">2</span>, <span class="at" style="color: #657422;">unit =</span> <span class="st" style="color: #20794D;">"year"</span>) <span class="sc" style="color: #5E5E5E;">-</span> <span class="dv" style="color: #AD0000;">1</span></span>
+<span id="cb9-2">period_start <span class="ot" style="color: #003B4F;">&lt;-</span> <span class="fu" style="color: #4758AB;">floor_date</span>(period_end, <span class="st" style="color: #20794D;">"year"</span>)</span>
+<span id="cb9-3"></span>
+<span id="cb9-4"><span class="fu" style="color: #4758AB;">cat</span>(<span class="st" style="color: #20794D;">"Od"</span>, <span class="fu" style="color: #4758AB;">format</span>(period_start, <span class="st" style="color: #20794D;">"%x"</span>), <span class="st" style="color: #20794D;">"do"</span>, <span class="fu" style="color: #4758AB;">format</span>(period_end, <span class="st" style="color: #20794D;">"%x"</span>))</span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Od 01.01.2022 do 31.12.2022</code></pre>
+</div>
+</div>
+</section>
+</section>
+<section id="načtení-vstupních-dat" class="level3">
+<h3 class="anchored" data-anchor-id="načtení-vstupních-dat">Načtení vstupních dat</h3>
+<p>Pak si podle potřeby definuju funkci, která při prvním zavolání s konkrétními parametry načte data funkcí <code>search_analytics</code> z balíčku <em>searchConsoleR</em> a uloží je do souboru. Při druhém a dalším zavolání se stejnými parametry již načítá data z uloženého souboru. To má dvě výhody:</p>
+<ul>
+<li>Opakované načtení dat je mnohem rychlejší.</li>
+<li>Skript pokaždé pracuje se stejnými daty, i když už ze Search Console zmizela (jsou tam data jen za posledních 16 měsíců).</li>
+</ul>
+<p>A dvě nevýhody:</p>
+<ul>
+<li>Uložená data zabírají místo na disku.</li>
+<li>Pokud potřebuju čerstvá data nebo s jinými parametry, musím soubory z disku odstranit.</li>
+</ul>
+<p>Pro účely tohoto zápisku si funkci definuju velmi jednoduše. Jako jediný parametr má dimenze, vše ostatní se bere přímo z globálních objektů definovaných výše. Data ukládá do podsložky <code>raw-data</code>, která již v aktuální složce musí existovat. Pro jiné účely může být funkce složitější.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb11" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1">read_sc <span class="ot" style="color: #003B4F;">&lt;-</span> <span class="cf" style="color: #003B4F;">function</span>(dimensions) {</span>
+<span id="cb11-2">  rds_path <span class="ot" style="color: #003B4F;">&lt;-</span> <span class="fu" style="color: #4758AB;">file.path</span>(</span>
+<span id="cb11-3">    <span class="st" style="color: #20794D;">"."</span>, <span class="st" style="color: #20794D;">"data-raw"</span>, <span class="fu" style="color: #4758AB;">paste0</span>(<span class="st" style="color: #20794D;">"sc-"</span>, <span class="fu" style="color: #4758AB;">paste</span>(dimensions, <span class="at" style="color: #657422;">collapse =</span> <span class="st" style="color: #20794D;">"-"</span>), <span class="st" style="color: #20794D;">".rds"</span>)</span>
+<span id="cb11-4">  )</span>
+<span id="cb11-5">  row_limit <span class="ot" style="color: #003B4F;">&lt;-</span> <span class="fu" style="color: #4758AB;">as.integer</span>(date_to <span class="sc" style="color: #5E5E5E;">-</span> date_from) <span class="sc" style="color: #5E5E5E;">*</span> <span class="dv" style="color: #AD0000;">500</span> <span class="sc" style="color: #5E5E5E;">*</span> (<span class="fu" style="color: #4758AB;">length</span>(dimensions))</span>
+<span id="cb11-6"></span>
+<span id="cb11-7">  <span class="cf" style="color: #003B4F;">if</span> (<span class="sc" style="color: #5E5E5E;">!</span><span class="fu" style="color: #4758AB;">file.exists</span>(rds_path)) {</span>
+<span id="cb11-8">    <span class="fu" style="color: #4758AB;">search_analytics</span>(</span>
+<span id="cb11-9">      <span class="at" style="color: #657422;">siteURL =</span> sc_site,</span>
+<span id="cb11-10">      <span class="at" style="color: #657422;">startDate =</span> date_from,</span>
+<span id="cb11-11">      <span class="at" style="color: #657422;">endDate =</span> date_to,</span>
+<span id="cb11-12">      <span class="at" style="color: #657422;">dimensions =</span> dimensions,</span>
+<span id="cb11-13">      <span class="at" style="color: #657422;">dimensionFilterExp =</span> <span class="fu" style="color: #4758AB;">paste0</span>(<span class="st" style="color: #20794D;">"country=="</span>, sc_country),</span>
+<span id="cb11-14">      <span class="at" style="color: #657422;">rowLimit =</span> row_limit</span>
+<span id="cb11-15">    ) <span class="sc" style="color: #5E5E5E;">|&gt;</span></span>
+<span id="cb11-16">      <span class="fu" style="color: #4758AB;">write_rds</span>(rds_path, <span class="at" style="color: #657422;">compress =</span> <span class="st" style="color: #20794D;">"gz"</span>)</span>
+<span id="cb11-17">  }</span>
+<span id="cb11-18">  <span class="fu" style="color: #4758AB;">read_rds</span>(rds_path)</span>
+<span id="cb11-19">}</span></code></pre></div>
+</div>
+<p>Nakonec si opravdu stáhnu resp. ze souborů načtu všechna data, která budu ze Search Console potřebovat. V praxi se s tím musí opatrně, protože tahání více dimenzí za delší období z API může trvat docela dlouho. Když nevím, jak budou data konkrétního webu veliká, zkusím nejprve stáhnout jeden typický den nebo týden a podle toho se rozhodnu.</p>
+<p>Pokud budete kód sami pouštět, funkci <code>src_auth</code> můžete nechat bez parametrů a ona se vás na e-mail zeptá. Já to mám takhle proto, aby to běželo automaticky.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb12" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><span class="fu" style="color: #4758AB;">scr_auth</span>(<span class="at" style="color: #657422;">email =</span> <span class="fu" style="color: #4758AB;">Sys.getenv</span>(<span class="st" style="color: #20794D;">"MY_GOOGLE_ACCOUNT"</span>))</span></code></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>✔ Setting client.id from C:/Users/HP Z1/AppData/Local/R/win-library/4.2/searchConsoleR/clients/native.json</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb14" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1">sc_by_date <span class="ot" style="color: #003B4F;">&lt;-</span> <span class="fu" style="color: #4758AB;">read_sc</span>(<span class="st" style="color: #20794D;">"date"</span>)</span>
+<span id="cb14-2">sc_by_date_page <span class="ot" style="color: #003B4F;">&lt;-</span> <span class="fu" style="color: #4758AB;">read_sc</span>(<span class="fu" style="color: #4758AB;">c</span>(<span class="st" style="color: #20794D;">"date"</span>, <span class="st" style="color: #20794D;">"page"</span>))</span>
+<span id="cb14-3">sc_by_date_query <span class="ot" style="color: #003B4F;">&lt;-</span> <span class="fu" style="color: #4758AB;">read_sc</span>(<span class="fu" style="color: #4758AB;">c</span>(<span class="st" style="color: #20794D;">"date"</span>, <span class="st" style="color: #20794D;">"query"</span>))</span>
+<span id="cb14-4">sc_by_date_page_query <span class="ot" style="color: #003B4F;">&lt;-</span> <span class="fu" style="color: #4758AB;">read_sc</span>(<span class="fu" style="color: #4758AB;">c</span>(<span class="st" style="color: #20794D;">"date"</span>, <span class="st" style="color: #20794D;">"page"</span>, <span class="st" style="color: #20794D;">"query"</span>))</span></code></pre></div>
+</div>
+<p>Výsledkem je několik dataframů, jejichž strukturu a obsah si mohu rychle zkontrolovat.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb15" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><span class="fu" style="color: #4758AB;">glimpse</span>(sc_by_date)</span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Rows: 498
+Columns: 5
+$ date        &lt;date&gt; 2020-11-28, 2020-11-29, 2020-11-30, 2020-12-01, 2020-12-0…
+$ clicks      &lt;int&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0…
+$ impressions &lt;int&gt; 0, 0, 0, 4, 5, 1, 0, 0, 1, 0, 2, 10, 4, 6, 3, 6, 6, 2, 6, …
+$ ctr         &lt;dbl&gt; 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00…
+$ position    &lt;dbl&gt; 0.000000, 0.000000, 0.000000, 16.500000, 8.400000, 11.0000…</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb17" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><span class="fu" style="color: #4758AB;">glimpse</span>(sc_by_date_page)</span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Rows: 18,626
+Columns: 6
+$ date        &lt;date&gt; 2021-12-19, 2021-07-02, 2021-04-19, 2021-07-05, 2021-06-3…
+$ page        &lt;chr&gt; "https://www.glamourcabaret.cz/znacky/hermes", "https://ww…
+$ clicks      &lt;int&gt; 30, 13, 12, 12, 11, 11, 10, 8, 8, 8, 8, 8, 7, 7, 7, 7, 7, …
+$ impressions &lt;int&gt; 657, 272, 406, 100, 374, 768, 295, 91, 226, 105, 141, 105,…
+$ ctr         &lt;dbl&gt; 0.04566210, 0.04779412, 0.02955665, 0.12000000, 0.02941176…
+$ position    &lt;dbl&gt; 3.713851, 3.669118, 5.211823, 3.470000, 4.687166, 3.281250…</code></pre>
+</div>
+</div>
+<p>A tak dále. Výsledný dataframe vždy obsahuje dimenzi <em>date</em>, případné další dimenze a čtyři základní metriky, které Search Console eviduje.</p>
+</section>
+<section id="nekonzistence-dat-search-console" class="level3">
+<h3 class="anchored" data-anchor-id="nekonzistence-dat-search-console">Nekonzistence dat Search Console</h3>
+<p>Teoreticky by stačilo stáhnout jenom poslední dataset <code>sc_by_date_page_query</code>, protože z něho by mělo jít všechno ostatní agregovat, jenže Search Console vrací různě upravené výsledky podle toho, zda si vyžádáte dimenze <em>page</em> nebo <em>query</em>, takže datasety bez těchto dimenzí mají přesnější čísla než data sety s nimi. Podrobněji to dokumentuju v <a href="https://github.com/MarekProkop/search-analytics-test/blob/master/search-analytics-test.md">tomhle testu</a>.</p>
+<p>Z tohoto důvodu beru základní metriky (imprese, kliky, CTR a pozice) pokud možno jen z datasetu, který nebosahuje dimenze <em>page</em> nebo <em>query</em>. Datasety s těmito dimenzemi používám jen v případě, že potřebuju znát konkrétní stránky nebo jejich počty, resp. konkrétní dotazy nebo jejich počty.</p>
+</section>
+</section>
+<section id="vizualizace-časových-řad" class="level2 page-columns page-full">
+<h2 class="anchored" data-anchor-id="vizualizace-časových-řad">Vizualizace časových řad</h2>
+<section id="základní-metriky" class="level3 page-columns page-full">
+<h3 class="anchored" data-anchor-id="základní-metriky">Základní metriky</h3>
+<p>Základní vizualizace, kterou skoro stejně ukazuje i webové rozhraní Search Console, vypadá takto:</p>
+<div class="cell page-columns page-full" data-fig.asp="0.25">
+<div class="sourceCode cell-code" id="cb19" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1">scale_factor <span class="ot" style="color: #003B4F;">&lt;-</span> <span class="fu" style="color: #4758AB;">max</span>(sc_by_date<span class="sc" style="color: #5E5E5E;">$</span>clicks) <span class="sc" style="color: #5E5E5E;">/</span> <span class="fu" style="color: #4758AB;">max</span>(sc_by_date<span class="sc" style="color: #5E5E5E;">$</span>impressions)</span>
+<span id="cb19-2">sc_by_date <span class="sc" style="color: #5E5E5E;">|&gt;</span></span>
+<span id="cb19-3">  <span class="fu" style="color: #4758AB;">ggplot</span>(<span class="fu" style="color: #4758AB;">aes</span>(<span class="at" style="color: #657422;">x =</span> date)) <span class="sc" style="color: #5E5E5E;">+</span></span>
+<span id="cb19-4">  <span class="fu" style="color: #4758AB;">geom_line</span>(<span class="fu" style="color: #4758AB;">aes</span>(<span class="at" style="color: #657422;">y =</span> clicks), <span class="at" style="color: #657422;">color =</span> <span class="st" style="color: #20794D;">"#4285f4"</span>) <span class="sc" style="color: #5E5E5E;">+</span></span>
+<span id="cb19-5">  <span class="fu" style="color: #4758AB;">geom_line</span>(<span class="fu" style="color: #4758AB;">aes</span>(<span class="at" style="color: #657422;">y =</span> impressions <span class="sc" style="color: #5E5E5E;">*</span> scale_factor), <span class="at" style="color: #657422;">color =</span> <span class="st" style="color: #20794D;">"#5e35b1"</span>) <span class="sc" style="color: #5E5E5E;">+</span></span>
+<span id="cb19-6">  <span class="fu" style="color: #4758AB;">scale_y_continuous</span>(</span>
+<span id="cb19-7">    <span class="at" style="color: #657422;">name =</span> <span class="st" style="color: #20794D;">"clicks"</span>,</span>
+<span id="cb19-8">    <span class="at" style="color: #657422;">sec.axis =</span> <span class="fu" style="color: #4758AB;">sec_axis</span>(<span class="sc" style="color: #5E5E5E;">~</span> . <span class="sc" style="color: #5E5E5E;">/</span> scale_factor, <span class="at" style="color: #657422;">name =</span> <span class="st" style="color: #20794D;">"impressions"</span>)</span>
+<span id="cb19-9">  ) <span class="sc" style="color: #5E5E5E;">+</span></span>
+<span id="cb19-10">  <span class="fu" style="color: #4758AB;">theme</span>(</span>
+<span id="cb19-11">    <span class="at" style="color: #657422;">axis.title.y.left =</span> <span class="fu" style="color: #4758AB;">element_text</span>(<span class="at" style="color: #657422;">color =</span> <span class="st" style="color: #20794D;">"#4285f4"</span>),</span>
+<span id="cb19-12">    <span class="at" style="color: #657422;">axis.text.y.left =</span> <span class="fu" style="color: #4758AB;">element_text</span>(<span class="at" style="color: #657422;">color =</span> <span class="st" style="color: #20794D;">"#4285f4"</span>),</span>
+<span id="cb19-13">    <span class="at" style="color: #657422;">axis.title.y.right =</span> <span class="fu" style="color: #4758AB;">element_text</span>(<span class="at" style="color: #657422;">color =</span> <span class="st" style="color: #20794D;">"#5e35b1"</span>),</span>
+<span id="cb19-14">    <span class="at" style="color: #657422;">axis.text.y.right =</span> <span class="fu" style="color: #4758AB;">element_text</span>(<span class="at" style="color: #657422;">color =</span> <span class="st" style="color: #20794D;">"#5e35b1"</span>)</span>
+<span id="cb19-15">  ) <span class="sc" style="color: #5E5E5E;">+</span></span>
+<span id="cb19-16">  <span class="fu" style="color: #4758AB;">theme_minimal</span>()</span></code></pre></div>
+<div class="cell-output-display column-page">
+<p><img src="https://marekprokop.github.io/jak-pracuju/posts/2022-04-12-search-console-timeline/index_files/figure-html/unnamed-chunk-11-1.png" class="img-fluid" width="1152"></p>
+</div>
+</div>
+<p>Tenhle graf má duální osu Y (čili dvě různé osy Y), což patří spíš do rejstříku „manažerských“ grafů, které se ve vážnější analytice z dobrých důvodů moc nepoužívájí. V R se místo toho většinou používají fasety (grafy vedle sebe a/nebo pod sebou), které nezkreslují měřítko, nepletou čtenáře co je co a navíc se do nich vejdou víc než dvě metriky, když je to potřeba.</p>
+<p>Protože budu v dalším kódu potřebovat podobné fasetové grafy často, připravím si na ně dvě funkce, abych nepsal opakovaně stejný kód.</p>
+<p>První funkce <code>sc_reshape</code> provede tři věci:</p>
+<ol type="1">
+<li>Přesune imprese před kliky, protože tohle pořadí mi připadá logičtější.</li>
+<li>Převede širokou tabulku na dlouhou, tj. hodnoty metrik v druhém až posledním sloupci sloučí do jediného sloupce <code>value</code> (to je ve funkci <code>pivot_longer default</code>) a jejich názvy do sloupce <code>metric</code>.</li>
+<li>Převede názvy metrik na typ <em>factor</em>, aby se fasety v grafu správně seřadily.</li>
+</ol>
+<p>K druhému bodu vysvětlení: Fasety v principu zobrazují jen jednu proměnnou ve více kategoriích, takže se tabulka musí předem převést na dlouhý formát, ve kterém se do jednoho sloupce dostanou názvy metrik jako kategorie a do druhého sloupce hodnoty všech metrik. K tomu slouží funkce <code>pivot_longer</code>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb20" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1">sc_reshape <span class="ot" style="color: #003B4F;">&lt;-</span> <span class="cf" style="color: #003B4F;">function</span>(df) {</span>
+<span id="cb20-2">  <span class="cf" style="color: #003B4F;">if</span> (<span class="st" style="color: #20794D;">"impressions"</span> <span class="sc" style="color: #5E5E5E;">%in%</span> <span class="fu" style="color: #4758AB;">names</span>(df)) {</span>
+<span id="cb20-3">    df <span class="ot" style="color: #003B4F;">&lt;-</span> df <span class="sc" style="color: #5E5E5E;">|&gt;</span> </span>
+<span id="cb20-4">      <span class="fu" style="color: #4758AB;">relocate</span>(impressions, <span class="at" style="color: #657422;">.before =</span> clicks)</span>
+<span id="cb20-5">  }</span>
+<span id="cb20-6">  df <span class="sc" style="color: #5E5E5E;">|&gt;</span></span>
+<span id="cb20-7">    <span class="fu" style="color: #4758AB;">pivot_longer</span>(<span class="at" style="color: #657422;">cols =</span> <span class="dv" style="color: #AD0000;">2</span><span class="sc" style="color: #5E5E5E;">:</span><span class="fu" style="color: #4758AB;">last_col</span>(), <span class="at" style="color: #657422;">names_to =</span> <span class="st" style="color: #20794D;">"metric"</span>) <span class="sc" style="color: #5E5E5E;">|&gt;</span></span>
+<span id="cb20-8">    <span class="fu" style="color: #4758AB;">mutate</span>(<span class="at" style="color: #657422;">metric =</span> <span class="fu" style="color: #4758AB;">as_factor</span>(metric))</span>
+<span id="cb20-9">}</span></code></pre></div>
+</div>
+<p>Druhá funkce vykreslí samotný graf časových řad. Protože budu používat různé časové rozpětí a různé časové jednotky, je malinko složitější, aby se tomu přizpůsobila.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb21" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1">sc_plot <span class="ot" style="color: #003B4F;">&lt;-</span> <span class="cf" style="color: #003B4F;">function</span>(</span>
+<span id="cb21-2">  df, <span class="at" style="color: #657422;">x_breaks =</span> <span class="st" style="color: #20794D;">"3 months"</span>, <span class="at" style="color: #657422;">x_labels =</span> <span class="st" style="color: #20794D;">"%b %y"</span>, <span class="at" style="color: #657422;">x_minor_breaks =</span> <span class="st" style="color: #20794D;">"month"</span>,</span>
+<span id="cb21-3">  <span class="at" style="color: #657422;">strip_pos =</span> <span class="st" style="color: #20794D;">"right"</span></span>
+<span id="cb21-4">) {</span>
+<span id="cb21-5">  df <span class="sc" style="color: #5E5E5E;">|&gt;</span> </span>
+<span id="cb21-6">    <span class="fu" style="color: #4758AB;">ggplot</span>(<span class="fu" style="color: #4758AB;">aes</span>(<span class="at" style="color: #657422;">x =</span> .data[[<span class="fu" style="color: #4758AB;">names</span>(df)[[<span class="dv" style="color: #AD0000;">1</span>]]]], <span class="at" style="color: #657422;">y =</span> value)) <span class="sc" style="color: #5E5E5E;">+</span></span>
+<span id="cb21-7">    <span class="fu" style="color: #4758AB;">geom_line</span>() <span class="sc" style="color: #5E5E5E;">+</span></span>
+<span id="cb21-8">    <span class="fu" style="color: #4758AB;">scale_x_date</span>(</span>
+<span id="cb21-9">      <span class="at" style="color: #657422;">date_breaks =</span> x_breaks, <span class="at" style="color: #657422;">date_labels =</span> x_labels,</span>
+<span id="cb21-10">      <span class="at" style="color: #657422;">date_minor_breaks =</span> x_minor_breaks, <span class="at" style="color: #657422;">expand =</span> <span class="fu" style="color: #4758AB;">expansion</span>(<span class="fl" style="color: #AD0000;">0.01</span>)</span>
+<span id="cb21-11">    ) <span class="sc" style="color: #5E5E5E;">+</span></span>
+<span id="cb21-12">    <span class="fu" style="color: #4758AB;">facet_wrap</span>(</span>
+<span id="cb21-13">      <span class="sc" style="color: #5E5E5E;">~</span> metric, <span class="at" style="color: #657422;">ncol =</span> <span class="dv" style="color: #AD0000;">1</span>, <span class="at" style="color: #657422;">scales =</span> <span class="st" style="color: #20794D;">"free_y"</span>, <span class="at" style="color: #657422;">strip.position =</span> strip_pos</span>
+<span id="cb21-14">    ) <span class="sc" style="color: #5E5E5E;">+</span></span>
+<span id="cb21-15">    <span class="fu" style="color: #4758AB;">theme_gray</span>()</span>
+<span id="cb21-16">}</span></code></pre></div>
+</div>
+<p>Ve fasetách vypadají časové řady všech čtyř základních metrik takhle:</p>
+<div class="cell page-columns page-full" data-fig.asp="0.625">
+<div class="sourceCode cell-code" id="cb22" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1">sc_by_date <span class="sc" style="color: #5E5E5E;">|&gt;</span></span>
+<span id="cb22-2">  <span class="fu" style="color: #4758AB;">sc_reshape</span>() <span class="sc" style="color: #5E5E5E;">|&gt;</span></span>
+<span id="cb22-3">  <span class="fu" style="color: #4758AB;">sc_plot</span>()</span></code></pre></div>
+<div class="cell-output-display column-page">
+<p><img src="https://marekprokop.github.io/jak-pracuju/posts/2022-04-12-search-console-timeline/index_files/figure-html/unnamed-chunk-14-1.png" class="img-fluid" width="1056"></p>
+</div>
+</div>
+<section id="výklad-dat" class="level4">
+<h4 class="anchored" data-anchor-id="výklad-dat">Výklad dat</h4>
+<p>Už tenhle graf jde nějak interpretovat:</p>
+<ul>
+<li>Na začátku období neměl web z Googlu skoro žádnou návštěvnost, ale po cca třech měsících se začal postupně zlepšovat a zřejmě se zlepšuje pořád.</li>
+<li>CTR v prvním měsíci skákalo až k 50 %, což s nepatrným počtem impresí naznačuje, že web se v té době zobrazoval jen na extrémně nekonkurenční dotazy, které neměly ve výsledcích hledání jinou dobrou odpověď. To se postupně změnilo, CTR kleslo, a to naznačuje, že přibyly nějaké normálnější dotazy.</li>
+<li>Tuto hypotézu podporuje i křivka průměrných pozic. Na začátku šíleně skáče, což je typické pro velmi malý počet dotazů, později se uklidní, takže se počet dotazů asi zvýšil.</li>
+<li>Z toho všecho bych usoudil, že web začínal s malým objemem obsahu a postupně se zvětšuje. Je to ale jen hypotéza, kterou je třeba podpořit dalšími daty.</li>
+</ul>
+</section>
+</section>
+<section id="počet-stránek-a-dotazů" class="level3 page-columns page-full">
+<h3 class="anchored" data-anchor-id="počet-stránek-a-dotazů">Počet stránek a dotazů</h3>
+<p>Aby šla data lépe interpretovat, skoro vždy přidávám ještě dvě další časové řady – počet vstupních stránek a počet unikátních dotazů. K tomu jsem si stáhl ze Search Sonsole dva další datasety, vstupní stránky podle dnů (<code>sc_by_date_page</code>) dotazy podle dnů (<code>sc_by_date_query</code>). Nyní z nich funkcemi <code>group_by</code> a <code>summarise</code> spočítám počty unikátních stránek resp. dotazů za den a funkcí <code>left_join</code> je připojím k původní tabulce metrik. Výsledek uložím do objektu <code>sc_all_metrics_by_date</code>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb23" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1">sc_all_metrics_by_date <span class="ot" style="color: #003B4F;">&lt;-</span> sc_by_date <span class="sc" style="color: #5E5E5E;">|&gt;</span></span>
+<span id="cb23-2">  <span class="fu" style="color: #4758AB;">left_join</span>(</span>
+<span id="cb23-3">    sc_by_date_page <span class="sc" style="color: #5E5E5E;">|&gt;</span></span>
+<span id="cb23-4">      <span class="fu" style="color: #4758AB;">group_by</span>(date) <span class="sc" style="color: #5E5E5E;">|&gt;</span></span>
+<span id="cb23-5">      <span class="fu" style="color: #4758AB;">summarise</span>(<span class="at" style="color: #657422;">pages =</span> <span class="fu" style="color: #4758AB;">n</span>()),</span>
+<span id="cb23-6">    <span class="at" style="color: #657422;">by =</span> <span class="st" style="color: #20794D;">"date"</span></span>
+<span id="cb23-7">  ) <span class="sc" style="color: #5E5E5E;">|&gt;</span></span>
+<span id="cb23-8">  <span class="fu" style="color: #4758AB;">left_join</span>(</span>
+<span id="cb23-9">    sc_by_date_query <span class="sc" style="color: #5E5E5E;">|&gt;</span></span>
+<span id="cb23-10">      <span class="fu" style="color: #4758AB;">group_by</span>(date) <span class="sc" style="color: #5E5E5E;">|&gt;</span></span>
+<span id="cb23-11">      <span class="fu" style="color: #4758AB;">summarise</span>(<span class="at" style="color: #657422;">queries =</span> <span class="fu" style="color: #4758AB;">n</span>()),</span>
+<span id="cb23-12">    <span class="at" style="color: #657422;">by =</span> <span class="st" style="color: #20794D;">"date"</span></span>
+<span id="cb23-13">  ) <span class="sc" style="color: #5E5E5E;">|&gt;</span></span>
+<span id="cb23-14">  <span class="fu" style="color: #4758AB;">mutate</span>(</span>
+<span id="cb23-15">    <span class="at" style="color: #657422;">pages =</span> <span class="fu" style="color: #4758AB;">replace_na</span>(pages, <span class="dv" style="color: #AD0000;">0</span>),</span>
+<span id="cb23-16">    <span class="at" style="color: #657422;">queries =</span> <span class="fu" style="color: #4758AB;">replace_na</span>(queries, <span class="dv" style="color: #AD0000;">0</span>)</span>
+<span id="cb23-17">  )</span></code></pre></div>
+</div>
+<p>Výslední tabulka vypadá takhle:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb24" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><span class="fu" style="color: #4758AB;">glimpse</span>(sc_all_metrics_by_date)</span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Rows: 498
+Columns: 7
+$ date        &lt;date&gt; 2020-11-28, 2020-11-29, 2020-11-30, 2020-12-01, 2020-12-0…
+$ clicks      &lt;int&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0…
+$ impressions &lt;int&gt; 0, 0, 0, 4, 5, 1, 0, 0, 1, 0, 2, 10, 4, 6, 3, 6, 6, 2, 6, …
+$ ctr         &lt;dbl&gt; 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00…
+$ position    &lt;dbl&gt; 0.000000, 0.000000, 0.000000, 16.500000, 8.400000, 11.0000…
+$ pages       &lt;int&gt; 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 2, 1, 1, 1, 1, 1, 0, 1, 1…
+$ queries     &lt;int&gt; 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 2, 1, 2, 2, 1, 1, 0, 1, 1…</code></pre>
+</div>
+</div>
+<p>Graf zobrazím stejně, jako ten se čtyřmi základními metrikami, jen funkcí <code>scale_x_date</code> trochu vyladím rozdělení osy X, aby bylo časové členění přehlednější.</p>
+<div class="cell page-columns page-full">
+<div class="sourceCode cell-code" id="cb26" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1">sc_all_metrics_by_date <span class="sc" style="color: #5E5E5E;">|&gt;</span></span>
+<span id="cb26-2">  <span class="fu" style="color: #4758AB;">sc_reshape</span>() <span class="sc" style="color: #5E5E5E;">|&gt;</span></span>
+<span id="cb26-3">  <span class="fu" style="color: #4758AB;">sc_plot</span>()</span></code></pre></div>
+<div class="cell-output-display column-page">
+<p><img src="https://marekprokop.github.io/jak-pracuju/posts/2022-04-12-search-console-timeline/index_files/figure-html/unnamed-chunk-17-1.png" class="img-fluid" width="1056"></p>
+</div>
+</div>
+<p>Mimochodem, obdobný graf jde odělat i v Data Studiu. Tady je <a href="https://datastudio.google.com/u/0/reporting/9007c9b8-db68-4138-abcc-b800f0dc42bb/page/MlTqC">příklad reportu</a>, který si můžete zkopírovat a upravit pro své potřeby.</p>
+</section>
+<section id="zoomování-grafu" class="level3 page-columns page-full">
+<h3 class="anchored" data-anchor-id="zoomování-grafu">Zoomování grafu</h3>
+<p>V druhé polovině grafu za celé období nejsou moc dobře vidět změny CTR a pozic, protože na začátku období mají tyto metriky příliš veliké rozpětí hodnot. Zazoomuju proto na období od začátku srpna 2021 prostým vyfiltrováním řádků, které do grafu vstupují.</p>
+<div class="cell page-columns page-full">
+<div class="sourceCode cell-code" id="cb27" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1">sc_all_metrics_by_date <span class="sc" style="color: #5E5E5E;">|&gt;</span></span>
+<span id="cb27-2">  <span class="fu" style="color: #4758AB;">filter</span>(date <span class="sc" style="color: #5E5E5E;">&gt;=</span> <span class="fu" style="color: #4758AB;">as.Date</span>(<span class="st" style="color: #20794D;">"2021-08-01"</span>)) <span class="sc" style="color: #5E5E5E;">|&gt;</span></span>
+<span id="cb27-3">  <span class="fu" style="color: #4758AB;">sc_reshape</span>() <span class="sc" style="color: #5E5E5E;">|&gt;</span></span>
+<span id="cb27-4">  <span class="fu" style="color: #4758AB;">sc_plot</span>(<span class="st" style="color: #20794D;">"month"</span>)</span></code></pre></div>
+<div class="cell-output-display column-page">
+<p><img src="https://marekprokop.github.io/jak-pracuju/posts/2022-04-12-search-console-timeline/index_files/figure-html/unnamed-chunk-18-1.png" class="img-fluid" width="1056"></p>
+</div>
+</div>
+</section>
+</section>
+<section id="granularita-období" class="level2 page-columns page-full">
+<h2 class="anchored" data-anchor-id="granularita-období">Granularita období</h2>
+<p>Až dosud jsem časové řady vykresloval po dnech. Pro data související s návštěvností webů je ale typická silná týdenní periodicita a v jejím důsledku grafy bývají hodně zubaté. Existuje několik způsobů, jak je vyhladit. Nejpřirozenější je snížit časovou granularitu a agregovat data za týden, měsíc, nebo ještě delší období. I to lze však udělat více způsoby, např mohu:</p>
+<ol type="1">
+<li>Sečíst to, co jde sečíst (imprese a kliky) a zprůměrovat to, co sčítat nejde (CTR a pozice) a počty unikátních položek (stránek a dotazů) spočítat znovu. To vše za celé nové časové jednotky, tedy např. za týdny.</li>
+<li>Totéž, ale klouzavě. Ke každému dni tedy totéž sečtu, zprůměruju, nebo znovu vypočtu za posledních sedm dní. Bude to sice výpočetně náročnější, protože místo jednou za týden to budu počítat za každý den, ale i když nebude celé období začínat a končit přesně na hranici týdnů (resp. měsíců či jiné časové jednotky), nebude graf na okrajích zkreslený.</li>
+<li>Spočítat prosté průměry či mediány všech hodnot za týden či jinou časovou jednotku.</li>
+<li>Kromě průměru či mediánu spočítat a hezky vykreslit i pásmo, ve kterém se hodnoty pohybují.</li>
+</ol>
+<p>Zkusím všechny varianty, ať je vidět, zda a případně jak se liší.</p>
+<section id="agregace-za-kalendářní-období" class="level3 page-columns page-full">
+<h3 class="anchored" data-anchor-id="agregace-za-kalendářní-období">Agregace za kalendářní období</h3>
+<p>Agregace dat Search Console do delších časových jednotek, tedy typicky týdnů či měsíců případně kvartálů, není úplně triviální.</p>
+<ul>
+<li>Imprese a kliky se normálně sečtou, tam problém není.</li>
+<li>CTR a pozice se musí zprůměrovat váženým průměrem, přičemž vahou jsou imprese. Není to úplně nezbytné, ale je to bezpečnější, protože prostý aritmetický průměr se od váženého někdy liší jen nepatrně a jindy (při velkém rozdílu impresí) hodně.</li>
+<li>Počty unikátních stránek a dotazů se musí spočítat funkcí <code>n_distinct</code> za každé dílčí období znovu. Rozdíl ve tvaru křivky sice nebývá moc veliký, ale zato je značný rozdíl ve velikosti hodnot – za den je unikátních dotazů či stránek podstatně méně než za týden nebo měsíc.</li>
+</ul>
+<p>Pro usnadnění a zpřehlednění výpočtu si připravím několik funkcí.</p>
+<p>První funkce agreguje tabulku základních metrik.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb28" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1">sc_aggregate <span class="ot" style="color: #003B4F;">&lt;-</span> <span class="cf" style="color: #003B4F;">function</span>(df, <span class="at" style="color: #657422;">per =</span> <span class="st" style="color: #20794D;">"week"</span>) {</span>
+<span id="cb28-2">  df <span class="sc" style="color: #5E5E5E;">|&gt;</span></span>
+<span id="cb28-3">    <span class="fu" style="color: #4758AB;">group_by</span>(<span class="st" style="color: #20794D;">"{per}"</span> <span class="sc" style="color: #5E5E5E;">:</span><span class="er" style="color: #AD0000;">=</span> <span class="fu" style="color: #4758AB;">floor_date</span>(date, per)) <span class="sc" style="color: #5E5E5E;">|&gt;</span> </span>
+<span id="cb28-4">    <span class="fu" style="color: #4758AB;">summarise</span>(</span>
+<span id="cb28-5">      <span class="fu" style="color: #4758AB;">across</span>(ctr<span class="sc" style="color: #5E5E5E;">:</span>position, <span class="sc" style="color: #5E5E5E;">~</span> <span class="fu" style="color: #4758AB;">weighted.mean</span>(.x, impressions)),</span>
+<span id="cb28-6">      <span class="fu" style="color: #4758AB;">across</span>(clicks<span class="sc" style="color: #5E5E5E;">:</span>impressions, sum),</span>
+<span id="cb28-7">    ) <span class="sc" style="color: #5E5E5E;">|&gt;</span> </span>
+<span id="cb28-8">    <span class="fu" style="color: #4758AB;">relocate</span>(ctr<span class="sc" style="color: #5E5E5E;">:</span>position, <span class="at" style="color: #657422;">.after =</span> impressions)</span>
+<span id="cb28-9">}</span>
+<span id="cb28-10"></span>
+<span id="cb28-11"><span class="fu" style="color: #4758AB;">sc_aggregate</span>(sc_by_date, <span class="st" style="color: #20794D;">"quarter"</span>)</span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 7 × 5
+  quarter    clicks impressions    ctr position
+  &lt;date&gt;      &lt;int&gt;       &lt;int&gt;  &lt;dbl&gt;    &lt;dbl&gt;
+1 2020-10-01      4          89 0.0449     9.19
+2 2021-01-01     80        2608 0.0307     8.86
+3 2021-04-01    464       16597 0.0280     6.79
+4 2021-07-01   1224       54718 0.0224     7.35
+5 2021-10-01   2160      112025 0.0193     7.18
+6 2022-01-01   2816      142337 0.0198     6.82
+7 2022-04-01    357       17905 0.0199     6.99</code></pre>
+</div>
+</div>
+<p>Druhá funkce znovu spočítá počty unikátních stránek či dotazů. Předpokládá, že vstupní tabulka obsahuje sloupce <code>date</code> a sloupec řetězců, keré se mají spočítat. Na dalších sloupcích nezáleží.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb30" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1">sc_recount <span class="ot" style="color: #003B4F;">&lt;-</span> <span class="cf" style="color: #003B4F;">function</span>(df, <span class="at" style="color: #657422;">per =</span> <span class="st" style="color: #20794D;">"month"</span>, column, new_col) {</span>
+<span id="cb30-2">  df <span class="sc" style="color: #5E5E5E;">|&gt;</span> </span>
+<span id="cb30-3">    <span class="fu" style="color: #4758AB;">group_by</span>(<span class="st" style="color: #20794D;">"{per}"</span> <span class="sc" style="color: #5E5E5E;">:</span><span class="er" style="color: #AD0000;">=</span> <span class="fu" style="color: #4758AB;">floor_date</span>(date, per)) <span class="sc" style="color: #5E5E5E;">|&gt;</span> </span>
+<span id="cb30-4">    <span class="fu" style="color: #4758AB;">summarise</span>(<span class="st" style="color: #20794D;">"{new_col}"</span> <span class="sc" style="color: #5E5E5E;">:</span><span class="er" style="color: #AD0000;">=</span> <span class="fu" style="color: #4758AB;">n_distinct</span>({{ column }}))</span>
+<span id="cb30-5">}</span>
+<span id="cb30-6"></span>
+<span id="cb30-7"><span class="fu" style="color: #4758AB;">sc_recount</span>(sc_by_date_page, <span class="st" style="color: #20794D;">"quarter"</span>, page, <span class="st" style="color: #20794D;">"pages"</span>)</span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 7 × 2
+  quarter    pages
+  &lt;date&gt;     &lt;int&gt;
+1 2020-10-01     3
+2 2021-01-01    33
+3 2021-04-01    78
+4 2021-07-01   126
+5 2021-10-01   141
+6 2022-01-01   150
+7 2022-04-01   126</code></pre>
+</div>
+</div>
+<p>A konečně mohu napsat poslední funkci, která sestaví všechny metriky do jedné tabulky.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb32" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1">sc_aggregate_all_metrics <span class="ot" style="color: #003B4F;">&lt;-</span> <span class="cf" style="color: #003B4F;">function</span>(<span class="at" style="color: #657422;">per =</span> <span class="st" style="color: #20794D;">"week"</span>) {</span>
+<span id="cb32-2">  <span class="fu" style="color: #4758AB;">sc_aggregate</span>(sc_by_date, per) <span class="sc" style="color: #5E5E5E;">|&gt;</span> </span>
+<span id="cb32-3">    <span class="fu" style="color: #4758AB;">left_join</span>(<span class="fu" style="color: #4758AB;">sc_recount</span>(sc_by_date_page, per, page, <span class="st" style="color: #20794D;">"pages"</span>)) <span class="sc" style="color: #5E5E5E;">|&gt;</span> </span>
+<span id="cb32-4">    <span class="fu" style="color: #4758AB;">left_join</span>(<span class="fu" style="color: #4758AB;">sc_recount</span>(sc_by_date_query, per, query, <span class="st" style="color: #20794D;">"queries"</span>)) <span class="sc" style="color: #5E5E5E;">|&gt;</span> </span>
+<span id="cb32-5">    <span class="fu" style="color: #4758AB;">mutate</span>(</span>
+<span id="cb32-6">      <span class="at" style="color: #657422;">pages =</span> <span class="fu" style="color: #4758AB;">replace_na</span>(pages, <span class="dv" style="color: #AD0000;">0</span>),</span>
+<span id="cb32-7">      <span class="at" style="color: #657422;">queries =</span> <span class="fu" style="color: #4758AB;">replace_na</span>(queries, <span class="dv" style="color: #AD0000;">0</span>)</span>
+<span id="cb32-8">    )</span>
+<span id="cb32-9">}</span>
+<span id="cb32-10"></span>
+<span id="cb32-11"><span class="fu" style="color: #4758AB;">sc_aggregate_all_metrics</span>(<span class="st" style="color: #20794D;">"quarter"</span>)</span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 7 × 7
+  quarter    clicks impressions    ctr position pages queries
+  &lt;date&gt;      &lt;int&gt;       &lt;int&gt;  &lt;dbl&gt;    &lt;dbl&gt; &lt;int&gt;   &lt;int&gt;
+1 2020-10-01      4          89 0.0449     9.19     3       5
+2 2021-01-01     80        2608 0.0307     8.86    33      71
+3 2021-04-01    464       16597 0.0280     6.79    78     345
+4 2021-07-01   1224       54718 0.0224     7.35   126    1158
+5 2021-10-01   2160      112025 0.0193     7.18   141    1923
+6 2022-01-01   2816      142337 0.0198     6.82   150    2369
+7 2022-04-01    357       17905 0.0199     6.99   126     868</code></pre>
+</div>
+</div>
+<section id="agregace-po-kalendářních-týdnech" class="level4 page-columns page-full">
+<h4 class="anchored" data-anchor-id="agregace-po-kalendářních-týdnech">Agregace po kalendářních týdnech</h4>
+<p>S připravenými funkcemi již mohu snadno agregovat.</p>
+<div class="cell page-columns page-full">
+<div class="sourceCode cell-code" id="cb34" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><span class="fu" style="color: #4758AB;">sc_aggregate_all_metrics</span>(<span class="st" style="color: #20794D;">"week"</span>) <span class="sc" style="color: #5E5E5E;">|&gt;</span> </span>
+<span id="cb34-2">  <span class="fu" style="color: #4758AB;">filter</span>(week <span class="sc" style="color: #5E5E5E;">&gt;=</span> <span class="fu" style="color: #4758AB;">floor_date</span>(<span class="fu" style="color: #4758AB;">as.Date</span>(<span class="st" style="color: #20794D;">"2021-08-01"</span>), <span class="st" style="color: #20794D;">"week"</span>)) <span class="sc" style="color: #5E5E5E;">|&gt;</span></span>
+<span id="cb34-3">  <span class="fu" style="color: #4758AB;">sc_reshape</span>() <span class="sc" style="color: #5E5E5E;">|&gt;</span></span>
+<span id="cb34-4">  <span class="fu" style="color: #4758AB;">sc_plot</span>(<span class="st" style="color: #20794D;">"4 weeks"</span>, <span class="st" style="color: #20794D;">"%x"</span>, <span class="st" style="color: #20794D;">"week"</span>)</span></code></pre></div>
+<div class="cell-output-display column-page">
+<p><img src="https://marekprokop.github.io/jak-pracuju/posts/2022-04-12-search-console-timeline/index_files/figure-html/unnamed-chunk-22-1.png" class="img-fluid" width="1056"></p>
+</div>
+</div>
+</section>
+<section id="agregace-po-kalendářních-měsících" class="level4 page-columns page-full">
+<h4 class="anchored" data-anchor-id="agregace-po-kalendářních-měsících">Agregace po kalendářních měsících</h4>
+<div class="cell page-columns page-full">
+<div class="sourceCode cell-code" id="cb35" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><span class="fu" style="color: #4758AB;">sc_aggregate_all_metrics</span>(<span class="st" style="color: #20794D;">"month"</span>) <span class="sc" style="color: #5E5E5E;">|&gt;</span> </span>
+<span id="cb35-2">  <span class="fu" style="color: #4758AB;">filter</span>(</span>
+<span id="cb35-3">    month <span class="sc" style="color: #5E5E5E;">&gt;=</span> <span class="fu" style="color: #4758AB;">floor_date</span>(<span class="fu" style="color: #4758AB;">as.Date</span>(<span class="st" style="color: #20794D;">"2021-08-01"</span>), <span class="st" style="color: #20794D;">"month"</span>),</span>
+<span id="cb35-4">    month <span class="sc" style="color: #5E5E5E;">&lt;=</span> <span class="fu" style="color: #4758AB;">floor_date</span>(<span class="fu" style="color: #4758AB;">as.Date</span>(<span class="st" style="color: #20794D;">"2022-03-01"</span>), <span class="st" style="color: #20794D;">"month"</span>)</span>
+<span id="cb35-5">  ) <span class="sc" style="color: #5E5E5E;">|&gt;</span></span>
+<span id="cb35-6">  <span class="fu" style="color: #4758AB;">sc_reshape</span>() <span class="sc" style="color: #5E5E5E;">|&gt;</span></span>
+<span id="cb35-7">  <span class="fu" style="color: #4758AB;">sc_plot</span>(<span class="st" style="color: #20794D;">"month"</span>)</span></code></pre></div>
+<div class="cell-output-display column-page">
+<p><img src="https://marekprokop.github.io/jak-pracuju/posts/2022-04-12-search-console-timeline/index_files/figure-html/unnamed-chunk-23-1.png" class="img-fluid" width="1056"></p>
+</div>
+</div>
+</section>
+</section>
+<section id="průměr-za-kalendářní-týdny" class="level3 page-columns page-full">
+<h3 class="anchored" data-anchor-id="průměr-za-kalendářní-týdny">Průměr za kalendářní týdny</h3>
+<p>Průměr za kalendářní týdny je výpočetně mnohem jednodušší. Stačí spočítat průměry všech číselných hodnot. Jak ale píšu výše, pro CTR a pozice je metodicky nesprávný, a proto někdy méně a jindy více nepřesný, a u počtů stránek a dotazů sice metodicky dává smysl, nicméně říká něco jiného.</p>
+<p>Když si porovnáte tvar křivek metrik <em>pages</em> a <em>queies</em>, jsou sice podobné, ale čísla jsou úplně jiná – v prvním výpočtu (počet za týden) jsem se dostal na 110 stránek a 800 dotazů, kdežto v druhém (průměr týdenního počtu) jen na 80 resp. 300.</p>
+<div class="cell page-columns page-full">
+<div class="sourceCode cell-code" id="cb36" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1">sc_all_metrics_by_date <span class="sc" style="color: #5E5E5E;">|&gt;</span></span>
+<span id="cb36-2">  <span class="fu" style="color: #4758AB;">mutate</span>(<span class="at" style="color: #657422;">week =</span> <span class="fu" style="color: #4758AB;">floor_date</span>(date, <span class="st" style="color: #20794D;">"week"</span>)) <span class="sc" style="color: #5E5E5E;">|&gt;</span> </span>
+<span id="cb36-3">  <span class="fu" style="color: #4758AB;">filter</span>(week <span class="sc" style="color: #5E5E5E;">&gt;=</span> <span class="fu" style="color: #4758AB;">floor_date</span>(<span class="fu" style="color: #4758AB;">as.Date</span>(<span class="st" style="color: #20794D;">"2021-08-01"</span>), <span class="st" style="color: #20794D;">"week"</span>)) <span class="sc" style="color: #5E5E5E;">|&gt;</span></span>
+<span id="cb36-4">  <span class="fu" style="color: #4758AB;">group_by</span>(week) <span class="sc" style="color: #5E5E5E;">|&gt;</span> </span>
+<span id="cb36-5">  <span class="fu" style="color: #4758AB;">summarise</span>(<span class="fu" style="color: #4758AB;">across</span>(clicks<span class="sc" style="color: #5E5E5E;">:</span>queries, mean)) <span class="sc" style="color: #5E5E5E;">|&gt;</span> </span>
+<span id="cb36-6">  <span class="fu" style="color: #4758AB;">sc_reshape</span>() <span class="sc" style="color: #5E5E5E;">|&gt;</span> </span>
+<span id="cb36-7">  <span class="fu" style="color: #4758AB;">sc_plot</span>(<span class="st" style="color: #20794D;">"4 weeks"</span>, <span class="st" style="color: #20794D;">"%x"</span>, <span class="st" style="color: #20794D;">"week"</span>)</span></code></pre></div>
+<div class="cell-output-display column-page">
+<p><img src="https://marekprokop.github.io/jak-pracuju/posts/2022-04-12-search-console-timeline/index_files/figure-html/unnamed-chunk-24-1.png" class="img-fluid" width="1056"></p>
+</div>
+</div>
+</section>
+<section id="rozsah-hodnot-za-týden" class="level3 page-columns page-full">
+<h3 class="anchored" data-anchor-id="rozsah-hodnot-za-týden">Rozsah hodnot za týden</h3>
+<p>Na tomto grafu vykreslím medián jako čáru, mezikvartilové rozpětí (<a href="https://en.wikipedia.org/wiki/Interquartile_range">interquartile range</a>, tj. rozsah mezi 1. a 3. kvartilem) jako tmavší pás a variační rozpětí (rozdíl mezi maximem a minimem) jako světlejší pás.</p>
+<div class="cell page-columns page-full">
+<div class="sourceCode cell-code" id="cb37" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1">sc_all_metrics_by_date <span class="sc" style="color: #5E5E5E;">|&gt;</span></span>
+<span id="cb37-2">  <span class="fu" style="color: #4758AB;">mutate</span>(<span class="at" style="color: #657422;">week =</span> <span class="fu" style="color: #4758AB;">floor_date</span>(date, <span class="st" style="color: #20794D;">"week"</span>), <span class="at" style="color: #657422;">.before =</span> date) <span class="sc" style="color: #5E5E5E;">|&gt;</span> </span>
+<span id="cb37-3">  <span class="fu" style="color: #4758AB;">filter</span>(week <span class="sc" style="color: #5E5E5E;">&gt;=</span> <span class="fu" style="color: #4758AB;">floor_date</span>(<span class="fu" style="color: #4758AB;">as.Date</span>(<span class="st" style="color: #20794D;">"2021-08-01"</span>), <span class="st" style="color: #20794D;">"week"</span>)) <span class="sc" style="color: #5E5E5E;">|&gt;</span> </span>
+<span id="cb37-4">  <span class="fu" style="color: #4758AB;">select</span>(<span class="sc" style="color: #5E5E5E;">!</span>date) <span class="sc" style="color: #5E5E5E;">|&gt;</span> </span>
+<span id="cb37-5">  <span class="fu" style="color: #4758AB;">sc_reshape</span>() <span class="sc" style="color: #5E5E5E;">|&gt;</span> </span>
+<span id="cb37-6">  <span class="fu" style="color: #4758AB;">group_by</span>(week, metric) <span class="sc" style="color: #5E5E5E;">|&gt;</span> </span>
+<span id="cb37-7">  <span class="fu" style="color: #4758AB;">summarise</span>(</span>
+<span id="cb37-8">    <span class="at" style="color: #657422;">median =</span> <span class="fu" style="color: #4758AB;">median</span>(value),</span>
+<span id="cb37-9">    <span class="at" style="color: #657422;">lower =</span> <span class="fu" style="color: #4758AB;">quantile</span>(value, <span class="at" style="color: #657422;">probs =</span> <span class="fl" style="color: #AD0000;">0.25</span>),</span>
+<span id="cb37-10">    <span class="at" style="color: #657422;">upper =</span> <span class="fu" style="color: #4758AB;">quantile</span>(value, <span class="at" style="color: #657422;">probs =</span> <span class="fl" style="color: #AD0000;">0.75</span>),</span>
+<span id="cb37-11">    <span class="at" style="color: #657422;">min =</span> <span class="fu" style="color: #4758AB;">min</span>(value),</span>
+<span id="cb37-12">    <span class="at" style="color: #657422;">max =</span> <span class="fu" style="color: #4758AB;">max</span>(value),</span>
+<span id="cb37-13">    <span class="at" style="color: #657422;">.groups =</span> <span class="st" style="color: #20794D;">"drop"</span></span>
+<span id="cb37-14">  ) <span class="sc" style="color: #5E5E5E;">|&gt;</span> </span>
+<span id="cb37-15">  <span class="fu" style="color: #4758AB;">ggplot</span>(<span class="fu" style="color: #4758AB;">aes</span>(<span class="at" style="color: #657422;">x =</span> week)) <span class="sc" style="color: #5E5E5E;">+</span></span>
+<span id="cb37-16">  <span class="fu" style="color: #4758AB;">geom_ribbon</span>(<span class="fu" style="color: #4758AB;">aes</span>(<span class="at" style="color: #657422;">ymin =</span> min, <span class="at" style="color: #657422;">ymax =</span> max), <span class="at" style="color: #657422;">fill =</span> <span class="st" style="color: #20794D;">"gray80"</span>) <span class="sc" style="color: #5E5E5E;">+</span></span>
+<span id="cb37-17">  <span class="fu" style="color: #4758AB;">geom_ribbon</span>(<span class="fu" style="color: #4758AB;">aes</span>(<span class="at" style="color: #657422;">ymin =</span> lower, <span class="at" style="color: #657422;">ymax =</span> upper), <span class="at" style="color: #657422;">fill =</span> <span class="st" style="color: #20794D;">"gray60"</span>) <span class="sc" style="color: #5E5E5E;">+</span></span>
+<span id="cb37-18">  <span class="fu" style="color: #4758AB;">geom_line</span>(<span class="fu" style="color: #4758AB;">aes</span>(<span class="at" style="color: #657422;">y =</span> median), <span class="at" style="color: #657422;">color =</span> <span class="st" style="color: #20794D;">"gray25"</span>) <span class="sc" style="color: #5E5E5E;">+</span></span>
+<span id="cb37-19">  <span class="fu" style="color: #4758AB;">scale_x_date</span>(</span>
+<span id="cb37-20">    <span class="at" style="color: #657422;">date_breaks =</span> <span class="st" style="color: #20794D;">"4 weeks"</span>, <span class="at" style="color: #657422;">date_labels =</span> <span class="st" style="color: #20794D;">"%x"</span>, <span class="at" style="color: #657422;">date_minor_breaks =</span> <span class="st" style="color: #20794D;">"week"</span>,</span>
+<span id="cb37-21">    <span class="at" style="color: #657422;">expand =</span> <span class="fu" style="color: #4758AB;">expansion</span>(<span class="fl" style="color: #AD0000;">0.025</span>)</span>
+<span id="cb37-22">  ) <span class="sc" style="color: #5E5E5E;">+</span></span>
+<span id="cb37-23">  <span class="fu" style="color: #4758AB;">facet_wrap</span>(<span class="sc" style="color: #5E5E5E;">~</span>metric, <span class="at" style="color: #657422;">ncol =</span> <span class="dv" style="color: #AD0000;">1</span>, <span class="at" style="color: #657422;">scales =</span> <span class="st" style="color: #20794D;">"free_y"</span>, <span class="at" style="color: #657422;">strip.position =</span> <span class="st" style="color: #20794D;">"right"</span>)</span></code></pre></div>
+<div class="cell-output-display column-page">
+<p><img src="https://marekprokop.github.io/jak-pracuju/posts/2022-04-12-search-console-timeline/index_files/figure-html/unnamed-chunk-25-1.png" class="img-fluid" width="1056"></p>
+</div>
+</div>
+</section>
+<section id="klouzavý-průměr-moving-average" class="level3 page-columns page-full">
+<h3 class="anchored" data-anchor-id="klouzavý-průměr-moving-average">Klouzavý průměr (moving average)</h3>
+<p>Klouzavý průměr za posledních sedm dní zpopularizovaly různé covidové statistiky, ale pro data Search Console obvykle nemá smysl. Hodí se jen v případě, že potřebujete znát co nejnovější hodnotu (typicky včerejší) očištěnou od týdenní sezónnosti, přestože týden ještě neskončil.</p>
+<p>Pro jistotu ukážu, jak jde klouzavý průměr za posledních 7 dní spočítat (zde jen imprese), přestože ho sám nepoužívám. Pod něj zároveň šedou barvou vykreslím skutečné imprese po dnech.</p>
+<div class="cell page-columns page-full">
+<div class="sourceCode cell-code" id="cb38" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1">sc_by_date <span class="sc" style="color: #5E5E5E;">|&gt;</span></span>
+<span id="cb38-2">  <span class="fu" style="color: #4758AB;">mutate</span>(</span>
+<span id="cb38-3">    <span class="at" style="color: #657422;">impressions_avg7 =</span> slider<span class="sc" style="color: #5E5E5E;">::</span><span class="fu" style="color: #4758AB;">slide_dbl</span>(impressions, <span class="sc" style="color: #5E5E5E;">~</span> <span class="fu" style="color: #4758AB;">mean</span>(.x), <span class="at" style="color: #657422;">.before =</span> <span class="dv" style="color: #AD0000;">6</span>)</span>
+<span id="cb38-4">  ) <span class="sc" style="color: #5E5E5E;">|&gt;</span></span>
+<span id="cb38-5">  <span class="fu" style="color: #4758AB;">ggplot</span>(<span class="fu" style="color: #4758AB;">aes</span>(<span class="at" style="color: #657422;">x =</span> date)) <span class="sc" style="color: #5E5E5E;">+</span></span>
+<span id="cb38-6">  <span class="fu" style="color: #4758AB;">geom_line</span>(<span class="fu" style="color: #4758AB;">aes</span>(<span class="at" style="color: #657422;">y =</span> impressions), <span class="at" style="color: #657422;">color =</span> <span class="st" style="color: #20794D;">"gray"</span>) <span class="sc" style="color: #5E5E5E;">+</span></span>
+<span id="cb38-7">  <span class="fu" style="color: #4758AB;">geom_line</span>(<span class="fu" style="color: #4758AB;">aes</span>(<span class="at" style="color: #657422;">y =</span> impressions_avg7)) <span class="sc" style="color: #5E5E5E;">+</span></span>
+<span id="cb38-8">  <span class="fu" style="color: #4758AB;">scale_x_date</span>(</span>
+<span id="cb38-9">    <span class="at" style="color: #657422;">date_breaks =</span> <span class="st" style="color: #20794D;">"3 months"</span>, <span class="at" style="color: #657422;">date_labels =</span> <span class="st" style="color: #20794D;">"%b %y"</span>, </span>
+<span id="cb38-10">    <span class="at" style="color: #657422;">date_minor_breaks =</span> <span class="st" style="color: #20794D;">"month"</span>, <span class="at" style="color: #657422;">expand =</span> <span class="fu" style="color: #4758AB;">expansion</span>(<span class="fl" style="color: #AD0000;">0.01</span>)</span>
+<span id="cb38-11">  )</span></code></pre></div>
+<div class="cell-output-display column-page">
+<p><img src="https://marekprokop.github.io/jak-pracuju/posts/2022-04-12-search-console-timeline/index_files/figure-html/unnamed-chunk-26-1.png" class="img-fluid" width="1056"></p>
+</div>
+</div>
+</section>
+<section id="regrese" class="level3 page-columns page-full">
+<h3 class="anchored" data-anchor-id="regrese">Regrese</h3>
+<p>V praxi je úplně nejjednodušší vyhledit denní křivku nějakou regresí. V balíčku <em>ggplot2</em> je na to hotový <code>geom_smooth</code>.</p>
+<div class="cell page-columns page-full">
+<div class="sourceCode cell-code" id="cb39" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1">sc_by_date <span class="sc" style="color: #5E5E5E;">|&gt;</span></span>
+<span id="cb39-2">  <span class="fu" style="color: #4758AB;">sc_reshape</span>() <span class="sc" style="color: #5E5E5E;">|&gt;</span></span>
+<span id="cb39-3">  <span class="fu" style="color: #4758AB;">sc_plot</span>() <span class="sc" style="color: #5E5E5E;">+</span></span>
+<span id="cb39-4">  <span class="fu" style="color: #4758AB;">geom_smooth</span>()</span></code></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>`geom_smooth()` using method = 'loess' and formula = 'y ~ x'</code></pre>
+</div>
+<div class="cell-output-display column-page">
+<p><img src="https://marekprokop.github.io/jak-pracuju/posts/2022-04-12-search-console-timeline/index_files/figure-html/unnamed-chunk-27-1.png" class="img-fluid" width="1056"></p>
+</div>
+</div>
+<p>Pokud chci křivku klikatější, jde to nastavit parametrem <code>span</code>.</p>
+<div class="cell page-columns page-full">
+<div class="sourceCode cell-code" id="cb41" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1">sc_by_date <span class="sc" style="color: #5E5E5E;">|&gt;</span></span>
+<span id="cb41-2">  <span class="fu" style="color: #4758AB;">sc_reshape</span>() <span class="sc" style="color: #5E5E5E;">|&gt;</span></span>
+<span id="cb41-3">  <span class="fu" style="color: #4758AB;">sc_plot</span>() <span class="sc" style="color: #5E5E5E;">+</span></span>
+<span id="cb41-4">  <span class="fu" style="color: #4758AB;">geom_smooth</span>(<span class="at" style="color: #657422;">span =</span> <span class="fl" style="color: #AD0000;">0.1</span>)</span></code></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>`geom_smooth()` using method = 'loess' and formula = 'y ~ x'</code></pre>
+</div>
+<div class="cell-output-display column-page">
+<p><img src="https://marekprokop.github.io/jak-pracuju/posts/2022-04-12-search-console-timeline/index_files/figure-html/unnamed-chunk-28-1.png" class="img-fluid" width="1056"></p>
+</div>
+</div>
+<p>A ještě ukážu, jak jde <code>geom_smooth</code> vykreslit na jediné metrice za kratší období, protože to je typ grafu, který asi používám v různých reportech pro klienty nejčastěji. Šedý pás okolo modré křivky je <a href="https://cs.wikipedia.org/wiki/Interval_spolehlivosti">konfidenční interval</a>.</p>
+<div class="cell page-columns page-full">
+<div class="sourceCode cell-code" id="cb43" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb43-1">sc_by_date <span class="sc" style="color: #5E5E5E;">|&gt;</span></span>
+<span id="cb43-2">  <span class="fu" style="color: #4758AB;">filter</span>(date <span class="sc" style="color: #5E5E5E;">&gt;=</span> <span class="fu" style="color: #4758AB;">as.Date</span>(<span class="st" style="color: #20794D;">"2022-01-01"</span>)) <span class="sc" style="color: #5E5E5E;">|&gt;</span> </span>
+<span id="cb43-3">  <span class="fu" style="color: #4758AB;">ggplot</span>(<span class="fu" style="color: #4758AB;">aes</span>(<span class="at" style="color: #657422;">x =</span> date, <span class="at" style="color: #657422;">y =</span> impressions)) <span class="sc" style="color: #5E5E5E;">+</span></span>
+<span id="cb43-4">  <span class="fu" style="color: #4758AB;">geom_line</span>(<span class="at" style="color: #657422;">color =</span> <span class="st" style="color: #20794D;">"gray50"</span>) <span class="sc" style="color: #5E5E5E;">+</span></span>
+<span id="cb43-5">  <span class="fu" style="color: #4758AB;">geom_smooth</span>() <span class="sc" style="color: #5E5E5E;">+</span></span>
+<span id="cb43-6">  <span class="fu" style="color: #4758AB;">scale_x_date</span>(<span class="at" style="color: #657422;">date_labels =</span> <span class="st" style="color: #20794D;">"%b %y"</span>)</span></code></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>`geom_smooth()` using method = 'loess' and formula = 'y ~ x'</code></pre>
+</div>
+<div class="cell-output-display column-page">
+<p><img src="https://marekprokop.github.io/jak-pracuju/posts/2022-04-12-search-console-timeline/index_files/figure-html/unnamed-chunk-29-1.png" class="img-fluid" width="1056"></p>
+</div>
+</div>
+</section>
+</section>
+<section id="poměrové-metriky" class="level2 page-columns page-full">
+<h2 class="anchored" data-anchor-id="poměrové-metriky">Poměrové metriky</h2>
+<p>Z předešlých grafů už vím, že imprese i kliky dlouhodobě rostou a že to je mj. dáno tím, že roste počet vstupních stránek a dotazů. Tahle informace mi ale nestačí. Existují totiž tři možné varianty:</p>
+<ol type="1">
+<li>Imprese a kliky rostou víc, než by odpovídalo nárůstu počtu stránek a dotazů. To by se mi líbilo nejvíc, protože by to znamenalo, že novější stránky resp. dotazy jsou úspěšnější než starší, případně se na růstu impresí a kliků podílí ještě něco jiného, např. celková síla webu.</li>
+<li>Rúst impresí a kliků zhruba odpovídá růstu počtu stránek a dotazů. To je neutrální výsledek – odměna za vynaloženou práci na obsahu (a tedy efektivita této práce) zůstává pořád zhruba stejná, ani neklesá, ani se nezvyšuje.</li>
+<li>Poslední varianta je nejhorší: imprese a kliky rostou méně, než by odpovídalo nárůstu počtu stránek a dotazů. Efektivita vložené práce se tedy zhoršuje. Někdy to jinak nejde, protože nízko visíci ovoce je už otrhané, ale je dobré o tom vědět.</li>
+</ol>
+<p>Na tyhle otázky pomáhají najít odpověď poměrové metriky. V principu jde o poměry počtu impresí a kliků na jedné straně a počtu stránek a dotazů na straně druhé. Navíc je zajímavý i poměr počtu dotazů na stránku.</p>
+<div class="cell page-columns page-full">
+<div class="sourceCode cell-code" id="cb45" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb45-1"><span class="fu" style="color: #4758AB;">sc_aggregate_all_metrics</span>() <span class="sc" style="color: #5E5E5E;">|&gt;</span> </span>
+<span id="cb45-2">  <span class="fu" style="color: #4758AB;">filter</span>(week <span class="sc" style="color: #5E5E5E;">&gt;=</span> <span class="fu" style="color: #4758AB;">floor_date</span>(<span class="fu" style="color: #4758AB;">as.Date</span>(<span class="st" style="color: #20794D;">"2021-08-01"</span>), <span class="st" style="color: #20794D;">"week"</span>)) <span class="sc" style="color: #5E5E5E;">|&gt;</span> </span>
+<span id="cb45-3">  <span class="fu" style="color: #4758AB;">transmute</span>(</span>
+<span id="cb45-4">    <span class="at" style="color: #657422;">week =</span> week,</span>
+<span id="cb45-5">    <span class="at" style="color: #657422;">impressions_per_page =</span> impressions <span class="sc" style="color: #5E5E5E;">/</span> pages,</span>
+<span id="cb45-6">    <span class="at" style="color: #657422;">clicks_per_page =</span> clicks <span class="sc" style="color: #5E5E5E;">/</span> pages,</span>
+<span id="cb45-7">    <span class="at" style="color: #657422;">impressions_per_query =</span> impressions <span class="sc" style="color: #5E5E5E;">/</span> queries,</span>
+<span id="cb45-8">    <span class="at" style="color: #657422;">clicks_per_query =</span> clicks <span class="sc" style="color: #5E5E5E;">/</span> queries,</span>
+<span id="cb45-9">    <span class="at" style="color: #657422;">queries_per_page =</span> queries <span class="sc" style="color: #5E5E5E;">/</span> pages</span>
+<span id="cb45-10">  ) <span class="sc" style="color: #5E5E5E;">|&gt;</span></span>
+<span id="cb45-11">  <span class="fu" style="color: #4758AB;">sc_reshape</span>() <span class="sc" style="color: #5E5E5E;">|&gt;</span> </span>
+<span id="cb45-12">  <span class="fu" style="color: #4758AB;">sc_plot</span>(<span class="st" style="color: #20794D;">"4 weeks"</span>, <span class="st" style="color: #20794D;">"%x"</span>, <span class="st" style="color: #20794D;">"week"</span>, <span class="at" style="color: #657422;">strip_pos =</span> <span class="st" style="color: #20794D;">"top"</span>)</span></code></pre></div>
+<div class="cell-output-display column-page">
+<p><img src="https://marekprokop.github.io/jak-pracuju/posts/2022-04-12-search-console-timeline/index_files/figure-html/unnamed-chunk-30-1.png" class="img-fluid" width="1056"></p>
+</div>
+</div>
+<p>Z grafu je vidět, že počty impresí a kliků na stránku stále rostou, což je dobře – odpovídá to variantě 1. S impresemi a kliky na dotaz je to už slabší, ty posledních cca 5 měsíců stagnují. Co to znamená? Na to odpovídá poslední poměrová metrika, počet dotazů na stránku. Ta roste, což znamená, že novější stránky jsou efektivnější především proto, že pokrývají víc dotazů, avšak jednotlivé novéjší dotazy jsou efektivní zhruba stejně.</p>
+<p>K tomu jen poznámka: Grafy samy o sobě nejsou důkazem tvrzení, která zde píšu. Jsou jen dobrým podkladem k odbornému odhadu, který je tím spolehlivější, čím lépe znám daný web a jeho historii.</p>
+</section>
+<section id="metriky-podle-pozic" class="level2 page-columns page-full">
+<h2 class="anchored" data-anchor-id="metriky-podle-pozic">Metriky podle pozic</h2>
+<p>Oblíbené vizualizace jsou různé metriky podle pozic nebo intervalů pozic. Např. Collabim a Marketing Miner nabízí graf počtu dotazů podle skupin pozic. I takové grafy jsou ze Search Console udělat.</p>
+<section id="počet-dotazů-podle-intervalů-pozic" class="level3 page-columns page-full">
+<h3 class="anchored" data-anchor-id="počet-dotazů-podle-intervalů-pozic">Počet dotazů podle intervalů pozic</h3>
+<p>V Collabimu a Marketing Mineru je 100% plošný graf počtu dotazů podle intervalů pozic. Ten v principu vypadá takhle, byť má intervaly pozic nastavené jinak:</p>
+<div class="cell page-columns page-full">
+<div class="sourceCode cell-code" id="cb46" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb46-1">sc_by_date_query <span class="sc" style="color: #5E5E5E;">|&gt;</span></span>
+<span id="cb46-2">  <span class="fu" style="color: #4758AB;">filter</span>(date <span class="sc" style="color: #5E5E5E;">&gt;=</span> <span class="fu" style="color: #4758AB;">as.Date</span>(<span class="st" style="color: #20794D;">"2021-08-01"</span>)) <span class="sc" style="color: #5E5E5E;">|&gt;</span> </span>
+<span id="cb46-3">  <span class="fu" style="color: #4758AB;">mutate</span>(</span>
+<span id="cb46-4">    <span class="at" style="color: #657422;">pos_int =</span> <span class="fu" style="color: #4758AB;">cut</span>(</span>
+<span id="cb46-5">      position,</span>
+<span id="cb46-6">      <span class="at" style="color: #657422;">breaks =</span> <span class="fu" style="color: #4758AB;">c</span>(<span class="dv" style="color: #AD0000;">10</span> <span class="sc" style="color: #5E5E5E;">*</span> <span class="dv" style="color: #AD0000;">0</span><span class="sc" style="color: #5E5E5E;">:</span><span class="dv" style="color: #AD0000;">3</span>, <span class="cn" style="color: #8f5902;">Inf</span>),</span>
+<span id="cb46-7">      <span class="at" style="color: #657422;">labels =</span> <span class="fu" style="color: #4758AB;">c</span>(<span class="st" style="color: #20794D;">"1-10"</span>, <span class="st" style="color: #20794D;">"11-20"</span>, <span class="st" style="color: #20794D;">"21-30"</span>, <span class="st" style="color: #20794D;">"31+"</span>)</span>
+<span id="cb46-8">    )</span>
+<span id="cb46-9">  ) <span class="sc" style="color: #5E5E5E;">|&gt;</span></span>
+<span id="cb46-10">  <span class="fu" style="color: #4758AB;">group_by</span>(date, pos_int) <span class="sc" style="color: #5E5E5E;">|&gt;</span></span>
+<span id="cb46-11">  <span class="fu" style="color: #4758AB;">summarise</span>(<span class="at" style="color: #657422;">queries =</span> <span class="fu" style="color: #4758AB;">n_distinct</span>(query)) <span class="sc" style="color: #5E5E5E;">|&gt;</span></span>
+<span id="cb46-12">  <span class="fu" style="color: #4758AB;">ungroup</span>() <span class="sc" style="color: #5E5E5E;">|&gt;</span> </span>
+<span id="cb46-13">  <span class="fu" style="color: #4758AB;">ggplot</span>(<span class="fu" style="color: #4758AB;">aes</span>(<span class="at" style="color: #657422;">x =</span> date, <span class="at" style="color: #657422;">y =</span> queries, <span class="at" style="color: #657422;">fill =</span> pos_int)) <span class="sc" style="color: #5E5E5E;">+</span></span>
+<span id="cb46-14">  <span class="fu" style="color: #4758AB;">geom_area</span>(<span class="at" style="color: #657422;">position =</span> <span class="st" style="color: #20794D;">"fill"</span>) <span class="sc" style="color: #5E5E5E;">+</span></span>
+<span id="cb46-15">  <span class="fu" style="color: #4758AB;">scale_x_date</span>(</span>
+<span id="cb46-16">    <span class="at" style="color: #657422;">date_breaks =</span> <span class="st" style="color: #20794D;">"3 months"</span>, <span class="at" style="color: #657422;">date_labels =</span> <span class="st" style="color: #20794D;">"%b %y"</span>, </span>
+<span id="cb46-17">    <span class="at" style="color: #657422;">date_minor_breaks =</span> <span class="st" style="color: #20794D;">"month"</span>, <span class="at" style="color: #657422;">expand =</span> <span class="fu" style="color: #4758AB;">expansion</span>(<span class="fl" style="color: #AD0000;">0.01</span>)</span>
+<span id="cb46-18">  ) <span class="sc" style="color: #5E5E5E;">+</span></span>
+<span id="cb46-19">  <span class="fu" style="color: #4758AB;">scale_fill_brewer</span>(<span class="at" style="color: #657422;">type =</span> <span class="st" style="color: #20794D;">"seq"</span>, <span class="at" style="color: #657422;">direction =</span> <span class="sc" style="color: #5E5E5E;">-</span><span class="dv" style="color: #AD0000;">1</span>)</span></code></pre></div>
+<div class="cell-output-display column-page">
+<p><img src="https://marekprokop.github.io/jak-pracuju/posts/2022-04-12-search-console-timeline/index_files/figure-html/unnamed-chunk-31-1.png" class="img-fluid" width="1056"></p>
+</div>
+</div>
+<p>Tenhle graf má ale význam jen pro pevně danou sadu dotazů, která se v čase nemění. V kontextu Search Console, kde se dotazy a jejich počet každý den mění, nedává příliš smysl. O trochu užitečnější je graf skutečných počtů dotazů nepřepočítaných na procenta. Z toho je alespoň vidět, že počet dotazů roste a růst táhnou dotazy v první desítce.</p>
+<div class="cell page-columns page-full">
+<div class="sourceCode cell-code" id="cb47" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb47-1">sc_by_date_query <span class="sc" style="color: #5E5E5E;">|&gt;</span></span>
+<span id="cb47-2">  <span class="fu" style="color: #4758AB;">filter</span>(date <span class="sc" style="color: #5E5E5E;">&gt;=</span> <span class="fu" style="color: #4758AB;">as.Date</span>(<span class="st" style="color: #20794D;">"2021-08-01"</span>)) <span class="sc" style="color: #5E5E5E;">|&gt;</span> </span>
+<span id="cb47-3">  <span class="fu" style="color: #4758AB;">mutate</span>(</span>
+<span id="cb47-4">    <span class="at" style="color: #657422;">pos_int =</span> <span class="fu" style="color: #4758AB;">cut</span>(</span>
+<span id="cb47-5">      position,</span>
+<span id="cb47-6">      <span class="at" style="color: #657422;">breaks =</span> <span class="fu" style="color: #4758AB;">c</span>(<span class="dv" style="color: #AD0000;">10</span> <span class="sc" style="color: #5E5E5E;">*</span> <span class="dv" style="color: #AD0000;">0</span><span class="sc" style="color: #5E5E5E;">:</span><span class="dv" style="color: #AD0000;">3</span>, <span class="cn" style="color: #8f5902;">Inf</span>),</span>
+<span id="cb47-7">      <span class="at" style="color: #657422;">labels =</span> <span class="fu" style="color: #4758AB;">c</span>(<span class="st" style="color: #20794D;">"1-10"</span>, <span class="st" style="color: #20794D;">"11-20"</span>, <span class="st" style="color: #20794D;">"21-30"</span>, <span class="st" style="color: #20794D;">"31+"</span>)</span>
+<span id="cb47-8">    )</span>
+<span id="cb47-9">  ) <span class="sc" style="color: #5E5E5E;">|&gt;</span></span>
+<span id="cb47-10">  <span class="fu" style="color: #4758AB;">group_by</span>(date, pos_int) <span class="sc" style="color: #5E5E5E;">|&gt;</span></span>
+<span id="cb47-11">  <span class="fu" style="color: #4758AB;">summarise</span>(<span class="at" style="color: #657422;">queries =</span> <span class="fu" style="color: #4758AB;">n_distinct</span>(query), <span class="at" style="color: #657422;">.groups =</span> <span class="st" style="color: #20794D;">"drop"</span>) <span class="sc" style="color: #5E5E5E;">|&gt;</span></span>
+<span id="cb47-12">  <span class="fu" style="color: #4758AB;">ggplot</span>(<span class="fu" style="color: #4758AB;">aes</span>(<span class="at" style="color: #657422;">x =</span> date, <span class="at" style="color: #657422;">y =</span> queries, <span class="at" style="color: #657422;">fill =</span> pos_int)) <span class="sc" style="color: #5E5E5E;">+</span></span>
+<span id="cb47-13">  <span class="fu" style="color: #4758AB;">geom_area</span>() <span class="sc" style="color: #5E5E5E;">+</span></span>
+<span id="cb47-14">  <span class="fu" style="color: #4758AB;">scale_x_date</span>(</span>
+<span id="cb47-15">    <span class="at" style="color: #657422;">date_breaks =</span> <span class="st" style="color: #20794D;">"3 months"</span>, <span class="at" style="color: #657422;">date_labels =</span> <span class="st" style="color: #20794D;">"%b %y"</span>, </span>
+<span id="cb47-16">    <span class="at" style="color: #657422;">date_minor_breaks =</span> <span class="st" style="color: #20794D;">"month"</span>, <span class="at" style="color: #657422;">expand =</span> <span class="fu" style="color: #4758AB;">expansion</span>(<span class="fl" style="color: #AD0000;">0.01</span>)</span>
+<span id="cb47-17">  ) <span class="sc" style="color: #5E5E5E;">+</span></span>
+<span id="cb47-18">  <span class="fu" style="color: #4758AB;">scale_fill_brewer</span>(<span class="at" style="color: #657422;">type =</span> <span class="st" style="color: #20794D;">"seq"</span>, <span class="at" style="color: #657422;">direction =</span> <span class="sc" style="color: #5E5E5E;">-</span><span class="dv" style="color: #AD0000;">1</span>)</span></code></pre></div>
+<div class="cell-output-display column-page">
+<p><img src="https://marekprokop.github.io/jak-pracuju/posts/2022-04-12-search-console-timeline/index_files/figure-html/unnamed-chunk-32-1.png" class="img-fluid" width="1056"></p>
+</div>
+</div>
+</section>
+<section id="počet-vstupních-stránek-podle-intervalů-pozic" class="level3 page-columns page-full">
+<h3 class="anchored" data-anchor-id="počet-vstupních-stránek-podle-intervalů-pozic">Počet vstupních stránek podle intervalů pozic</h3>
+<p>Obdobný graf lze vykreslit i pro počty vstupních stránek</p>
+<div class="cell page-columns page-full">
+<div class="sourceCode cell-code" id="cb48" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb48-1">sc_by_date_page <span class="sc" style="color: #5E5E5E;">|&gt;</span></span>
+<span id="cb48-2">  <span class="fu" style="color: #4758AB;">filter</span>(date <span class="sc" style="color: #5E5E5E;">&gt;=</span> <span class="fu" style="color: #4758AB;">as.Date</span>(<span class="st" style="color: #20794D;">"2021-08-01"</span>)) <span class="sc" style="color: #5E5E5E;">|&gt;</span> </span>
+<span id="cb48-3">  <span class="fu" style="color: #4758AB;">mutate</span>(</span>
+<span id="cb48-4">    <span class="at" style="color: #657422;">pos_int =</span> <span class="fu" style="color: #4758AB;">cut</span>(</span>
+<span id="cb48-5">      position,</span>
+<span id="cb48-6">      <span class="at" style="color: #657422;">breaks =</span> <span class="fu" style="color: #4758AB;">c</span>(<span class="dv" style="color: #AD0000;">10</span> <span class="sc" style="color: #5E5E5E;">*</span> <span class="dv" style="color: #AD0000;">0</span><span class="sc" style="color: #5E5E5E;">:</span><span class="dv" style="color: #AD0000;">3</span>, <span class="cn" style="color: #8f5902;">Inf</span>),</span>
+<span id="cb48-7">      <span class="at" style="color: #657422;">labels =</span> <span class="fu" style="color: #4758AB;">c</span>(<span class="st" style="color: #20794D;">"1-10"</span>, <span class="st" style="color: #20794D;">"11-20"</span>, <span class="st" style="color: #20794D;">"21-30"</span>, <span class="st" style="color: #20794D;">"31+"</span>)</span>
+<span id="cb48-8">    )</span>
+<span id="cb48-9">  ) <span class="sc" style="color: #5E5E5E;">|&gt;</span></span>
+<span id="cb48-10">  <span class="fu" style="color: #4758AB;">group_by</span>(date, pos_int) <span class="sc" style="color: #5E5E5E;">|&gt;</span></span>
+<span id="cb48-11">  <span class="fu" style="color: #4758AB;">summarise</span>(<span class="at" style="color: #657422;">pages =</span> <span class="fu" style="color: #4758AB;">n_distinct</span>(page), <span class="at" style="color: #657422;">.groups =</span> <span class="st" style="color: #20794D;">"drop"</span>) <span class="sc" style="color: #5E5E5E;">|&gt;</span></span>
+<span id="cb48-12">  <span class="fu" style="color: #4758AB;">ggplot</span>(<span class="fu" style="color: #4758AB;">aes</span>(<span class="at" style="color: #657422;">x =</span> date, <span class="at" style="color: #657422;">y =</span> pages, <span class="at" style="color: #657422;">fill =</span> pos_int)) <span class="sc" style="color: #5E5E5E;">+</span></span>
+<span id="cb48-13">  <span class="fu" style="color: #4758AB;">geom_area</span>() <span class="sc" style="color: #5E5E5E;">+</span></span>
+<span id="cb48-14">  <span class="fu" style="color: #4758AB;">scale_x_date</span>(</span>
+<span id="cb48-15">    <span class="at" style="color: #657422;">date_breaks =</span> <span class="st" style="color: #20794D;">"3 months"</span>, <span class="at" style="color: #657422;">date_labels =</span> <span class="st" style="color: #20794D;">"%b %y"</span>, </span>
+<span id="cb48-16">    <span class="at" style="color: #657422;">date_minor_breaks =</span> <span class="st" style="color: #20794D;">"month"</span>, <span class="at" style="color: #657422;">expand =</span> <span class="fu" style="color: #4758AB;">expansion</span>(<span class="fl" style="color: #AD0000;">0.01</span>)</span>
+<span id="cb48-17">  ) <span class="sc" style="color: #5E5E5E;">+</span></span>
+<span id="cb48-18">  <span class="fu" style="color: #4758AB;">scale_fill_brewer</span>(<span class="at" style="color: #657422;">type =</span> <span class="st" style="color: #20794D;">"seq"</span>, <span class="at" style="color: #657422;">direction =</span> <span class="sc" style="color: #5E5E5E;">-</span><span class="dv" style="color: #AD0000;">1</span>)</span></code></pre></div>
+<div class="cell-output-display column-page">
+<p><img src="https://marekprokop.github.io/jak-pracuju/posts/2022-04-12-search-console-timeline/index_files/figure-html/unnamed-chunk-33-1.png" class="img-fluid" width="1056"></p>
+</div>
+</div>
+</section>
+<section id="imprese-podle-intervalů-pozic" class="level3 page-columns page-full">
+<h3 class="anchored" data-anchor-id="imprese-podle-intervalů-pozic">Imprese podle intervalů pozic</h3>
+<p>Graf jde vykreslit i pro imprese nebo kliky (zde imprese). Zároveň jsem mu nastavil i jiné intervaly pozic, aby bylo vidět pordobnější rozdělení pozic na první stránce výsledků hledání.</p>
+<p>Ale upřímně, všechny tyhle grafy mají z dat Search Console málokdy smysl, protože bývají pro většinu webů hodně podobné a nějaký důležitý vhled z nich získám jen výjimečně.</p>
+<div class="cell page-columns page-full">
+<div class="sourceCode cell-code" id="cb49" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb49-1">sc_by_date_query <span class="sc" style="color: #5E5E5E;">|&gt;</span></span>
+<span id="cb49-2">  <span class="fu" style="color: #4758AB;">filter</span>(date <span class="sc" style="color: #5E5E5E;">&gt;=</span> <span class="fu" style="color: #4758AB;">as.Date</span>(<span class="st" style="color: #20794D;">"2021-08-01"</span>)) <span class="sc" style="color: #5E5E5E;">|&gt;</span> </span>
+<span id="cb49-3">  <span class="fu" style="color: #4758AB;">mutate</span>(</span>
+<span id="cb49-4">    <span class="at" style="color: #657422;">pos_int =</span> <span class="fu" style="color: #4758AB;">cut</span>(</span>
+<span id="cb49-5">      position,</span>
+<span id="cb49-6">      <span class="at" style="color: #657422;">breaks =</span> <span class="fu" style="color: #4758AB;">c</span>(<span class="dv" style="color: #AD0000;">1</span>, <span class="fl" style="color: #AD0000;">1.5</span>, <span class="fl" style="color: #AD0000;">3.5</span>, <span class="fl" style="color: #AD0000;">5.5</span>, <span class="fl" style="color: #AD0000;">10.01</span>, <span class="cn" style="color: #8f5902;">Inf</span>),</span>
+<span id="cb49-7">      <span class="at" style="color: #657422;">labels =</span> <span class="fu" style="color: #4758AB;">c</span>(<span class="st" style="color: #20794D;">"1"</span>, <span class="st" style="color: #20794D;">"2-3"</span>, <span class="st" style="color: #20794D;">"4-5"</span>, <span class="st" style="color: #20794D;">"6-10"</span>, <span class="st" style="color: #20794D;">"10+"</span>),</span>
+<span id="cb49-8">      <span class="at" style="color: #657422;">right =</span> <span class="cn" style="color: #8f5902;">FALSE</span></span>
+<span id="cb49-9">    )</span>
+<span id="cb49-10">  ) <span class="sc" style="color: #5E5E5E;">|&gt;</span></span>
+<span id="cb49-11">  <span class="fu" style="color: #4758AB;">group_by</span>(date, pos_int) <span class="sc" style="color: #5E5E5E;">|&gt;</span></span>
+<span id="cb49-12">  <span class="fu" style="color: #4758AB;">summarise</span>(<span class="at" style="color: #657422;">impressions =</span> <span class="fu" style="color: #4758AB;">sum</span>(impressions), <span class="at" style="color: #657422;">.groups =</span> <span class="st" style="color: #20794D;">"drop"</span>) <span class="sc" style="color: #5E5E5E;">|&gt;</span></span>
+<span id="cb49-13">  <span class="fu" style="color: #4758AB;">ggplot</span>(<span class="fu" style="color: #4758AB;">aes</span>(<span class="at" style="color: #657422;">x =</span> date, <span class="at" style="color: #657422;">y =</span> impressions, <span class="at" style="color: #657422;">fill =</span> pos_int)) <span class="sc" style="color: #5E5E5E;">+</span></span>
+<span id="cb49-14">  <span class="fu" style="color: #4758AB;">geom_area</span>() <span class="sc" style="color: #5E5E5E;">+</span></span>
+<span id="cb49-15">  <span class="fu" style="color: #4758AB;">scale_x_date</span>(</span>
+<span id="cb49-16">    <span class="at" style="color: #657422;">date_breaks =</span> <span class="st" style="color: #20794D;">"3 months"</span>, <span class="at" style="color: #657422;">date_labels =</span> <span class="st" style="color: #20794D;">"%b %y"</span>, </span>
+<span id="cb49-17">    <span class="at" style="color: #657422;">date_minor_breaks =</span> <span class="st" style="color: #20794D;">"month"</span>, <span class="at" style="color: #657422;">expand =</span> <span class="fu" style="color: #4758AB;">expansion</span>(<span class="fl" style="color: #AD0000;">0.01</span>)</span>
+<span id="cb49-18">  ) <span class="sc" style="color: #5E5E5E;">+</span></span>
+<span id="cb49-19">  <span class="fu" style="color: #4758AB;">scale_fill_brewer</span>(<span class="at" style="color: #657422;">type =</span> <span class="st" style="color: #20794D;">"seq"</span>, <span class="at" style="color: #657422;">direction =</span> <span class="sc" style="color: #5E5E5E;">-</span><span class="dv" style="color: #AD0000;">1</span>)</span></code></pre></div>
+<div class="cell-output-display column-page">
+<p><img src="https://marekprokop.github.io/jak-pracuju/posts/2022-04-12-search-console-timeline/index_files/figure-html/unnamed-chunk-34-1.png" class="img-fluid" width="1056"></p>
+</div>
+</div>
+</section>
+</section>
+<section id="porovnání-metrik-s-předešlým-obdobím-nebo-rokem" class="level2 page-columns page-full">
+<h2 class="anchored" data-anchor-id="porovnání-metrik-s-předešlým-obdobím-nebo-rokem">Porovnání metrik s předešlým obdobím nebo rokem</h2>
+<p>Dalším populárním grafem je porovnání běžného období s obdobím před rokem (YoY, year over year) nebo s obdobím bezprostředně předcházejícím.</p>
+<section id="meziroční-porovnání-yoy" class="level3 page-columns page-full">
+<h3 class="anchored" data-anchor-id="meziroční-porovnání-yoy">Meziroční porovnání (YoY)</h3>
+<p>Princip přípravy je jednoduchý. Vím, že mám v dlouhé tabulce 6 metrik, takže ke každému řádku přidám funkcí <code>lag</code> hodnotu z řádku o 6 * 365 řádků zpátky. Tuhle hodnotu pak vykreslím tečkovanou čárou.</p>
+<div class="cell page-columns page-full">
+<div class="sourceCode cell-code" id="cb50" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb50-1">sc_all_metrics_by_date <span class="sc" style="color: #5E5E5E;">|&gt;</span> </span>
+<span id="cb50-2">  <span class="fu" style="color: #4758AB;">sc_reshape</span>() <span class="sc" style="color: #5E5E5E;">|&gt;</span> </span>
+<span id="cb50-3">  <span class="fu" style="color: #4758AB;">mutate</span>(<span class="at" style="color: #657422;">value_prev =</span> <span class="fu" style="color: #4758AB;">lag</span>(value, <span class="dv" style="color: #AD0000;">6</span> <span class="sc" style="color: #5E5E5E;">*</span> <span class="dv" style="color: #AD0000;">365</span>)) <span class="sc" style="color: #5E5E5E;">|&gt;</span> </span>
+<span id="cb50-4">  <span class="fu" style="color: #4758AB;">filter</span>(date <span class="sc" style="color: #5E5E5E;">&gt;=</span> <span class="fu" style="color: #4758AB;">as.Date</span>(<span class="st" style="color: #20794D;">"2022-01-01"</span>)) <span class="sc" style="color: #5E5E5E;">|&gt;</span></span>
+<span id="cb50-5">  <span class="fu" style="color: #4758AB;">sc_plot</span>(<span class="st" style="color: #20794D;">"month"</span>) <span class="sc" style="color: #5E5E5E;">+</span></span>
+<span id="cb50-6">  <span class="fu" style="color: #4758AB;">geom_line</span>(<span class="fu" style="color: #4758AB;">aes</span>(<span class="at" style="color: #657422;">y =</span> value_prev), <span class="at" style="color: #657422;">linetype =</span> <span class="st" style="color: #20794D;">"dotted"</span>)</span></code></pre></div>
+<div class="cell-output-display column-page">
+<p><img src="https://marekprokop.github.io/jak-pracuju/posts/2022-04-12-search-console-timeline/index_files/figure-html/unnamed-chunk-35-1.png" class="img-fluid" width="1056"></p>
+</div>
+</div>
+</section>
+<section id="posledních-12-týdnů-a-12-týdnů-před-tím" class="level3 page-columns page-full">
+<h3 class="anchored" data-anchor-id="posledních-12-týdnů-a-12-týdnů-před-tím">Posledních 12 týdnů a 12 týdnů před tím</h3>
+<p>Obdobně jde vykreslit jakékoli období s jakoukoli granularitou a k němu stejně dlouhé období bezprostředně předcházející.</p>
+<div class="cell page-columns page-full">
+<div class="sourceCode cell-code" id="cb51" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb51-1"><span class="fu" style="color: #4758AB;">sc_aggregate_all_metrics</span>(<span class="st" style="color: #20794D;">"week"</span>) <span class="sc" style="color: #5E5E5E;">|&gt;</span> </span>
+<span id="cb51-2">  <span class="fu" style="color: #4758AB;">sc_reshape</span>() <span class="sc" style="color: #5E5E5E;">|&gt;</span> </span>
+<span id="cb51-3">  <span class="fu" style="color: #4758AB;">mutate</span>(<span class="at" style="color: #657422;">value_prev =</span> <span class="fu" style="color: #4758AB;">lag</span>(value, <span class="dv" style="color: #AD0000;">6</span> <span class="sc" style="color: #5E5E5E;">*</span> <span class="dv" style="color: #AD0000;">12</span>)) <span class="sc" style="color: #5E5E5E;">|&gt;</span> </span>
+<span id="cb51-4">  <span class="fu" style="color: #4758AB;">filter</span>(week <span class="sc" style="color: #5E5E5E;">&gt;=</span> <span class="fu" style="color: #4758AB;">floor_date</span>(<span class="fu" style="color: #4758AB;">as.Date</span>(<span class="st" style="color: #20794D;">"2022-01-03"</span>), <span class="st" style="color: #20794D;">"week"</span>)) <span class="sc" style="color: #5E5E5E;">|&gt;</span> </span>
+<span id="cb51-5">  <span class="fu" style="color: #4758AB;">sc_plot</span>(<span class="st" style="color: #20794D;">"2 weeks"</span>, <span class="st" style="color: #20794D;">"%x"</span>, <span class="st" style="color: #20794D;">"week"</span>) <span class="sc" style="color: #5E5E5E;">+</span></span>
+<span id="cb51-6">  <span class="fu" style="color: #4758AB;">geom_line</span>(<span class="fu" style="color: #4758AB;">aes</span>(<span class="at" style="color: #657422;">y =</span> value_prev), <span class="at" style="color: #657422;">linetype =</span> <span class="st" style="color: #20794D;">"dotted"</span>)</span></code></pre></div>
+<div class="cell-output-display column-page">
+<p><img src="https://marekprokop.github.io/jak-pracuju/posts/2022-04-12-search-console-timeline/index_files/figure-html/unnamed-chunk-36-1.png" class="img-fluid" width="1056"></p>
+</div>
+</div>
+</section>
+<section id="autokorelace" class="level3 page-columns page-full">
+<h3 class="anchored" data-anchor-id="autokorelace">Autokorelace</h3>
+<p>Zajímavá varianta je, když se vykreslí jen rozdíly (případně podíly resp. procenta) mezi aktuální a předešlou hodnotou. V principu se jedná o svislou úsečku mezi plnou a tečkovanou z grafů výše, která má základ v nule.</p>
+<p>Zde je příklad posledních 12 týdnů v porovnání s předešlými 12 týdny vykreslený po dnech. Ukazuje, o kolik byla daná metrika v daný den vyšší než před 12 týdny.</p>
+<div class="cell page-columns page-full">
+<div class="sourceCode cell-code" id="cb52" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb52-1">sc_all_metrics_by_date <span class="sc" style="color: #5E5E5E;">|&gt;</span></span>
+<span id="cb52-2">  <span class="fu" style="color: #4758AB;">sc_reshape</span>() <span class="sc" style="color: #5E5E5E;">|&gt;</span> </span>
+<span id="cb52-3">  <span class="fu" style="color: #4758AB;">mutate</span>(<span class="at" style="color: #657422;">value =</span> value <span class="sc" style="color: #5E5E5E;">-</span> <span class="fu" style="color: #4758AB;">lag</span>(value, <span class="dv" style="color: #AD0000;">6</span> <span class="sc" style="color: #5E5E5E;">*</span> <span class="dv" style="color: #AD0000;">7</span> <span class="sc" style="color: #5E5E5E;">*</span> <span class="dv" style="color: #AD0000;">12</span>)) <span class="sc" style="color: #5E5E5E;">|&gt;</span> </span>
+<span id="cb52-4">  <span class="fu" style="color: #4758AB;">filter</span>(date <span class="sc" style="color: #5E5E5E;">&gt;=</span> <span class="fu" style="color: #4758AB;">as.Date</span>(<span class="st" style="color: #20794D;">"2022-01-01"</span>)) <span class="sc" style="color: #5E5E5E;">|&gt;</span></span>
+<span id="cb52-5">  <span class="fu" style="color: #4758AB;">ggplot</span>(<span class="fu" style="color: #4758AB;">aes</span>(<span class="at" style="color: #657422;">x =</span> date, <span class="at" style="color: #657422;">y =</span> value)) <span class="sc" style="color: #5E5E5E;">+</span></span>
+<span id="cb52-6">  <span class="fu" style="color: #4758AB;">geom_segment</span>(<span class="fu" style="color: #4758AB;">aes</span>(<span class="at" style="color: #657422;">xend =</span> date, <span class="at" style="color: #657422;">yend =</span> <span class="dv" style="color: #AD0000;">0</span>)) <span class="sc" style="color: #5E5E5E;">+</span></span>
+<span id="cb52-7">  <span class="fu" style="color: #4758AB;">scale_x_date</span>(<span class="at" style="color: #657422;">date_breaks =</span> <span class="st" style="color: #20794D;">"month"</span>, <span class="at" style="color: #657422;">date_labels =</span> <span class="st" style="color: #20794D;">"%b %y"</span>) <span class="sc" style="color: #5E5E5E;">+</span></span>
+<span id="cb52-8">  <span class="fu" style="color: #4758AB;">facet_wrap</span>(<span class="sc" style="color: #5E5E5E;">~</span>metric, <span class="at" style="color: #657422;">ncol =</span> <span class="dv" style="color: #AD0000;">1</span>, <span class="at" style="color: #657422;">scales =</span> <span class="st" style="color: #20794D;">"free_y"</span>, <span class="at" style="color: #657422;">strip.position =</span> <span class="st" style="color: #20794D;">"right"</span>)</span></code></pre></div>
+<div class="cell-output-display column-page">
+<p><img src="https://marekprokop.github.io/jak-pracuju/posts/2022-04-12-search-console-timeline/index_files/figure-html/unnamed-chunk-37-1.png" class="img-fluid" width="1056"></p>
+</div>
+</div>
+</section>
+</section>
+<section id="dny-v-týdnu" class="level2 page-columns page-full">
+<h2 class="anchored" data-anchor-id="dny-v-týdnu">Dny v týdnu</h2>
+<p>Pro většinu webů je typická týdenní periodicita. Někde je slabší, někde silnější a liší se i její průběh. Asi nejlepším porovnáním je <a href="https://cs.wikipedia.org/wiki/Boxplot">boxplot</a>, který ukazuje jednak medián (tlustší vodorovná čára uvnitř boxu) a jednak i celou distribuci hodnt (box reprezentuje 50 % hodnot uprostřed, box i s fousy rozpětí bez odlehlých hodnot, které reprezentují puntíky).</p>
+<p>Graf má smysl spíš jen pro imprese a kliky, protože u ostatních metrik se periodicita moc neprojevuje.</p>
+<div class="cell page-columns page-full">
+<div class="sourceCode cell-code" id="cb53" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb53-1">sc_by_date <span class="sc" style="color: #5E5E5E;">|&gt;</span></span>
+<span id="cb53-2">  <span class="fu" style="color: #4758AB;">filter</span>(date <span class="sc" style="color: #5E5E5E;">&gt;=</span> <span class="fu" style="color: #4758AB;">as.Date</span>(<span class="st" style="color: #20794D;">"2021-08-01"</span>)) <span class="sc" style="color: #5E5E5E;">|&gt;</span></span>
+<span id="cb53-3">  <span class="fu" style="color: #4758AB;">select</span>(<span class="sc" style="color: #5E5E5E;">!</span><span class="fu" style="color: #4758AB;">c</span>(ctr, position)) <span class="sc" style="color: #5E5E5E;">|&gt;</span> </span>
+<span id="cb53-4">  <span class="fu" style="color: #4758AB;">sc_reshape</span>() <span class="sc" style="color: #5E5E5E;">|&gt;</span> </span>
+<span id="cb53-5">  <span class="fu" style="color: #4758AB;">mutate</span>(<span class="at" style="color: #657422;">day =</span> <span class="fu" style="color: #4758AB;">wday</span>(date, <span class="at" style="color: #657422;">label =</span> <span class="cn" style="color: #8f5902;">TRUE</span>, <span class="at" style="color: #657422;">week_start =</span> <span class="dv" style="color: #AD0000;">1</span>)) <span class="sc" style="color: #5E5E5E;">|&gt;</span> </span>
+<span id="cb53-6">  <span class="fu" style="color: #4758AB;">ggplot</span>(<span class="fu" style="color: #4758AB;">aes</span>(<span class="at" style="color: #657422;">x =</span> day, <span class="at" style="color: #657422;">y =</span> value)) <span class="sc" style="color: #5E5E5E;">+</span></span>
+<span id="cb53-7">  <span class="fu" style="color: #4758AB;">geom_boxplot</span>() <span class="sc" style="color: #5E5E5E;">+</span></span>
+<span id="cb53-8">  <span class="fu" style="color: #4758AB;">facet_wrap</span>(<span class="sc" style="color: #5E5E5E;">~</span>metric, <span class="at" style="color: #657422;">ncol =</span> <span class="dv" style="color: #AD0000;">1</span>, <span class="at" style="color: #657422;">scales =</span> <span class="st" style="color: #20794D;">"free_y"</span>, <span class="at" style="color: #657422;">strip.position =</span> <span class="st" style="color: #20794D;">"right"</span>)</span></code></pre></div>
+<div class="cell-output-display column-page">
+<p><img src="https://marekprokop.github.io/jak-pracuju/posts/2022-04-12-search-console-timeline/index_files/figure-html/unnamed-chunk-38-1.png" class="img-fluid" width="1056"></p>
+</div>
+</div>
+<p>Z grafu je vidět, že zrovna tenhle web silnou týdenní periodicitu nemá. Sice od pondělí trochu vystoupá do úterý, pak až do soboty mírně klesá a znovu stoupne v neděli, ale rozdíly hodnot nejsou moc přesvědčivé.</p>
+<section id="dekompozice-časové-řady" class="level3 page-columns page-full">
+<h3 class="anchored" data-anchor-id="dekompozice-časové-řady">Dekompozice časové řady</h3>
+<p>Pro dekompozici časových řad na trend, sezónnost a šum existuje mnoho teoretických modelů a balíčků, které je počítají. Pro příklad ukážu postup s balíčkem <em>feasts</em> z rodiny balíčku <em>tsibble</em>. Ten sice nějakou sezónnost našel, ale zároveň ukazuje, že se pohybuje jen v rozpětí cca 100 impresí (-50 až 50), což v objemu nějakých 2000 impresí za den není zrovna moc. Navíc je vidět, že rozpětí šumu (označený jako <em>random</em>) je čtyřikrát větší.</p>
+<div class="cell page-columns page-full">
+<div class="sourceCode cell-code" id="cb54" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb54-1">sc_by_date <span class="sc" style="color: #5E5E5E;">|&gt;</span></span>
+<span id="cb54-2">  <span class="fu" style="color: #4758AB;">filter</span>(date <span class="sc" style="color: #5E5E5E;">&gt;=</span> <span class="fu" style="color: #4758AB;">as.Date</span>(<span class="st" style="color: #20794D;">"2022-01-01"</span>)) <span class="sc" style="color: #5E5E5E;">|&gt;</span> </span>
+<span id="cb54-3">  <span class="fu" style="color: #4758AB;">as_tsibble</span>(<span class="at" style="color: #657422;">index =</span> date) <span class="sc" style="color: #5E5E5E;">|&gt;</span></span>
+<span id="cb54-4">  fabletools<span class="sc" style="color: #5E5E5E;">::</span><span class="fu" style="color: #4758AB;">model</span>(feasts<span class="sc" style="color: #5E5E5E;">::</span><span class="fu" style="color: #4758AB;">classical_decomposition</span>(impressions)) <span class="sc" style="color: #5E5E5E;">|&gt;</span></span>
+<span id="cb54-5">  fabletools<span class="sc" style="color: #5E5E5E;">::</span><span class="fu" style="color: #4758AB;">components</span>() <span class="sc" style="color: #5E5E5E;">|&gt;</span></span>
+<span id="cb54-6">  <span class="fu" style="color: #4758AB;">autoplot</span>()</span></code></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: Removed 3 rows containing missing values (`geom_line()`).</code></pre>
+</div>
+<div class="cell-output-display column-page">
+<p><img src="https://marekprokop.github.io/jak-pracuju/posts/2022-04-12-search-console-timeline/index_files/figure-html/unnamed-chunk-39-1.png" class="img-fluid" width="1056"></p>
+</div>
+</div>
+<p>Nutno poznamenat, že sezónnost v v rámci roku nejde z dat Search Console odvodit, protože je k dispozici jen 16 měsíců dat. Museli byste si data sami archivovat za delší období.</p>
+</section>
+</section>
+<section id="segmentace-podle-url" class="level2 page-columns page-full">
+<h2 class="anchored" data-anchor-id="segmentace-podle-url">Segmentace podle URL</h2>
+<p>Data Search Console se nejčastěji segmentují podle skupin vstupních stránek (URL) nebo podle skupin dotazů. Většinou segmentuju aktuální stav (tj. např. posledních 28 dní) sloupcovým grafem, ale vývoj v čase se občas hodí taky.</p>
+<p>V tomto konkrétním případě se v URL hned za doménou nachází složka representující kategorii (rubriku či sekci webu), takže se nabízí segmentace stránek podle těchto kategorií. Dále jde segmentovat i podle typu stránky – na webu jsou jednak stránky rubrik se seznamem článků (ty mají za doménou jen jedno lomítko) a jednak články, které mají za doménou dvě lomítka.</p>
+<section id="typ-stránky-rubriky-vs.-články" class="level3 page-columns page-full">
+<h3 class="anchored" data-anchor-id="typ-stránky-rubriky-vs.-články">Typ stránky: rubriky vs.&nbsp;články</h3>
+<p>Vyjdu z datasetu <code>sc_by_date_page</code> a doplním ho o sloupec reprezentující typ stránky. Imprese a kliky sečtu za měsíc a rubriku a přidám i počet unikátních stránek. Výsledek vykreslím jako vrstvený plošný graf (stacked area chart). Rubriku poznám tak, že má v URL celkem 3 lomítka, kdežto článek má 4. Tím se mi do rubrik dostane i homepage, ale to mi nevadí.</p>
+<div class="cell page-columns page-full">
+<div class="sourceCode cell-code" id="cb56" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb56-1">sc_by_date_page <span class="sc" style="color: #5E5E5E;">|&gt;</span> </span>
+<span id="cb56-2">  <span class="fu" style="color: #4758AB;">filter</span>(</span>
+<span id="cb56-3">    <span class="fu" style="color: #4758AB;">between</span>(date, <span class="fu" style="color: #4758AB;">as.Date</span>(<span class="st" style="color: #20794D;">"2021-01-01"</span>), <span class="fu" style="color: #4758AB;">as.Date</span>(<span class="st" style="color: #20794D;">"2022-03-31"</span>)),</span>
+<span id="cb56-4">  ) <span class="sc" style="color: #5E5E5E;">|&gt;</span> </span>
+<span id="cb56-5">  <span class="fu" style="color: #4758AB;">mutate</span>(</span>
+<span id="cb56-6">    <span class="at" style="color: #657422;">page_type =</span> <span class="fu" style="color: #4758AB;">if_else</span>(<span class="fu" style="color: #4758AB;">str_count</span>(page, <span class="st" style="color: #20794D;">"/"</span>) <span class="sc" style="color: #5E5E5E;">==</span> <span class="dv" style="color: #AD0000;">3</span>, <span class="st" style="color: #20794D;">"rubrika"</span>, <span class="st" style="color: #20794D;">"článek"</span>),</span>
+<span id="cb56-7">    <span class="at" style="color: #657422;">month =</span> <span class="fu" style="color: #4758AB;">floor_date</span>(date, <span class="st" style="color: #20794D;">"month"</span>)</span>
+<span id="cb56-8">  ) <span class="sc" style="color: #5E5E5E;">|&gt;</span> </span>
+<span id="cb56-9">  <span class="fu" style="color: #4758AB;">group_by</span>(month, page_type) <span class="sc" style="color: #5E5E5E;">|&gt;</span> </span>
+<span id="cb56-10">  <span class="fu" style="color: #4758AB;">summarise</span>(</span>
+<span id="cb56-11">    <span class="at" style="color: #657422;">n =</span> <span class="fu" style="color: #4758AB;">n_distinct</span>(page),</span>
+<span id="cb56-12">    <span class="at" style="color: #657422;">impressions =</span> <span class="fu" style="color: #4758AB;">sum</span>(impressions),</span>
+<span id="cb56-13">    <span class="at" style="color: #657422;">clicks =</span> <span class="fu" style="color: #4758AB;">sum</span>(clicks),</span>
+<span id="cb56-14">    <span class="at" style="color: #657422;">.groups =</span> <span class="st" style="color: #20794D;">"drop"</span></span>
+<span id="cb56-15">  ) <span class="sc" style="color: #5E5E5E;">|&gt;</span> </span>
+<span id="cb56-16">  <span class="fu" style="color: #4758AB;">pivot_longer</span>(<span class="at" style="color: #657422;">cols =</span> n<span class="sc" style="color: #5E5E5E;">:</span><span class="fu" style="color: #4758AB;">last_col</span>(), <span class="at" style="color: #657422;">names_to =</span> <span class="st" style="color: #20794D;">"metric"</span>) <span class="sc" style="color: #5E5E5E;">|&gt;</span> </span>
+<span id="cb56-17">  <span class="fu" style="color: #4758AB;">ggplot</span>(<span class="fu" style="color: #4758AB;">aes</span>(<span class="at" style="color: #657422;">x =</span> month, <span class="at" style="color: #657422;">y =</span> value, <span class="at" style="color: #657422;">fill =</span> page_type)) <span class="sc" style="color: #5E5E5E;">+</span></span>
+<span id="cb56-18">  <span class="fu" style="color: #4758AB;">geom_area</span>() <span class="sc" style="color: #5E5E5E;">+</span></span>
+<span id="cb56-19">  <span class="fu" style="color: #4758AB;">facet_wrap</span>(<span class="sc" style="color: #5E5E5E;">~</span> metric, <span class="at" style="color: #657422;">ncol =</span> <span class="dv" style="color: #AD0000;">1</span>, <span class="at" style="color: #657422;">scales =</span> <span class="st" style="color: #20794D;">"free_y"</span>, <span class="at" style="color: #657422;">strip.position =</span> <span class="st" style="color: #20794D;">"right"</span>) <span class="sc" style="color: #5E5E5E;">+</span></span>
+<span id="cb56-20">  <span class="fu" style="color: #4758AB;">scale_fill_brewer</span>(<span class="at" style="color: #657422;">type =</span> <span class="st" style="color: #20794D;">"qual"</span>, <span class="at" style="color: #657422;">palette =</span> <span class="dv" style="color: #AD0000;">1</span>)</span></code></pre></div>
+<div class="cell-output-display column-page">
+<p><img src="https://marekprokop.github.io/jak-pracuju/posts/2022-04-12-search-console-timeline/index_files/figure-html/unnamed-chunk-40-1.png" class="img-fluid" width="1056"></p>
+</div>
+</div>
+<p>Výsledek je jednoznačný: rubrik je oproti článkům velmi málo a na viditelnosti nebo návštěvnosti z Googlu se reálně nepodílejí.</p>
+</section>
+<section id="rubriky" class="level3 page-columns page-full">
+<h3 class="anchored" data-anchor-id="rubriky">Rubriky</h3>
+<p>Rubriky identifikuje první složka za doménou, takže ji stačí z URL vykousnout funkcí <code>str_extract</code> z balíčku <em>stringr</em>, které pošlu jen cestu za doménou získanou funkcí <code>path</code> z balíčku <em>urltools</em>. Homepage vyřadím (má ve sloupci <code>category</code> hodnotu <code>NA</code>).</p>
+<div class="cell page-columns page-full">
+<div class="sourceCode cell-code" id="cb57" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb57-1">sc_by_date_page <span class="sc" style="color: #5E5E5E;">|&gt;</span> </span>
+<span id="cb57-2">  <span class="fu" style="color: #4758AB;">mutate</span>(</span>
+<span id="cb57-3">    <span class="at" style="color: #657422;">category =</span> <span class="fu" style="color: #4758AB;">str_extract</span>(<span class="fu" style="color: #4758AB;">path</span>(page), <span class="st" style="color: #20794D;">"^[^/]+"</span>),</span>
+<span id="cb57-4">    <span class="at" style="color: #657422;">month =</span> <span class="fu" style="color: #4758AB;">floor_date</span>(date, <span class="st" style="color: #20794D;">"month"</span>)</span>
+<span id="cb57-5">  ) <span class="sc" style="color: #5E5E5E;">|&gt;</span> </span>
+<span id="cb57-6">  <span class="fu" style="color: #4758AB;">filter</span>(</span>
+<span id="cb57-7">    <span class="fu" style="color: #4758AB;">between</span>(month, <span class="fu" style="color: #4758AB;">as.Date</span>(<span class="st" style="color: #20794D;">"2021-01-01"</span>), <span class="fu" style="color: #4758AB;">as.Date</span>(<span class="st" style="color: #20794D;">"2022-03-31"</span>)),</span>
+<span id="cb57-8">    <span class="sc" style="color: #5E5E5E;">!</span><span class="fu" style="color: #4758AB;">is.na</span>(category)</span>
+<span id="cb57-9">  ) <span class="sc" style="color: #5E5E5E;">|&gt;</span> </span>
+<span id="cb57-10">  <span class="fu" style="color: #4758AB;">group_by</span>(month, category) <span class="sc" style="color: #5E5E5E;">|&gt;</span> </span>
+<span id="cb57-11">  <span class="fu" style="color: #4758AB;">summarise</span>(</span>
+<span id="cb57-12">    <span class="at" style="color: #657422;">n =</span> <span class="fu" style="color: #4758AB;">n_distinct</span>(page),</span>
+<span id="cb57-13">    <span class="at" style="color: #657422;">impressions =</span> <span class="fu" style="color: #4758AB;">sum</span>(impressions),</span>
+<span id="cb57-14">    <span class="at" style="color: #657422;">clicks =</span> <span class="fu" style="color: #4758AB;">sum</span>(clicks),</span>
+<span id="cb57-15">    <span class="at" style="color: #657422;">.groups =</span> <span class="st" style="color: #20794D;">"drop"</span></span>
+<span id="cb57-16">  ) <span class="sc" style="color: #5E5E5E;">|&gt;</span> </span>
+<span id="cb57-17">  <span class="fu" style="color: #4758AB;">pivot_longer</span>(<span class="at" style="color: #657422;">cols =</span> n<span class="sc" style="color: #5E5E5E;">:</span><span class="fu" style="color: #4758AB;">last_col</span>(), <span class="at" style="color: #657422;">names_to =</span> <span class="st" style="color: #20794D;">"metric"</span>) <span class="sc" style="color: #5E5E5E;">|&gt;</span> </span>
+<span id="cb57-18">  <span class="fu" style="color: #4758AB;">ggplot</span>(<span class="fu" style="color: #4758AB;">aes</span>(<span class="at" style="color: #657422;">x =</span> month, <span class="at" style="color: #657422;">y =</span> value, <span class="at" style="color: #657422;">fill =</span> category)) <span class="sc" style="color: #5E5E5E;">+</span></span>
+<span id="cb57-19">  <span class="fu" style="color: #4758AB;">geom_area</span>() <span class="sc" style="color: #5E5E5E;">+</span></span>
+<span id="cb57-20">  <span class="fu" style="color: #4758AB;">facet_wrap</span>(<span class="sc" style="color: #5E5E5E;">~</span> metric, <span class="at" style="color: #657422;">ncol =</span> <span class="dv" style="color: #AD0000;">1</span>, <span class="at" style="color: #657422;">scales =</span> <span class="st" style="color: #20794D;">"free_y"</span>, <span class="at" style="color: #657422;">strip.position =</span> <span class="st" style="color: #20794D;">"right"</span>) <span class="sc" style="color: #5E5E5E;">+</span></span>
+<span id="cb57-21">  <span class="fu" style="color: #4758AB;">scale_fill_brewer</span>(<span class="at" style="color: #657422;">type =</span> <span class="st" style="color: #20794D;">"qual"</span>, <span class="at" style="color: #657422;">palette =</span> <span class="dv" style="color: #AD0000;">8</span>)</span></code></pre></div>
+<div class="cell-output-display column-page">
+<p><img src="https://marekprokop.github.io/jak-pracuju/posts/2022-04-12-search-console-timeline/index_files/figure-html/unnamed-chunk-41-1.png" class="img-fluid" width="1056"></p>
+</div>
+</div>
+<p>Tady už je interpretace zajímavější.</p>
+<ul>
+<li>Stránek v rubrice <em>značky</em> je hodně, ale impresí a kliků mají málo. Lze je tedy považovat za nepříliš úspěšné. Obdobně je na tom <em>katalog</em>.</li>
+<li>Opakem jsou <em>trendy</em>, které mají velmi málo stránek, ale získávají hodně impresí i kliků.</li>
+<li>Rubriky <em>nákupy</em> a <em>materiály</em> mají hodně impresí, ale z hlediska viditelnosti <em>nákupy</em> fungují efektivněji, protože impresí dosahují s menším počtem stránek. Zase ale mají horší CTR.</li>
+<li>Zajímavá je rubrika <em>m</em> (magazín), která má hodně kliků při menším počtu impresí (takže vysoké CTR) a navíc jí kliky v posledních měsících rychle rostou i při stagnujícím počtu stránek.</li>
+</ul>
+<p>Aby byla efektivita výkonových metrik (kliky a imprese) vzhledem k počtu unikátních stránek vidět ještě lépe, lze použít poměrové metriky: počet impresí na stránku a počet kliků na stránku.</p>
+<div class="cell page-columns page-full">
+<div class="sourceCode cell-code" id="cb58" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb58-1">sc_by_date_page <span class="sc" style="color: #5E5E5E;">|&gt;</span> </span>
+<span id="cb58-2">  <span class="fu" style="color: #4758AB;">mutate</span>(</span>
+<span id="cb58-3">    <span class="at" style="color: #657422;">category =</span> <span class="fu" style="color: #4758AB;">str_extract</span>(<span class="fu" style="color: #4758AB;">path</span>(page), <span class="st" style="color: #20794D;">"^[^/]+"</span>),</span>
+<span id="cb58-4">    <span class="at" style="color: #657422;">month =</span> <span class="fu" style="color: #4758AB;">floor_date</span>(date, <span class="st" style="color: #20794D;">"month"</span>)</span>
+<span id="cb58-5">  ) <span class="sc" style="color: #5E5E5E;">|&gt;</span> </span>
+<span id="cb58-6">  <span class="fu" style="color: #4758AB;">filter</span>(</span>
+<span id="cb58-7">    <span class="fu" style="color: #4758AB;">between</span>(month, <span class="fu" style="color: #4758AB;">as.Date</span>(<span class="st" style="color: #20794D;">"2021-01-01"</span>), <span class="fu" style="color: #4758AB;">as.Date</span>(<span class="st" style="color: #20794D;">"2022-03-31"</span>)),</span>
+<span id="cb58-8">    <span class="sc" style="color: #5E5E5E;">!</span><span class="fu" style="color: #4758AB;">is.na</span>(category)</span>
+<span id="cb58-9">  ) <span class="sc" style="color: #5E5E5E;">|&gt;</span> </span>
+<span id="cb58-10">  <span class="fu" style="color: #4758AB;">group_by</span>(month, category) <span class="sc" style="color: #5E5E5E;">|&gt;</span> </span>
+<span id="cb58-11">  <span class="fu" style="color: #4758AB;">summarise</span>(</span>
+<span id="cb58-12">    <span class="at" style="color: #657422;">impressions_pp =</span> <span class="fu" style="color: #4758AB;">sum</span>(impressions) <span class="sc" style="color: #5E5E5E;">/</span> <span class="fu" style="color: #4758AB;">n_distinct</span>(page),</span>
+<span id="cb58-13">    <span class="at" style="color: #657422;">clicks_pp =</span> <span class="fu" style="color: #4758AB;">sum</span>(clicks) <span class="sc" style="color: #5E5E5E;">/</span> <span class="fu" style="color: #4758AB;">n_distinct</span>(page),</span>
+<span id="cb58-14">    <span class="at" style="color: #657422;">.groups =</span> <span class="st" style="color: #20794D;">"drop"</span></span>
+<span id="cb58-15">  ) <span class="sc" style="color: #5E5E5E;">|&gt;</span> </span>
+<span id="cb58-16">  <span class="fu" style="color: #4758AB;">pivot_longer</span>(<span class="at" style="color: #657422;">cols =</span> impressions_pp<span class="sc" style="color: #5E5E5E;">:</span><span class="fu" style="color: #4758AB;">last_col</span>(), <span class="at" style="color: #657422;">names_to =</span> <span class="st" style="color: #20794D;">"metric"</span>) <span class="sc" style="color: #5E5E5E;">|&gt;</span> </span>
+<span id="cb58-17">  <span class="fu" style="color: #4758AB;">ggplot</span>(<span class="fu" style="color: #4758AB;">aes</span>(<span class="at" style="color: #657422;">x =</span> month, <span class="at" style="color: #657422;">y =</span> value, <span class="at" style="color: #657422;">fill =</span> category)) <span class="sc" style="color: #5E5E5E;">+</span></span>
+<span id="cb58-18">  <span class="fu" style="color: #4758AB;">geom_area</span>() <span class="sc" style="color: #5E5E5E;">+</span></span>
+<span id="cb58-19">  <span class="fu" style="color: #4758AB;">facet_wrap</span>(<span class="sc" style="color: #5E5E5E;">~</span> metric, <span class="at" style="color: #657422;">ncol =</span> <span class="dv" style="color: #AD0000;">1</span>, <span class="at" style="color: #657422;">scales =</span> <span class="st" style="color: #20794D;">"free_y"</span>, <span class="at" style="color: #657422;">strip.position =</span> <span class="st" style="color: #20794D;">"right"</span>) <span class="sc" style="color: #5E5E5E;">+</span></span>
+<span id="cb58-20">  <span class="fu" style="color: #4758AB;">scale_fill_brewer</span>(<span class="at" style="color: #657422;">type =</span> <span class="st" style="color: #20794D;">"qual"</span>, <span class="at" style="color: #657422;">palette =</span> <span class="dv" style="color: #AD0000;">8</span>)</span></code></pre></div>
+<div class="cell-output-display column-page">
+<p><img src="https://marekprokop.github.io/jak-pracuju/posts/2022-04-12-search-console-timeline/index_files/figure-html/unnamed-chunk-42-1.png" class="img-fluid" width="1056"></p>
+</div>
+</div>
+<p>Zde je ještě lépe vidět malá efektivita značek a katalogu a vysoká efektivita trendů.</p>
+<p>Z těchto poznatků jde odvodit docela dost doporučení pro další práci s obsahem, ale to již záleží na konkrétním kontextu projektu.</p>
+<p>Podobně jde segmentovat podle dotazů. Nejčastěji se tak rozlišuje brandové hledání od obecného, ale jde zapojit i klasifikace dotazů z analýzy klíčových slov a segementovat podle ní. To už ale přesahuje téma tohoto článku.</p>
+<p>A to je všechno :-)</p>
+
+
+</section>
+</section>
+
+ ]]></description>
+  <guid>https://marekprokop.github.io/jak-pracuju/posts/2022-04-12-search-console-timeline/index.html</guid>
+  <pubDate>Sun, 17 Apr 2022 22:00:00 GMT</pubDate>
+  <media:content url="https://marekprokop.github.io/jak-pracuju/posts/2022-04-12-search-console-timeline/title.png" medium="image" type="image/png" height="90" width="144"/>
+</item>
+<item>
+  <title>Čístím Search Consoli od zbytečných webů</title>
+  <dc:creator>Marek Prokop</dc:creator>
+  <link>https://marekprokop.github.io/jak-pracuju/posts/2022-04-09-cistim-search-consoli/index.html</link>
+  <description><![CDATA[ 
+
+
+
+
+<section id="příprava" class="level2">
+<h2 class="anchored" data-anchor-id="příprava">Příprava</h2>
+<p>Skriptu stačí tyhle dva balíčky.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><span class="fu" style="color: #4758AB;">library</span>(tidyverse)</span>
+<span id="cb1-2"><span class="fu" style="color: #4758AB;">library</span>(searchConsoleR)</span></code></pre></div>
+</div>
+<p>A klasická autorizace do Search Console. Kdybych neměl svůj Google e-mail uložený v systémové proměnné, musel bych ho napsat do parametru <code>email</code> přímo.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><span class="fu" style="color: #4758AB;">scr_auth</span>(<span class="at" style="color: #657422;">email =</span> <span class="fu" style="color: #4758AB;">Sys.getenv</span>(<span class="st" style="color: #20794D;">"MY_GOOGLE_ACCOUNT"</span>))</span></code></pre></div>
+</div>
+<div class="cell">
+
+</div>
+<p>Funkcí <code>list_websites</code> načtu všechny weby, které v Search Consoli mám, a uložím si je do objektu <code>websites</code>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1">websites <span class="ot" style="color: #003B4F;">&lt;-</span> <span class="fu" style="color: #4758AB;">list_websites</span>()</span></code></pre></div>
+</div>
+<p>Seznam vypadá nějak takhle, jen jsem konkrétní weby ze své Search Console anonymizoval, abych mohl výstup publikovat. Když vynechám poslední řádek, budou weby normálně vidět.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1">websites <span class="sc" style="color: #5E5E5E;">|&gt;</span> </span>
+<span id="cb4-2">  <span class="fu" style="color: #4758AB;">slice_sample</span>(<span class="at" style="color: #657422;">n =</span> <span class="dv" style="color: #AD0000;">10</span>) <span class="sc" style="color: #5E5E5E;">|&gt;</span> </span>
+<span id="cb4-3">  <span class="fu" style="color: #4758AB;">mutate</span>(<span class="at" style="color: #657422;">siteUrl =</span> <span class="fu" style="color: #4758AB;">anonymize_site</span>(siteUrl))</span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>                    siteUrl    permissionLevel
+1    http://anonymized.com/       siteFullUser
+2    https://anonymized.cz/       siteFullUser
+3   sc-domain:anonymized.cz       siteFullUser
+4   sc-domain:anonymized.cz siteRestrictedUser
+5   https://anonymized.cz/d       siteFullUser
+6    http://anonymized.cz/p       siteFullUser
+7   https://anonymized.cz/e       siteFullUser
+8   https://anonymized.cz/c       siteFullUser
+9   sc-domain:anonymized.sk       siteFullUser
+10 sc-domain:anonymized.com          siteOwner</code></pre>
+</div>
+</div>
+</section>
+<section id="neautorizované-weby" class="level2">
+<h2 class="anchored" data-anchor-id="neautorizované-weby">Neautorizované weby</h2>
+<p>Důležitý je sloupec <code>permissionLevel</code>. Mám v něm tyhle hodnoty:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1">websites <span class="sc" style="color: #5E5E5E;">|&gt;</span> </span>
+<span id="cb6-2">  <span class="fu" style="color: #4758AB;">count</span>(permissionLevel)</span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>     permissionLevel  n
+1       siteFullUser 67
+2          siteOwner 32
+3 siteRestrictedUser 17
+4 siteUnverifiedUser  3</code></pre>
+</div>
+</div>
+<p>Zbavit se chci webů, ke kterým nemám povolený přístup. Vypíšu si je a raději je pečlivě zkontroluju (samozřejmě až odstraním anonymizaci na posledním řádku).</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1">unverified_websites <span class="ot" style="color: #003B4F;">&lt;-</span> websites <span class="sc" style="color: #5E5E5E;">|&gt;</span> </span>
+<span id="cb8-2">  <span class="fu" style="color: #4758AB;">filter</span>(permissionLevel <span class="sc" style="color: #5E5E5E;">==</span> <span class="st" style="color: #20794D;">"siteUnverifiedUser"</span>)</span>
+<span id="cb8-3"></span>
+<span id="cb8-4">unverified_websites <span class="sc" style="color: #5E5E5E;">|&gt;</span> </span>
+<span id="cb8-5">  <span class="fu" style="color: #4758AB;">mutate</span>(<span class="at" style="color: #657422;">siteUrl =</span> <span class="fu" style="color: #4758AB;">anonymize_site</span>(siteUrl))</span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>                  siteUrl    permissionLevel
+1 sc-domain:anonymized.cz siteUnverifiedUser
+2   http://anonymized.sk/ siteUnverifiedUser
+3   http://anonymized.cz/ siteUnverifiedUser</code></pre>
+</div>
+</div>
+<p>Ze Search Console si je pak odstraním takto. Jen před tím přepíšu na prvním řádku <code>FALSE</code> na <code>TRUE</code>. Dal jsem to tam proto, abych si nechtěně nesmazal weby před tím, než si je zkontroluju.</p>
+<div class="sourceCode" id="cb10" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><span class="cf" style="color: #003B4F;">if</span> (<span class="cn" style="color: #8f5902;">FALSE</span>) {</span>
+<span id="cb10-2">  unverified_websites <span class="sc" style="color: #5E5E5E;">|&gt;</span> </span>
+<span id="cb10-3">    <span class="fu" style="color: #4758AB;">pull</span>(siteUrl) <span class="sc" style="color: #5E5E5E;">|&gt;</span> </span>
+<span id="cb10-4">    <span class="fu" style="color: #4758AB;">walk</span>(delete_website)</span>
+<span id="cb10-5">}</span></code></pre></div>
+<p>Když to pustím, křičí to na mě nějaké warningy ohledně JSON. Asi je někde nějaká chybka, ale podle všeho ničemu nevadí a skript dělá to, co má. Každopádně si pak můžu ověřit, jestli už jsou všechny neverifikované weby pryč:</p>
+<div class="sourceCode" id="cb11" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><span class="fu" style="color: #4758AB;">list_websites</span>() <span class="sc" style="color: #5E5E5E;">|&gt;</span> </span>
+<span id="cb11-2">  <span class="fu" style="color: #4758AB;">filter</span>(permissionLevel <span class="sc" style="color: #5E5E5E;">==</span> <span class="st" style="color: #20794D;">"siteUnverifiedUser"</span>)</span></code></pre></div>
+</section>
+<section id="weby-bez-dat" class="level2">
+<h2 class="anchored" data-anchor-id="weby-bez-dat">Weby bez dat</h2>
+<p>Kromě neutorizovaných webů se chci zbavit i těch, které už dlouho nemají žádná data.</p>
+<p>Nejdřív si definuju funkci, která načte souhrnné metriky jednoho webu za poslední dva roky. K&nbsp;výsledku přidám do prvního sloupce i URL webu, abych ho poznal, až jich bude v tabulce víc.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb12" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1">get_site_metrics <span class="ot" style="color: #003B4F;">&lt;-</span> <span class="cf" style="color: #003B4F;">function</span>(site) {</span>
+<span id="cb12-2">  <span class="fu" style="color: #4758AB;">search_analytics</span>(</span>
+<span id="cb12-3">    <span class="at" style="color: #657422;">siteURL =</span> site, </span>
+<span id="cb12-4">    <span class="at" style="color: #657422;">startDate =</span> <span class="fu" style="color: #4758AB;">Sys.Date</span>() <span class="sc" style="color: #5E5E5E;">-</span> <span class="dv" style="color: #AD0000;">365</span> <span class="sc" style="color: #5E5E5E;">*</span> <span class="dv" style="color: #AD0000;">2</span>, </span>
+<span id="cb12-5">  ) <span class="sc" style="color: #5E5E5E;">|&gt;</span> </span>
+<span id="cb12-6">    <span class="fu" style="color: #4758AB;">add_column</span>(<span class="at" style="color: #657422;">site =</span> site, <span class="at" style="color: #657422;">.before =</span> <span class="dv" style="color: #AD0000;">1</span>)</span>
+<span id="cb12-7">}</span></code></pre></div>
+</div>
+<p>Ověřím, zda funkce funguje.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb13" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><span class="fu" style="color: #4758AB;">get_site_metrics</span>(<span class="st" style="color: #20794D;">"http://www.marekp.cz/"</span>)</span></code></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Fetching search analytics for url: http://www.marekp.cz/ dates: 2021-02-18 2023-02-15 dimensions:  dimensionFilterExp:  searchType: web aggregationType: auto</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>                   site clicks impressions        ctr position
+1 http://www.marekp.cz/   1997       52140 0.03830073 11.22434</code></pre>
+</div>
+</div>
+<p>Funguje, takže ji mohu pomocí funkce <code>map_dfr</code> z balíčku <em>purrr</em> aplikovat na celý seznam webů, ke kterým mám autorizovaný přístup. S více weby to nějakou chvíli poběží.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb16" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1">all_site_metrics <span class="ot" style="color: #003B4F;">&lt;-</span> websites <span class="sc" style="color: #5E5E5E;">|&gt;</span> </span>
+<span id="cb16-2">  <span class="fu" style="color: #4758AB;">filter</span>(permissionLevel <span class="sc" style="color: #5E5E5E;">!=</span> <span class="st" style="color: #20794D;">"siteUnverifiedUser"</span>) <span class="sc" style="color: #5E5E5E;">|&gt;</span> </span>
+<span id="cb16-3">  <span class="fu" style="color: #4758AB;">pull</span>(siteUrl) <span class="sc" style="color: #5E5E5E;">|&gt;</span> </span>
+<span id="cb16-4">  <span class="fu" style="color: #4758AB;">map_dfr</span>(get_site_metrics)</span></code></pre></div>
+</div>
+<p>A teď už jen vyfiltruju a zobrazím (opět anonymizovaně) weby, které nemají žádné imprese.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb17" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1">all_site_metrics <span class="sc" style="color: #5E5E5E;">|&gt;</span> </span>
+<span id="cb17-2">  <span class="fu" style="color: #4758AB;">filter</span>(impressions <span class="sc" style="color: #5E5E5E;">==</span> <span class="dv" style="color: #AD0000;">0</span>) <span class="sc" style="color: #5E5E5E;">|&gt;</span> </span>
+<span id="cb17-3">  <span class="fu" style="color: #4758AB;">mutate</span>(<span class="at" style="color: #657422;">site =</span> <span class="fu" style="color: #4758AB;">anonymize_site</span>(site))</span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>                      site clicks impressions ctr position
+1   http://anonymized.com/      0           0   0        0
+2   http://anonymized.net/      0           0   0        0
+3   https://anonymized.cz/      0           0   0        0
+4    http://anonymized.sk/      0           0   0        0
+5 sc-domain:anonymized.com      0           0   0        0
+6  https://anonymized.com/      0           0   0        0
+7   https://anonymized.cz/      0           0   0        0
+8   http://anonymized.com/      0           0   0        0</code></pre>
+</div>
+</div>
+<p>Pokud je chci ze Search Console odebrat, udělám to podle návodu pro neautorizované weby výše.</p>
+<p>A to je všechno :-)</p>
+
+
+</section>
+
+ ]]></description>
+  <guid>https://marekprokop.github.io/jak-pracuju/posts/2022-04-09-cistim-search-consoli/index.html</guid>
+  <pubDate>Sat, 09 Apr 2022 22:00:00 GMT</pubDate>
+</item>
+<item>
+  <title>Kontrola stavových kódů většího počtu URL v R</title>
+  <dc:creator>Marek Prokop</dc:creator>
+  <link>https://marekprokop.github.io/jak-pracuju/posts/2022-04-09-kontrola-http-kodu/index.html</link>
+  <description><![CDATA[ 
+
+
+
+
+<p>Klient nedávno měnil CMS i doménu webu, došlo ke změně hodně URL, klasický zmatek, jako v těhle případech vždy. Asi měsíc po změně se ukázalo, že se něco nepovedlo a URL starého webu, které měly být přesměrované na nový web, nyní vrací chybu. Navíc jsou některé z nich ještě stále ve výsledcích hledání Googlu.</p>
+<p>Vytáhli jsme tedy ze Search Console starého webu URL všech stránek, které se od změny domény alespoň jednou zobrazily, a mým úkolem bylo rychle zkontrolovat, jaké HTTP kódy vracejí. Konkrétně mě zajímalo, která URL fungují (vrací HTTP 200), neexistují (vrací chybu 404 nebo jinou 4xx), nebo na serveru způsobí nějakou chybu (kódy 5xx).</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><span class="fu" style="color: #4758AB;">library</span>(tidyverse)</span>
+<span id="cb1-2"><span class="fu" style="color: #4758AB;">library</span>(furrr)</span>
+<span id="cb1-3"><span class="fu" style="color: #4758AB;">library</span>(rvest)</span>
+<span id="cb1-4"><span class="fu" style="color: #4758AB;">library</span>(httr)</span>
+<span id="cb1-5"><span class="fu" style="color: #4758AB;">library</span>(tictoc)</span></code></pre></div>
+</div>
+<p>Pro potřeby tohoto zápisku jsem skutečná URL nahradil odkazy z úvodní stránky Wikipedie, ke kterým jsem navíc přidal 10 náhodných adres, aby mi to ukázalo nějaké chyby. Na principu to nic nemění. Ty odkazy jsem získal takhle:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1">start_url <span class="ot" style="color: #003B4F;">&lt;-</span> <span class="st" style="color: #20794D;">"https://www.wikipedia.org/"</span></span>
+<span id="cb2-2"></span>
+<span id="cb2-3">urls <span class="ot" style="color: #003B4F;">&lt;-</span> <span class="fu" style="color: #4758AB;">read_html</span>(start_url) <span class="sc" style="color: #5E5E5E;">|&gt;</span></span>
+<span id="cb2-4">  <span class="fu" style="color: #4758AB;">html_elements</span>(<span class="st" style="color: #20794D;">"a"</span>) <span class="sc" style="color: #5E5E5E;">|&gt;</span></span>
+<span id="cb2-5">  <span class="fu" style="color: #4758AB;">html_attr</span>(<span class="st" style="color: #20794D;">"href"</span>) <span class="sc" style="color: #5E5E5E;">|&gt;</span></span>
+<span id="cb2-6">  xml2<span class="sc" style="color: #5E5E5E;">::</span><span class="fu" style="color: #4758AB;">url_absolute</span>(start_url) <span class="sc" style="color: #5E5E5E;">|&gt;</span> </span>
+<span id="cb2-7">  <span class="fu" style="color: #4758AB;">c</span>(<span class="fu" style="color: #4758AB;">paste0</span>(start_url, stringi<span class="sc" style="color: #5E5E5E;">::</span><span class="fu" style="color: #4758AB;">stri_rand_strings</span>(<span class="dv" style="color: #AD0000;">10</span>, <span class="dv" style="color: #AD0000;">15</span>)))</span></code></pre></div>
+</div>
+<p>Jedná se o 340 adres, a náhodný vzorek deseti z nich vypadá takhle:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><span class="fu" style="color: #4758AB;">sample</span>(urls, <span class="dv" style="color: #AD0000;">10</span>)</span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> [1] "https://om.wikipedia.org/"                
+ [2] "https://www.wikipedia.org/f5NHoRoonRkdi0T"
+ [3] "https://xh.wikipedia.org/"                
+ [4] "https://os.wikipedia.org/"                
+ [5] "https://hsb.wikipedia.org/"               
+ [6] "https://sah.wikipedia.org/"               
+ [7] "https://sq.wikipedia.org/"                
+ [8] "https://ga.wikipedia.org/"                
+ [9] "https://sm.wikipedia.org/"                
+[10] "https://sw.wikipedia.org/"                </code></pre>
+</div>
+</div>
+<section id="kontrola-jednoho-url" class="level2">
+<h2 class="anchored" data-anchor-id="kontrola-jednoho-url">Kontrola jednoho URL</h2>
+<p>Pro kontrolu jednoho URL si připravím funkci <code>check_url</code>. Ta zadané URL zkontroluje HTTP požadavkem HEAD (z balíčku <a href="https://httr.r-lib.org/">httr</a>), zjistí návratový kód a vrátí tibble s původním URL, výsledným URL (z toho se pozná případné přesměrování) a kódem odpovědi. Pro požadavek se také nastaví timeout v sekundách. Pokud server do této doby neodpoví, místo výsledného HTTP kódu se zapíše <code>NA</code>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1">check_url <span class="ot" style="color: #003B4F;">&lt;-</span> <span class="cf" style="color: #003B4F;">function</span>(url, timeout) {</span>
+<span id="cb5-2">  resp <span class="ot" style="color: #003B4F;">&lt;-</span> <span class="fu" style="color: #4758AB;">try</span>(<span class="fu" style="color: #4758AB;">HEAD</span>(url, <span class="fu" style="color: #4758AB;">timeout</span>(timeout)), <span class="at" style="color: #657422;">silent =</span> <span class="cn" style="color: #8f5902;">TRUE</span>)</span>
+<span id="cb5-3">  <span class="cf" style="color: #003B4F;">if</span> (<span class="fu" style="color: #4758AB;">class</span>(resp) <span class="sc" style="color: #5E5E5E;">==</span> <span class="st" style="color: #20794D;">"try-error"</span>) {</span>
+<span id="cb5-4">    status <span class="ot" style="color: #003B4F;">&lt;-</span> <span class="cn" style="color: #8f5902;">NA_integer_</span></span>
+<span id="cb5-5">    dest_url <span class="ot" style="color: #003B4F;">&lt;-</span> <span class="cn" style="color: #8f5902;">NA_character_</span></span>
+<span id="cb5-6">  } <span class="cf" style="color: #003B4F;">else</span> {</span>
+<span id="cb5-7">    status <span class="ot" style="color: #003B4F;">&lt;-</span> resp<span class="sc" style="color: #5E5E5E;">$</span>status_code</span>
+<span id="cb5-8">    dest_url <span class="ot" style="color: #003B4F;">&lt;-</span> resp<span class="sc" style="color: #5E5E5E;">$</span>url</span>
+<span id="cb5-9">  }</span>
+<span id="cb5-10">  <span class="fu" style="color: #4758AB;">tibble</span>(url, dest_url, status)</span>
+<span id="cb5-11">}</span></code></pre></div>
+</div>
+<p>Vyzkouším, zda funkce funguje s platným (ale přesměrovaným) URL.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><span class="fu" style="color: #4758AB;">check_url</span>(<span class="st" style="color: #20794D;">"https://wikipedia.org/"</span>, <span class="dv" style="color: #AD0000;">1</span>)</span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1 × 3
+  url                    dest_url                   status
+  &lt;chr&gt;                  &lt;chr&gt;                       &lt;int&gt;
+1 https://wikipedia.org/ https://www.wikipedia.org/    200</code></pre>
+</div>
+</div>
+<p>A raději i s neplatným:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><span class="fu" style="color: #4758AB;">check_url</span>(<span class="st" style="color: #20794D;">"https://www.wikipedia.org/iououoiuoiuoiu"</span>, <span class="dv" style="color: #AD0000;">1</span>)</span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1 × 3
+  url                                      dest_url                       status
+  &lt;chr&gt;                                    &lt;chr&gt;                           &lt;int&gt;
+1 https://www.wikipedia.org/iououoiuoiuoiu https://en.wikipedia.org/iouo…    404</code></pre>
+</div>
+</div>
+</section>
+<section id="kontrola-celého-seznamu-url" class="level2">
+<h2 class="anchored" data-anchor-id="kontrola-celého-seznamu-url">Kontrola celého seznamu URL</h2>
+<p>A teď již mohu pomocí funkce <code>map_dfr</code> z balíčku <a href="https://purrr.tidyverse.org/">purrr</a> zkontrolovat celý seznam URL. Zároveň si budu pomocí funkcí <code>tic</code> a <code>toc</code> z balíčku <a href="http://collectivemedia.github.io/tictoc/">tictoc</a> měřit, jak dlouho to celé trvá s timeoutem nastaveným na 0.5 sekundy. Reálně by byl potřeba vyšší timeout, např. 3 sekundy, ale Wikiepedia je docela rychlá a já chci ukázat výstup, ve kterém se některá URL v časovém limitu zkontrolovat nepodařilo.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb10" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><span class="fu" style="color: #4758AB;">tic</span>()</span>
+<span id="cb10-2">status_codes <span class="ot" style="color: #003B4F;">&lt;-</span> urls <span class="sc" style="color: #5E5E5E;">|&gt;</span></span>
+<span id="cb10-3">  <span class="fu" style="color: #4758AB;">map_dfr</span>(check_url, <span class="fl" style="color: #AD0000;">0.5</span>)</span>
+<span id="cb10-4"><span class="fu" style="color: #4758AB;">toc</span>()</span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>59.27 sec elapsed</code></pre>
+</div>
+</div>
+<p>Trvá to docela dlouho a mohlo by to trvat ještě déle, pokud by byl server pomalejší. Teoreticky až počet URL v seznamu krát timeout. Tak dlouho se mi čekat nechce.</p>
+<p>Proto raději zkusím balíček <a href="https://furrr.futureverse.org/">furrr</a>, který nabízí obdobné funkce jako <em>purrr</em>, jenže paralelizované tak, aby využily víc jader a vláken procesoru. Natavím 6 vláken, takže načtení URL by mělo být skoro šestkrát rychlejší.</p>
+<section id="zrychlení-balíčkem-furrr" class="level3">
+<h3 class="anchored" data-anchor-id="zrychlení-balíčkem-furrr">Zrychlení balíčkem <em>furrr</em></h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb12" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><span class="fu" style="color: #4758AB;">plan</span>(multisession, <span class="at" style="color: #657422;">workers =</span> <span class="dv" style="color: #AD0000;">6</span>)</span>
+<span id="cb12-2"></span>
+<span id="cb12-3"><span class="fu" style="color: #4758AB;">tic</span>()</span>
+<span id="cb12-4">status_codes <span class="ot" style="color: #003B4F;">&lt;-</span> urls <span class="sc" style="color: #5E5E5E;">|&gt;</span></span>
+<span id="cb12-5">  <span class="fu" style="color: #4758AB;">future_map_dfr</span>(check_url, <span class="fl" style="color: #AD0000;">0.5</span>)</span>
+<span id="cb12-6"><span class="fu" style="color: #4758AB;">toc</span>()</span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>10.17 sec elapsed</code></pre>
+</div>
+</div>
+<p>Jo! Šestkrát rychlejší to sice není, ale i tak je zrychlení super. S tím už se pár tisíc URL zpracovat dá.</p>
+</section>
+</section>
+<section id="zobrazení-výsledků" class="level2">
+<h2 class="anchored" data-anchor-id="zobrazení-výsledků">Zobrazení výsledků</h2>
+<p>A zbývá se podívat na výsledky. Jsou v dataframu (tibble), takže stačí běžné funkce z balíčku <a href="https://dplyr.tidyverse.org/">dplyr</a></p>
+<section id="souhrnný-přehled" class="level3">
+<h3 class="anchored" data-anchor-id="souhrnný-přehled">Souhrnný přehled</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb14" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1">status_codes <span class="sc" style="color: #5E5E5E;">|&gt;</span></span>
+<span id="cb14-2">  <span class="fu" style="color: #4758AB;">count</span>(status, <span class="at" style="color: #657422;">sort =</span> <span class="cn" style="color: #8f5902;">TRUE</span>)</span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 3 × 2
+  status     n
+   &lt;int&gt; &lt;int&gt;
+1    200   329
+2    404    10
+3     NA     1</code></pre>
+</div>
+</div>
+</section>
+<section id="vadné-url" class="level3">
+<h3 class="anchored" data-anchor-id="vadné-url">Vadné URL</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb16" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1">status_codes <span class="sc" style="color: #5E5E5E;">|&gt;</span> </span>
+<span id="cb16-2">  <span class="fu" style="color: #4758AB;">filter</span>(status <span class="sc" style="color: #5E5E5E;">!=</span> <span class="dv" style="color: #AD0000;">200</span>)</span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 10 × 3
+   url                                       dest_url                     status
+   &lt;chr&gt;                                     &lt;chr&gt;                         &lt;int&gt;
+ 1 https://www.wikipedia.org/HmPsw2WtYSxSgZ6 https://en.wikipedia.org/Hm…    404
+ 2 https://www.wikipedia.org/tF2KxtgdzehXaH9 https://en.wikipedia.org/tF…    404
+ 3 https://www.wikipedia.org/xtgn1TlDJE8PPM9 https://en.wikipedia.org/xt…    404
+ 4 https://www.wikipedia.org/8ESGr2Rn7YC7ktN https://en.wikipedia.org/8E…    404
+ 5 https://www.wikipedia.org/f5NHoRoonRkdi0T https://en.wikipedia.org/f5…    404
+ 6 https://www.wikipedia.org/DNbL6FfPm6QztsA https://en.wikipedia.org/DN…    404
+ 7 https://www.wikipedia.org/8eLeJBm5SVbKUxT https://en.wikipedia.org/8e…    404
+ 8 https://www.wikipedia.org/tubP9vI3wi8YxaP https://en.wikipedia.org/tu…    404
+ 9 https://www.wikipedia.org/eJJDMz958gctfjW https://en.wikipedia.org/eJ…    404
+10 https://www.wikipedia.org/eomyRJP0BqEE4Fj https://en.wikipedia.org/eo…    404</code></pre>
+</div>
+</div>
+</section>
+<section id="timeouty" class="level3">
+<h3 class="anchored" data-anchor-id="timeouty">Timeouty</h3>
+<p>A pokud tam jsou i adresy, které nestihly timeout, pak jdou vypsat takhle:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb18" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1">status_codes <span class="sc" style="color: #5E5E5E;">|&gt;</span> </span>
+<span id="cb18-2">  <span class="fu" style="color: #4758AB;">filter</span>(<span class="fu" style="color: #4758AB;">is.na</span>(status))</span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1 × 3
+  url                                                             dest_…¹ status
+  &lt;chr&gt;                                                           &lt;chr&gt;    &lt;int&gt;
+1 https://itunes.apple.com/app/apple-store/id324715238?pt=208305… &lt;NA&gt;        NA
+# … with abbreviated variable name ¹​dest_url</code></pre>
+</div>
+</div>
+<p>Případně je můžu znovu projet s vyšším timeoutem, třeba takhle:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb20" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1">status_codes <span class="sc" style="color: #5E5E5E;">|&gt;</span> </span>
+<span id="cb20-2">  <span class="fu" style="color: #4758AB;">filter</span>(<span class="fu" style="color: #4758AB;">is.na</span>(status)) <span class="sc" style="color: #5E5E5E;">|&gt;</span> </span>
+<span id="cb20-3">  <span class="fu" style="color: #4758AB;">pull</span>(url) <span class="sc" style="color: #5E5E5E;">|&gt;</span> </span>
+<span id="cb20-4">  <span class="fu" style="color: #4758AB;">future_map_dfr</span>(check_url, <span class="dv" style="color: #AD0000;">2</span>)</span></code></pre></div>
+</div>
+<p>A to je všechno :-)</p>
+
+
+</section>
+</section>
+
+ ]]></description>
+  <guid>https://marekprokop.github.io/jak-pracuju/posts/2022-04-09-kontrola-http-kodu/index.html</guid>
+  <pubDate>Fri, 08 Apr 2022 22:00:00 GMT</pubDate>
+</item>
+</channel>
 </rss>

@@ -1,0 +1,24 @@
+---
+title: "Marek Prokop"
+image: profile.jpg
+about:
+  template: trestles
+  image: img/marek.jpg
+  links:
+    - icon: facebook
+      text: Facebook
+      href: https://www.facebook.com/marek.prokop
+    - icon: twitter
+      text: Twitter
+      href: https://twitter.com
+    - icon: github
+      text: Github
+      href: https://github.com
+
+---
+
+Jmenuju se Marek Prokop a pracuju jako konzultant a analytik digitálního marketingu ve své firmě [PROKOP software s.r.o.](https://www.prokopsw.cz/cs) Kdysi dávno jsem programoval, a přestože mě už přes 20 let živí něco jiného, slovo _software_ jsem v názvu firmy nechal. I v marketingu totiž rád vymýšlím řešení, která jdou „naprogramovat“ -- ať už se jedná o různé analýzy, marketingovou automatizaci, nebo tvorbu webů.
+
+A právě taková řešení si zapisuju do tohoto blogu. Zapisuju si je sem především pro sebe, abych je tu snadno našel, když je zase zapomenu, ale budu rád, když přinesou nějaký užitek i vám.
+
+Většina řešení je v [jazyce R](https://cs.wikipedia.org/wiki/R_(programovac%C3%AD_jazyk)), a jestli je chcete využít pro sebe, měli byste R alespoň malinko umět. Když neumíte, projděte si mou příručku [Od Excelu k R](https://www.prokopsw.cz/bookdown/excel-r/) a budete připravení. Kromě R občas použiju i Google Sheets, Google Apps Script, Python apod. Pokusím se zápisky štítkovat, aby bylo jasné, o čem konkrétně jsou.

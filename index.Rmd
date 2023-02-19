@@ -1,5 +1,0 @@
----
-title: "Nejnovější zápisky"
-site: distill::distill_website
-listing: posts
----
