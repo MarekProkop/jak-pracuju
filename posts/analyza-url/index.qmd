@@ -1,0 +1,150 @@
+---
+title: "Analýza struktury většího počtu URL"
+description: |
+  Když dostanu do ruky nový web, zajímá mě z jakých URL se skládá. Postupy popsané v tomhle zápisku mi to pomáhají zjistit a přehledně zobrazit.
+author:
+  - name: Marek Prokop
+    affiliation: "[PROKOP software s.r.o.](https://www.prokopsw.cz/cs)"
+date: 2023-02-23
+date-format: "D. M. YYYY"
+---
+
+## Zadání
+
+V dataframu, typicky třeba ze Screaming Frogu nebo Search Console, mám proměnnou obsahující URL. Chci přehledně zobrazit, z jakých částí se tato URL skládají.
+
+## Co na to potřebuju
+
+Kromě obligátní *tidyverse* mi pomůže balíček [urltools](https://cran.r-project.org/web/packages/urltools/index.html).
+
+```{r}
+#| label: libs
+#| message: false
+library(tidyverse)
+library(urltools)
+```
+
+## Příklad vstupních dat
+
+Pomocí ChatGPT jsem vygeneroval vzorek náhodných URL a uložil do souboru url.csv.
+
+```{r}
+#| label: sample_data
+sample_df <- read_csv("url.csv")
+sample_df
+```
+
+## Rozložení URL
+
+URL nejprve rozložím na jednotlivé části podle [RFC 3986](https://www.rfc-editor.org/rfc/rfc3986). Zároveň přejmenuju některé sloupce tak, aby odpovídaly RFC.
+
+```{r}
+#| label: url_parts
+#| message: false
+sample_df <- read_csv("url.csv") |> 
+  bind_cols(url_parse(sample_df$url)) |> 
+  rename(host = domain) |> 
+  rename(query = parameter)
+sample_df
+```
+
+## Statistika protokolů a hostnames
+
+Z rozložených dat už snadno spočítám jednotlivé složky. Pro vizualizaci použiju ggplot s geomem `geom_bar`, který automaticky ukazuje počty, takže není třeba používat funkce `count` nebo `n`. Aby byly grafy seřazené od nejvyššího počtu po nejnižší, použiju `fct_infreq` a případně `fct_rev` z balíčku [forcats](https://forcats.tidyverse.org/).
+
+### Protokoly
+
+```{r}
+sample_df |> 
+  ggplot(aes(x = scheme)) +
+  geom_bar()
+```
+
+### Hostnames
+
+```{r}
+sample_df |> 
+  ggplot(aes(y = fct_rev(fct_infreq(host)))) +
+  geom_bar() +
+  labs(y = NULL)
+```
+
+### Jen domény druhého řádu
+
+Doménu druhého řádu vykousnu z hostname regulárním výrazem.
+
+```{r}
+sample_df |> 
+  transmute(domain = str_extract(host, "[^.]+\\.[^.]+$")) |> 
+  ggplot(aes(x = fct_infreq(domain))) +
+  geom_bar() +
+  labs(x = NULL)
+```
+
+## Rozložení cesty na složky
+
+Nejprve musím zjistit maximální počet lomítek.
+
+```{r}
+max_level <- sample_df |> 
+  mutate(level = str_count(path, "/") + 1) |> 
+  pull(level) |> 
+  max(na.rm = TRUE)
+```
+
+Nyní rozložím cestu pomocí [tidyr::separate](https://tidyr.tidyverse.org/reference/separate.html).
+
+```{r}
+sample_df |> 
+  select(path) |> 
+  separate(path, into = paste0("l", 1:max_level), sep = "/", fill = "right")
+```
+
+Pro rozloženou cestu už jde spočítat jakákoli statistika, např. nejčastější složky první úrovně.
+
+```{r}
+sample_df |> 
+  select(path) |> 
+  separate(path, into = paste0("l", 1:max_level), sep = "/", fill = "right") |> 
+  count(l1) |> 
+  drop_na() |> 
+  slice_max(n, n = 10)
+```
+
+## Rozložení parametrů
+
+Jednotlivé parametry jde získat funkcí `urltools::param_get`.
+
+```{r}
+sample_df |> 
+  pull(url) |> 
+  param_get() |> 
+  slice_head(n = 10)
+```
+
+Získanou širokou tabulku lze pak převrátit na dlouhou a spočítat statistiku parametrů i jejich hodnot.
+
+```{r}
+sample_df |> 
+  pull(url) |> 
+  param_get() |> 
+  pivot_longer(cols = everything()) |> 
+  drop_na() |>
+  count(name, sort = TRUE)
+```
+
+```{r}
+sample_df |> 
+  pull(url) |> 
+  param_get() |> 
+  pivot_longer(cols = everything()) |> 
+  drop_na() |> 
+  group_by(name) |> 
+  summarise(
+    n = n(),
+    values = paste(unique(value), collapse = ", ")
+  ) |> 
+  arrange(desc(n))
+```
+
+A to je všechno :-)

@@ -10,7 +10,262 @@
 <atom:link href="https://marekprokop.github.io/jak-pracuju/index.xml" rel="self" type="application/rss+xml"/>
 <description></description>
 <generator>quarto-1.2.335</generator>
-<lastBuildDate>Thu, 16 Feb 2023 23:00:00 GMT</lastBuildDate>
+<lastBuildDate>Wed, 22 Feb 2023 23:00:00 GMT</lastBuildDate>
+<item>
+  <title>Analýza struktury většího počtu URL</title>
+  <dc:creator>Marek Prokop</dc:creator>
+  <link>https://marekprokop.github.io/jak-pracuju/posts/analyza-url/index.html</link>
+  <description><![CDATA[ 
+
+
+
+
+<section id="zadání" class="level2">
+<h2 class="anchored" data-anchor-id="zadání">Zadání</h2>
+<p>V dataframu, typicky třeba ze Screaming Frogu nebo Search Console, mám proměnnou obsahující URL. Chci přehledně zobrazit, z jakých částí se tato URL skládají.</p>
+</section>
+<section id="co-na-to-potřebuju" class="level2">
+<h2 class="anchored" data-anchor-id="co-na-to-potřebuju">Co na to potřebuju</h2>
+<p>Kromě obligátní <em>tidyverse</em> mi pomůže balíček <a href="https://cran.r-project.org/web/packages/urltools/index.html">urltools</a>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><span class="fu" style="color: #4758AB;">library</span>(tidyverse)</span>
+<span id="cb1-2"><span class="fu" style="color: #4758AB;">library</span>(urltools)</span></code></pre></div>
+</div>
+</section>
+<section id="příklad-vstupních-dat" class="level2">
+<h2 class="anchored" data-anchor-id="příklad-vstupních-dat">Příklad vstupních dat</h2>
+<p>Pomocí ChatGPT jsem vygeneroval vzorek náhodných URL a uložil do souboru url.csv.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1">sample_df <span class="ot" style="color: #003B4F;">&lt;-</span> <span class="fu" style="color: #4758AB;">read_csv</span>(<span class="st" style="color: #20794D;">"url.csv"</span>)</span></code></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Rows: 81 Columns: 1
+── Column specification ────────────────────────────────────────────────────────
+Delimiter: ","
+chr (1): url
+
+ℹ Use `spec()` to retrieve the full column specification for this data.
+ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb4" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1">sample_df</span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 81 × 1
+   url                                                           
+   &lt;chr&gt;                                                         
+ 1 http://example.com/index.html                                 
+ 2 https://blog.example.com/archive#february                     
+ 3 http://example.net/about.html                                 
+ 4 https://secure.example.org/search?q=keyword                   
+ 5 http://example.com/products/item1.html                        
+ 6 https://secure.example.com/login?return_url=/account/dashboard
+ 7 http://example.net/news/2023/02/17/headline                   
+ 8 https://shop.example.com/cart?item=12345                      
+ 9 http://example.org/resources/guide.pdf                        
+10 https://login.example.com/                                    
+# … with 71 more rows</code></pre>
+</div>
+</div>
+</section>
+<section id="rozložení-url" class="level2">
+<h2 class="anchored" data-anchor-id="rozložení-url">Rozložení URL</h2>
+<p>URL nejprve rozložím na jednotlivé části podle <a href="https://www.rfc-editor.org/rfc/rfc3986">RFC 3986</a>. Zároveň přejmenuju některé sloupce tak, aby odpovídaly RFC.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1">sample_df <span class="ot" style="color: #003B4F;">&lt;-</span> <span class="fu" style="color: #4758AB;">read_csv</span>(<span class="st" style="color: #20794D;">"url.csv"</span>) <span class="sc" style="color: #5E5E5E;">|&gt;</span> </span>
+<span id="cb6-2">  <span class="fu" style="color: #4758AB;">bind_cols</span>(<span class="fu" style="color: #4758AB;">url_parse</span>(sample_df<span class="sc" style="color: #5E5E5E;">$</span>url)) <span class="sc" style="color: #5E5E5E;">|&gt;</span> </span>
+<span id="cb6-3">  <span class="fu" style="color: #4758AB;">rename</span>(<span class="at" style="color: #657422;">host =</span> domain) <span class="sc" style="color: #5E5E5E;">|&gt;</span> </span>
+<span id="cb6-4">  <span class="fu" style="color: #4758AB;">rename</span>(<span class="at" style="color: #657422;">query =</span> parameter)</span>
+<span id="cb6-5">sample_df</span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 81 × 7
+   url                                    scheme host  port  path  query fragm…¹
+   &lt;chr&gt;                                  &lt;chr&gt;  &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;  
+ 1 http://example.com/index.html          http   exam… &lt;NA&gt;  inde… &lt;NA&gt;  &lt;NA&gt;   
+ 2 https://blog.example.com/archive#febr… https  blog… &lt;NA&gt;  arch… &lt;NA&gt;  februa…
+ 3 http://example.net/about.html          http   exam… &lt;NA&gt;  abou… &lt;NA&gt;  &lt;NA&gt;   
+ 4 https://secure.example.org/search?q=k… https  secu… &lt;NA&gt;  sear… q=ke… &lt;NA&gt;   
+ 5 http://example.com/products/item1.html http   exam… &lt;NA&gt;  prod… &lt;NA&gt;  &lt;NA&gt;   
+ 6 https://secure.example.com/login?retu… https  secu… &lt;NA&gt;  login retu… &lt;NA&gt;   
+ 7 http://example.net/news/2023/02/17/he… http   exam… &lt;NA&gt;  news… &lt;NA&gt;  &lt;NA&gt;   
+ 8 https://shop.example.com/cart?item=12… https  shop… &lt;NA&gt;  cart  item… &lt;NA&gt;   
+ 9 http://example.org/resources/guide.pdf http   exam… &lt;NA&gt;  reso… &lt;NA&gt;  &lt;NA&gt;   
+10 https://login.example.com/             https  logi… &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;   
+# … with 71 more rows, and abbreviated variable name ¹​fragment</code></pre>
+</div>
+</div>
+</section>
+<section id="statistika-protokolů-a-hostnames" class="level2">
+<h2 class="anchored" data-anchor-id="statistika-protokolů-a-hostnames">Statistika protokolů a hostnames</h2>
+<p>Z rozložených dat už snadno spočítám jednotlivé složky. Pro vizualizaci použiju ggplot s geomem <code>geom_bar</code>, který automaticky ukazuje počty, takže není třeba používat funkce <code>count</code> nebo <code>n</code>. Aby byly grafy seřazené od nejvyššího počtu po nejnižší, použiju <code>fct_infreq</code> a případně <code>fct_rev</code> z balíčku <a href="https://forcats.tidyverse.org/">forcats</a>.</p>
+<section id="protokoly" class="level3">
+<h3 class="anchored" data-anchor-id="protokoly">Protokoly</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1">sample_df <span class="sc" style="color: #5E5E5E;">|&gt;</span> </span>
+<span id="cb8-2">  <span class="fu" style="color: #4758AB;">ggplot</span>(<span class="fu" style="color: #4758AB;">aes</span>(<span class="at" style="color: #657422;">x =</span> scheme)) <span class="sc" style="color: #5E5E5E;">+</span></span>
+<span id="cb8-3">  <span class="fu" style="color: #4758AB;">geom_bar</span>()</span></code></pre></div>
+<div class="cell-output-display">
+<p><img src="https://marekprokop.github.io/jak-pracuju/posts/analyza-url/index_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</section>
+<section id="hostnames" class="level3">
+<h3 class="anchored" data-anchor-id="hostnames">Hostnames</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1">sample_df <span class="sc" style="color: #5E5E5E;">|&gt;</span> </span>
+<span id="cb9-2">  <span class="fu" style="color: #4758AB;">ggplot</span>(<span class="fu" style="color: #4758AB;">aes</span>(<span class="at" style="color: #657422;">y =</span> <span class="fu" style="color: #4758AB;">fct_rev</span>(<span class="fu" style="color: #4758AB;">fct_infreq</span>(host)))) <span class="sc" style="color: #5E5E5E;">+</span></span>
+<span id="cb9-3">  <span class="fu" style="color: #4758AB;">geom_bar</span>() <span class="sc" style="color: #5E5E5E;">+</span></span>
+<span id="cb9-4">  <span class="fu" style="color: #4758AB;">labs</span>(<span class="at" style="color: #657422;">y =</span> <span class="cn" style="color: #8f5902;">NULL</span>)</span></code></pre></div>
+<div class="cell-output-display">
+<p><img src="https://marekprokop.github.io/jak-pracuju/posts/analyza-url/index_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</section>
+<section id="jen-domény-druhého-řádu" class="level3">
+<h3 class="anchored" data-anchor-id="jen-domény-druhého-řádu">Jen domény druhého řádu</h3>
+<p>Doménu druhého řádu vykousnu z hostname regulárním výrazem.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb10" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1">sample_df <span class="sc" style="color: #5E5E5E;">|&gt;</span> </span>
+<span id="cb10-2">  <span class="fu" style="color: #4758AB;">transmute</span>(<span class="at" style="color: #657422;">domain =</span> <span class="fu" style="color: #4758AB;">str_extract</span>(host, <span class="st" style="color: #20794D;">"[^.]+</span><span class="sc" style="color: #5E5E5E;">\\</span><span class="st" style="color: #20794D;">.[^.]+$"</span>)) <span class="sc" style="color: #5E5E5E;">|&gt;</span> </span>
+<span id="cb10-3">  <span class="fu" style="color: #4758AB;">ggplot</span>(<span class="fu" style="color: #4758AB;">aes</span>(<span class="at" style="color: #657422;">x =</span> <span class="fu" style="color: #4758AB;">fct_infreq</span>(domain))) <span class="sc" style="color: #5E5E5E;">+</span></span>
+<span id="cb10-4">  <span class="fu" style="color: #4758AB;">geom_bar</span>() <span class="sc" style="color: #5E5E5E;">+</span></span>
+<span id="cb10-5">  <span class="fu" style="color: #4758AB;">labs</span>(<span class="at" style="color: #657422;">x =</span> <span class="cn" style="color: #8f5902;">NULL</span>)</span></code></pre></div>
+<div class="cell-output-display">
+<p><img src="https://marekprokop.github.io/jak-pracuju/posts/analyza-url/index_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</section>
+</section>
+<section id="rozložení-cesty-na-složky" class="level2">
+<h2 class="anchored" data-anchor-id="rozložení-cesty-na-složky">Rozložení cesty na složky</h2>
+<p>Nejprve musím zjistit maximální počet lomítek.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb11" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1">max_level <span class="ot" style="color: #003B4F;">&lt;-</span> sample_df <span class="sc" style="color: #5E5E5E;">|&gt;</span> </span>
+<span id="cb11-2">  <span class="fu" style="color: #4758AB;">mutate</span>(<span class="at" style="color: #657422;">level =</span> <span class="fu" style="color: #4758AB;">str_count</span>(path, <span class="st" style="color: #20794D;">"/"</span>) <span class="sc" style="color: #5E5E5E;">+</span> <span class="dv" style="color: #AD0000;">1</span>) <span class="sc" style="color: #5E5E5E;">|&gt;</span> </span>
+<span id="cb11-3">  <span class="fu" style="color: #4758AB;">pull</span>(level) <span class="sc" style="color: #5E5E5E;">|&gt;</span> </span>
+<span id="cb11-4">  <span class="fu" style="color: #4758AB;">max</span>(<span class="at" style="color: #657422;">na.rm =</span> <span class="cn" style="color: #8f5902;">TRUE</span>)</span></code></pre></div>
+</div>
+<p>Nyní rozložím cestu pomocí <a href="https://tidyr.tidyverse.org/reference/separate.html">tidyr::separate</a>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb12" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1">sample_df <span class="sc" style="color: #5E5E5E;">|&gt;</span> </span>
+<span id="cb12-2">  <span class="fu" style="color: #4758AB;">select</span>(path) <span class="sc" style="color: #5E5E5E;">|&gt;</span> </span>
+<span id="cb12-3">  <span class="fu" style="color: #4758AB;">separate</span>(path, <span class="at" style="color: #657422;">into =</span> <span class="fu" style="color: #4758AB;">paste0</span>(<span class="st" style="color: #20794D;">"l"</span>, <span class="dv" style="color: #AD0000;">1</span><span class="sc" style="color: #5E5E5E;">:</span>max_level), <span class="at" style="color: #657422;">sep =</span> <span class="st" style="color: #20794D;">"/"</span>, <span class="at" style="color: #657422;">fill =</span> <span class="st" style="color: #20794D;">"right"</span>)</span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 81 × 5
+   l1         l2         l3    l4    l5      
+   &lt;chr&gt;      &lt;chr&gt;      &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;   
+ 1 index.html &lt;NA&gt;       &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;    
+ 2 archive    &lt;NA&gt;       &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;    
+ 3 about.html &lt;NA&gt;       &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;    
+ 4 search     &lt;NA&gt;       &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;    
+ 5 products   item1.html &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;    
+ 6 login      &lt;NA&gt;       &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;    
+ 7 news       2023       02    17    headline
+ 8 cart       &lt;NA&gt;       &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;    
+ 9 resources  guide.pdf  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;    
+10 &lt;NA&gt;       &lt;NA&gt;       &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;    
+# … with 71 more rows</code></pre>
+</div>
+</div>
+<p>Pro rozloženou cestu už jde spočítat jakákoli statistika, např. nejčastější složky první úrovně.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb14" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1">sample_df <span class="sc" style="color: #5E5E5E;">|&gt;</span> </span>
+<span id="cb14-2">  <span class="fu" style="color: #4758AB;">select</span>(path) <span class="sc" style="color: #5E5E5E;">|&gt;</span> </span>
+<span id="cb14-3">  <span class="fu" style="color: #4758AB;">separate</span>(path, <span class="at" style="color: #657422;">into =</span> <span class="fu" style="color: #4758AB;">paste0</span>(<span class="st" style="color: #20794D;">"l"</span>, <span class="dv" style="color: #AD0000;">1</span><span class="sc" style="color: #5E5E5E;">:</span>max_level), <span class="at" style="color: #657422;">sep =</span> <span class="st" style="color: #20794D;">"/"</span>, <span class="at" style="color: #657422;">fill =</span> <span class="st" style="color: #20794D;">"right"</span>) <span class="sc" style="color: #5E5E5E;">|&gt;</span> </span>
+<span id="cb14-4">  <span class="fu" style="color: #4758AB;">count</span>(l1) <span class="sc" style="color: #5E5E5E;">|&gt;</span> </span>
+<span id="cb14-5">  <span class="fu" style="color: #4758AB;">drop_na</span>() <span class="sc" style="color: #5E5E5E;">|&gt;</span> </span>
+<span id="cb14-6">  <span class="fu" style="color: #4758AB;">slice_max</span>(n, <span class="at" style="color: #657422;">n =</span> <span class="dv" style="color: #AD0000;">10</span>)</span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 10 × 2
+   l1             n
+   &lt;chr&gt;      &lt;int&gt;
+ 1 products      10
+ 2 contact-us     6
+ 3 about          5
+ 4 account        5
+ 5 login          5
+ 6 news           5
+ 7 services       5
+ 8 blog           4
+ 9 resources      4
+10 search         4</code></pre>
+</div>
+</div>
+</section>
+<section id="rozložení-parametrů" class="level2">
+<h2 class="anchored" data-anchor-id="rozložení-parametrů">Rozložení parametrů</h2>
+<p>Jednotlivé parametry jde získat funkcí <code>urltools::param_get</code>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb16" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1">sample_df <span class="sc" style="color: #5E5E5E;">|&gt;</span> </span>
+<span id="cb16-2">  <span class="fu" style="color: #4758AB;">pull</span>(url) <span class="sc" style="color: #5E5E5E;">|&gt;</span> </span>
+<span id="cb16-3">  <span class="fu" style="color: #4758AB;">param_get</span>() <span class="sc" style="color: #5E5E5E;">|&gt;</span> </span>
+<span id="cb16-4">  <span class="fu" style="color: #4758AB;">slice_head</span>(<span class="at" style="color: #657422;">n =</span> <span class="dv" style="color: #AD0000;">10</span>)</span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>   color  item       q redirect         return_url size status
+1   &lt;NA&gt;  &lt;NA&gt;    &lt;NA&gt;     &lt;NA&gt;               &lt;NA&gt; &lt;NA&gt;   &lt;NA&gt;
+2   &lt;NA&gt;  &lt;NA&gt;    &lt;NA&gt;     &lt;NA&gt;               &lt;NA&gt; &lt;NA&gt;   &lt;NA&gt;
+3   &lt;NA&gt;  &lt;NA&gt;    &lt;NA&gt;     &lt;NA&gt;               &lt;NA&gt; &lt;NA&gt;   &lt;NA&gt;
+4   &lt;NA&gt;  &lt;NA&gt; keyword     &lt;NA&gt;               &lt;NA&gt; &lt;NA&gt;   &lt;NA&gt;
+5   &lt;NA&gt;  &lt;NA&gt;    &lt;NA&gt;     &lt;NA&gt;               &lt;NA&gt; &lt;NA&gt;   &lt;NA&gt;
+6   &lt;NA&gt;  &lt;NA&gt;    &lt;NA&gt;     &lt;NA&gt; /account/dashboard &lt;NA&gt;   &lt;NA&gt;
+7   &lt;NA&gt;  &lt;NA&gt;    &lt;NA&gt;     &lt;NA&gt;               &lt;NA&gt; &lt;NA&gt;   &lt;NA&gt;
+8   &lt;NA&gt; 12345    &lt;NA&gt;     &lt;NA&gt;               &lt;NA&gt; &lt;NA&gt;   &lt;NA&gt;
+9   &lt;NA&gt;  &lt;NA&gt;    &lt;NA&gt;     &lt;NA&gt;               &lt;NA&gt; &lt;NA&gt;   &lt;NA&gt;
+10  &lt;NA&gt;  &lt;NA&gt;    &lt;NA&gt;     &lt;NA&gt;               &lt;NA&gt; &lt;NA&gt;   &lt;NA&gt;</code></pre>
+</div>
+</div>
+<p>Získanou širokou tabulku lze pak převrátit na dlouhou a spočítat statistiku parametrů i jejich hodnot.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb18" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1">sample_df <span class="sc" style="color: #5E5E5E;">|&gt;</span> </span>
+<span id="cb18-2">  <span class="fu" style="color: #4758AB;">pull</span>(url) <span class="sc" style="color: #5E5E5E;">|&gt;</span> </span>
+<span id="cb18-3">  <span class="fu" style="color: #4758AB;">param_get</span>() <span class="sc" style="color: #5E5E5E;">|&gt;</span> </span>
+<span id="cb18-4">  <span class="fu" style="color: #4758AB;">pivot_longer</span>(<span class="at" style="color: #657422;">cols =</span> <span class="fu" style="color: #4758AB;">everything</span>()) <span class="sc" style="color: #5E5E5E;">|&gt;</span> </span>
+<span id="cb18-5">  <span class="fu" style="color: #4758AB;">drop_na</span>() <span class="sc" style="color: #5E5E5E;">|&gt;</span></span>
+<span id="cb18-6">  <span class="fu" style="color: #4758AB;">count</span>(name, <span class="at" style="color: #657422;">sort =</span> <span class="cn" style="color: #8f5902;">TRUE</span>)</span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 7 × 2
+  name           n
+  &lt;chr&gt;      &lt;int&gt;
+1 q              4
+2 status         3
+3 color          2
+4 item           2
+5 redirect       2
+6 return_url     2
+7 size           2</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb20" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1">sample_df <span class="sc" style="color: #5E5E5E;">|&gt;</span> </span>
+<span id="cb20-2">  <span class="fu" style="color: #4758AB;">pull</span>(url) <span class="sc" style="color: #5E5E5E;">|&gt;</span> </span>
+<span id="cb20-3">  <span class="fu" style="color: #4758AB;">param_get</span>() <span class="sc" style="color: #5E5E5E;">|&gt;</span> </span>
+<span id="cb20-4">  <span class="fu" style="color: #4758AB;">pivot_longer</span>(<span class="at" style="color: #657422;">cols =</span> <span class="fu" style="color: #4758AB;">everything</span>()) <span class="sc" style="color: #5E5E5E;">|&gt;</span> </span>
+<span id="cb20-5">  <span class="fu" style="color: #4758AB;">drop_na</span>() <span class="sc" style="color: #5E5E5E;">|&gt;</span> </span>
+<span id="cb20-6">  <span class="fu" style="color: #4758AB;">group_by</span>(name) <span class="sc" style="color: #5E5E5E;">|&gt;</span> </span>
+<span id="cb20-7">  <span class="fu" style="color: #4758AB;">summarise</span>(</span>
+<span id="cb20-8">    <span class="at" style="color: #657422;">n =</span> <span class="fu" style="color: #4758AB;">n</span>(),</span>
+<span id="cb20-9">    <span class="at" style="color: #657422;">values =</span> <span class="fu" style="color: #4758AB;">paste</span>(<span class="fu" style="color: #4758AB;">unique</span>(value), <span class="at" style="color: #657422;">collapse =</span> <span class="st" style="color: #20794D;">", "</span>)</span>
+<span id="cb20-10">  ) <span class="sc" style="color: #5E5E5E;">|&gt;</span> </span>
+<span id="cb20-11">  <span class="fu" style="color: #4758AB;">arrange</span>(<span class="fu" style="color: #4758AB;">desc</span>(n))</span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 7 × 3
+  name           n values                        
+  &lt;chr&gt;      &lt;int&gt; &lt;chr&gt;                         
+1 q              4 keyword                       
+2 status         3 shipped, pending, completed   
+3 color          2 red, blue                     
+4 item           2 12345, 67890                  
+5 redirect       2 /dashboard                    
+6 return_url     2 /account/dashboard, /dashboard
+7 size           2 medium, large                 </code></pre>
+</div>
+</div>
+<p>A to je všechno :-)</p>
+
+
+</section>
+
+ ]]></description>
+  <guid>https://marekprokop.github.io/jak-pracuju/posts/analyza-url/index.html</guid>
+  <pubDate>Wed, 22 Feb 2023 23:00:00 GMT</pubDate>
+</item>
 <item>
   <title>Děláte digitální marketing a chcete začít používat R? Tohle je váš studijní plán</title>
   <dc:creator>Marek Prokop</dc:creator>
